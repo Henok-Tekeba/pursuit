@@ -8,9 +8,10 @@ The authentication screen and application shell are a close recreation of the su
 
 ## What's included
 
-- **Real email/password accounts** — create your own account from `/signup`, sign in from `/login`, and manage your password in Settings. Passwords are hashed with scrypt and sessions use signed, HTTP-only cookies.
+- **Verified Google sign-in** — new accounts are created from `/signup` with Google, so the email is verified by Google. After verification, onboarding collects the profile and creates the private workspace. Existing email/password accounts can still sign in with their password.
 - **A separate demo workspace** — Elena is a real seeded user with realistic sample data, available from the login screen or with her credentials below. Your own account starts completely empty.
 - **Multi-user, private by default** — every person who signs up gets their own applications, companies, emails, and templates. Every query and mutation is scoped to the signed-in user.
+- **Onboarding + guided tour** — new Google accounts finish a profile step (name, target role, school, graduation year, location, optional password) and then get a six-step product tour with Next, Back, and Skip.
 - **Dashboard** — total applications, responses, follow-ups due, interviews, recent applications, today's action items, and a status overview.
 - **Application management** — create, edit, view, delete, search, filter, sort, paginate, bulk-update, and bulk-delete.
 - **Conversation timeline** — initial email, follow-ups, replies, interview and assessment invitations, offers, rejections, status changes, scheduled follow-ups, and notes. Emails are append-only and are never overwritten.
@@ -19,7 +20,7 @@ The authentication screen and application shell are a close recreation of the su
 - **Analytics** — response rate, interview conversion, offer rate, average response time, follow-up effectiveness, status breakdown, method breakdown, monthly activity, and CSV export.
 - **Companies** — company-level rollups, response rates, notes, and quick access to related applications.
 - **Responsive + dark mode** — mobile navigation, mobile-friendly application/follow-up/email lists, larger type, and a complete dark theme.
-- **Optional Supabase Auth** — Google and Apple sign-in use Supabase Auth when it is configured. Email/password auth works without any external auth provider.
+- **Google sign-in with Supabase Auth** — Google verifies the email and creates the account. Apple is scaffolded but disabled until Apple Developer credentials are available. Existing email/password accounts remain supported.
 - **Optional sample data** — the demo workspace is clearly marked. New accounts never receive fake data. Elena is seeded only when demo data is enabled.
 
 ## Stack
@@ -130,7 +131,7 @@ If you want to keep the deployment private, use Vercel Deployment Protection or 
 
 ### Auth: Google & Apple sign-in
 
-Email/password accounts work immediately with no external auth service. Supabase Auth is only needed for the **Sign In with Google** and **Sign In with Apple** buttons.
+New account creation uses **Google sign-in**, so the email is verified by Google and no email delivery service is required. Existing email/password accounts can still sign in normally. Supabase Auth is required for the Google signup path.
 
 1. **Set the Supabase Auth environment variables**
    ```bash
@@ -153,9 +154,9 @@ Email/password accounts work immediately with no external auth service. Supabase
    - In Apple Developer, create a Services ID with Sign in with Apple enabled. Add your domain and `https://<project-ref>.supabase.co/auth/v1/callback` as a return URL.
    - Create a Sign in with Apple key, note the Key ID and Team ID, and download the `.p8` key.
    - Add the Services ID, Team ID, Key ID, and private key in Supabase Dashboard → Authentication → Providers → Apple.
-   - Apple’s provider setup is the slowest part. If Apple credentials are not ready, you can still go live with email/password and Google; the Apple button will only succeed once the provider is configured.
+   - Apple’s provider setup is the slowest part. Apple is intentionally out of scope for launch; the button stays hidden until the provider is configured.
 
-The login page reads the enabled providers from Supabase Auth and only renders buttons for providers that are actually enabled. Email/password login always remains available. If Supabase Auth is not configured, social buttons are hidden.
+The login and signup pages read the enabled providers from Supabase Auth and only render buttons for providers that are actually enabled. Email/password login remains available for existing accounts. If Supabase Auth is not configured, social buttons are hidden.
 
 ### Go-live checklist
 
@@ -172,8 +173,8 @@ Use this on launch day:
 - [ ] Apple provider configured (if launching with Apple)
 - [ ] `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` added to Vercel
 - [ ] Deployment built and `/api/health` returns `{ "ok": true }`
-- [ ] Open production `/signup`, create your own account, and confirm the dashboard is empty
-- [ ] Open Google/Apple sign-in from production and confirm the callback returns to `/dashboard`
+- [ ] Open production `/signup`, continue with Google, and confirm the new account reaches `/onboarding` and then an empty dashboard
+- [ ] Complete the product tour from the dashboard
 - [ ] Seed Elena's demo workspace if you want it in production: `DATABASE_URL="..." pnpm db:seed`
 - [ ] Optional: disable demo access with `DEMO_LOGIN_ENABLED=false`
 

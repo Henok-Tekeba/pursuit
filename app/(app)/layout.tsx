@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import { requireUser } from "@/lib/auth/session";
 import { getShellData } from "@/lib/queries/applications";
 import { AppShell } from "@/components/app-shell/app-shell";
@@ -7,6 +8,7 @@ export const dynamic = "force-dynamic";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const user = await requireUser();
+  if (!user.onboardedAt && !user.isDemo) redirect("/onboarding");
   const shellData = await getShellData(user.id);
 
   const dueFollowUps: DueFollowUp[] = shellData.dueFollowUps.slice(0, 8).map((item) => ({

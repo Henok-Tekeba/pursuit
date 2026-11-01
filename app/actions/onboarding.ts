@@ -1,10 +1,11 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { eq } from "drizzle-orm";
 import { getDb } from "@/lib/db";
 import { users } from "@/lib/db/schema";
 import { ensureUserWorkspace, findUserByEmail, normalizeEmail } from "@/lib/auth/helpers";
-import { setSessionCookie } from "@/lib/auth/session";
+import { requireUser, setSessionCookie } from "@/lib/auth/session";
 import { hashPassword } from "@/lib/auth/password";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
@@ -105,6 +106,44 @@ export async function completeOnboardingAction(
   } catch {
     // The application session is already set; clearing the Supabase session is best effort.
   }
+
+  redirect("/dashboard?welcome=1");
+}
+
+export async function completeExistingOnboardingAction(
+  _previousState: OnboardingState,
+  formData: FormData,
+): Promise<OnboardingState> {
+  const user = await requireUser();
+  const name = String(formData.get("name") ?? "").trim();
+  const targetRole = String(formData.get("targetRole") ?? "").trim();
+  const university = String(formData.get("university") ?? "").trim();
+  const graduationYear = String(formData.get("graduationYear") ?? "").trim();
+  const location = String(formData.get("location") ?? "").trim();
+
+  if (name.length < 2 || name.length > 80) {
+    return { status: "error", message: "Enter your full name." };
+  }
+  if (targetRole.length > 120 || university.length > 160 || location.length > 120) {
+    return { status: "error", message: "One of your profile fields is too long." };
+  }
+  if (graduationYear && !/^\d{4}$/.test(graduationYear)) {
+    return { status: "error", message: "Enter a four-digit graduation year." };
+  }
+
+  const db = await getDb();
+  await db
+    .update(users)
+    .set({
+      name,
+      targetRole: targetRole || null,
+      university: university || null,
+      graduationYear: graduationYear || null,
+      location: location || null,
+      onboardedAt: new Date(),
+      updatedAt: new Date(),
+    })
+    .where(eq(users.id, user.id));
 
   redirect("/dashboard?welcome=1");
 }

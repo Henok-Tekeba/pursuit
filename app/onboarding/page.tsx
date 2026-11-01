@@ -10,7 +10,25 @@ export const dynamic = "force-dynamic";
 
 export default async function OnboardingPage() {
   const appUser = await getCurrentUser();
-  if (appUser) redirect("/dashboard");
+  if (appUser) {
+    if (appUser.onboardedAt || appUser.isDemo) redirect("/dashboard");
+    return (
+      <AuthShell wide>
+        <OnboardingForm
+          mode="existing"
+          email={appUser.email}
+          initialName={appUser.name}
+          provider="existing"
+          initialProfile={{
+            targetRole: appUser.targetRole,
+            university: appUser.university,
+            graduationYear: appUser.graduationYear,
+            location: appUser.location,
+          }}
+        />
+      </AuthShell>
+    );
+  }
 
   if (!isSupabaseConfigured()) {
     redirect("/signup?error=verification-unavailable");
