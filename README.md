@@ -4,9 +4,9 @@ Pursuit is a focused personal CRM for internship applications, cold emails, foll
 
 The authentication screen and application shell are a close recreation of the supplied design references, extended into a full multi-user product.
 
-**Live:** https://internship-tracker-dusky-phi.vercel.app
+**Live:** https://pursuit.enoch.et
 
-The Vercel hostname is retained so the existing Supabase and Google OAuth callbacks keep working. A custom domain can be attached later without changing the application code.
+The primary domain is `pursuit.enoch.et`, connected through Cloudflare. The original `internship-tracker-dusky-phi.vercel.app` project hostname remains available as a fallback.
 
 ## What's included
 
@@ -142,9 +142,9 @@ New account creation uses **Google sign-in**, so the email is verified by Google
    ```
 2. **Add the app callback to Supabase**
    - Supabase Dashboard → Authentication → URL Configuration
-   - Site URL: `https://internship-tracker-dusky-phi.vercel.app`
+   - Site URL: `https://pursuit.enoch.et`
    - Redirect URLs:
-     - `https://internship-tracker-dusky-phi.vercel.app/auth/callback`
+     - `https://pursuit.enoch.et/auth/callback`
      - `http://localhost:3001/auth/callback` for local testing
 3. **Google**
    - Google Cloud Console → APIs & Services → OAuth consent screen. Publish the app (or add test users while testing).
@@ -178,7 +178,7 @@ Use this on launch day:
 
 ### Deploy to Vercel
 
-The production app is deployed at **https://internship-tracker-dusky-phi.vercel.app**.
+The production app is deployed at **https://pursuit.enoch.et**.
 
 Current Vercel project: `internship-tracker` under `henok-aaits-projects`.
 
@@ -186,7 +186,7 @@ Production environment variables:
 
 - `DATABASE_URL` — Supabase transaction pooler (port `6543`)
 - `SESSION_SECRET`
-- `APP_URL=https://internship-tracker-dusky-phi.vercel.app`
+- `APP_URL=https://pursuit.enoch.et`
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 - `NEXT_PUBLIC_APP_TIMEZONE=Africa/Addis_Ababa`
