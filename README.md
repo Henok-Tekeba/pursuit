@@ -62,8 +62,7 @@ Email/password signup is intentionally disabled. Existing email/password account
 
 Elena's workspace contains 15 sample applications, emails, replies, follow-ups, and analytics. It is completely separate from your account.
 
-- **Email:** `elena@pursuit.app`
-- **Password:** `REDACTED_DEMO_CREDENTIAL!`
+- Use **Open demo** on the login screen. The shared demo account has no password credential; the shortcut creates a session directly.
 
 You can also click **Open demo** on the login screen for one-click access. The demo user is labelled **Demo workspace** in the product. Set `DEMO_LOGIN_ENABLED=false` to disable the demo shortcut, and `SEED_DEMO=false` to prevent seeding Elena locally.
 

@@ -22,9 +22,7 @@ try {
   await page.goto(`${base}/login`, { waitUntil: "networkidle" });
   assert(await page.getByRole("heading", { name: "Welcome back!" }).isVisible(), "login page renders");
 
-  await page.fill('input[name="email"]', "elena@pursuit.app");
-  await page.fill('input[name="password"]', "REDACTED_DEMO_CREDENTIAL!");
-  await page.click('button[type="submit"]');
+  await page.getByRole("button", { name: "Open demo" }).click();
   await page.waitForURL("**/dashboard", { timeout: 30_000 });
   await page.waitForLoadState("networkidle");
   assert(await page.getByRole("heading", { name: "Dashboard" }).isVisible(), "dashboard renders after sign in");

@@ -1,5 +1,6 @@
 import { chromium } from "playwright";
 import { readFileSync } from "node:fs";
+import { randomUUID } from "node:crypto";
 import { eq } from "drizzle-orm";
 import { getDb, closeDb } from "@/lib/db";
 import { users } from "@/lib/db/schema";
@@ -22,8 +23,8 @@ function assert(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error(`Assertion failed: ${message}`);
 }
 
-const USER_PASSWORD = "REDACTED_TEST_CREDENTIAL!";
-const NEW_PASSWORD = "REDACTED_TEST_CREDENTIAL-Updated!";
+const USER_PASSWORD = `Qa-${randomUUID()}!`;
+const NEW_PASSWORD = `Qa-${randomUUID()}-Updated!`;
 let createdUserEmail: string | null = null;
 
 function loadEnv() {

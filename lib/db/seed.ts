@@ -16,7 +16,7 @@ import {
 } from "./schema";
 import type * as schema from "./schema";
 import { DEFAULT_TEMPLATES } from "@/lib/defaults";
-import { DEMO_AVATAR, DEMO_EMAIL, DEMO_NAME, DEMO_PASSWORD } from "@/lib/auth/demo";
+import { DEMO_AVATAR, DEMO_EMAIL, DEMO_NAME } from "@/lib/auth/demo";
 import { hashPassword } from "@/lib/auth/password";
 
 type Db = PgliteDatabase<typeof schema>;
@@ -894,7 +894,8 @@ export async function seedDemoData(db: Db, force = false) {
     await db.delete(users).where(eq(users.id, existing.id));
   }
 
-  const passwordHash = await hashPassword(DEMO_PASSWORD);
+  const demoPassword = process.env.DEMO_PASSWORD;
+  const passwordHash = demoPassword ? await hashPassword(demoPassword) : null;
   const [demoUser] = await db
     .insert(users)
     .values({

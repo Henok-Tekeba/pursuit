@@ -16,9 +16,7 @@ await page.goto("http://localhost:3001/login", { waitUntil: "networkidle" });
 await page.screenshot({ path: "screenshots/login.png", fullPage: true });
 console.log("login title:", await page.title());
 
-await page.fill('input[name="email"]', "elena@pursuit.app");
-await page.fill('input[name="password"]', "REDACTED_DEMO_CREDENTIAL!");
-await page.click('button[type="submit"]');
+await page.getByRole("button", { name: "Open demo" }).click();
 await page.waitForURL("**/dashboard", { timeout: 30000 });
 await page.waitForLoadState("networkidle");
 await page.setViewportSize({ width: 1200, height: 900 });

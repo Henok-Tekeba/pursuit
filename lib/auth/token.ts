@@ -7,13 +7,12 @@ const SESSION_TTL_SECONDS = 60 * 60 * 24 * 30;
 
 function getSecret() {
   const configured = process.env.SESSION_SECRET;
-  if (!configured && process.env.NODE_ENV === "production") {
+  if (!configured) {
     throw new Error(
-      "SESSION_SECRET is required in production. Generate one with: openssl rand -base64 32",
+      "SESSION_SECRET is required. Generate one with: openssl rand -base64 32",
     );
   }
-  const secret = configured ?? "REDACTED_DEV_SESSION_FALLBACK";
-  return new TextEncoder().encode(secret);
+  return new TextEncoder().encode(configured);
 }
 
 export type SessionPayload = JWTPayload & {
