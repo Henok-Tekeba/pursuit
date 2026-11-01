@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -7,11 +8,8 @@ import {
   CalendarClock,
   Check,
   Mail,
-  ShieldCheck,
-  Sparkles,
 } from "lucide-react";
 import { LogoMark } from "@/components/logo";
-import { LandingDashboardPreview } from "./dashboard-preview";
 
 const nav = [
   { label: "Why Pursuit", href: "#why" },
@@ -29,7 +27,7 @@ const features = [
   {
     icon: Briefcase,
     title: "One home for every application",
-    body: "Company, role, contact, source, notes, and the exact email you sent — attached to one record instead of scattered across tabs.",
+    body: "Everything about an application lives on one record: company, role, contact, source, notes, and the exact email you sent.",
   },
   {
     icon: CalendarClock,
@@ -44,7 +42,7 @@ const features = [
   {
     icon: BarChart3,
     title: "See what is actually working",
-    body: "Response rate, interviews, offers, and follow-up effectiveness — the signal you need to adjust your search with intent.",
+    body: "Response rate, interviews, offers, and follow-up effectiveness. The signal you need to adjust your search with intent.",
   },
 ];
 
@@ -66,17 +64,24 @@ const steps = [
   },
 ];
 
-export function LandingPage({ isAuthed }: { isAuthed: boolean }) {
-  const primaryHref = isAuthed ? "/dashboard" : "/signup";
-  const primaryLabel = isAuthed ? "Open dashboard" : "Start for free";
+export function LandingPage() {
+  const primaryHref = "/signup";
+  const primaryLabel = "Start for free";
 
   return (
     <main className="min-h-dvh bg-[#fafaf9] text-[#101012]">
       <section className="relative mx-auto min-h-dvh w-full max-w-[1440px] overflow-hidden">
-        <div className="absolute inset-y-[26px] left-[50.6%] right-[42px] hidden overflow-hidden rounded-[12px] lg:block">
+        <div className="absolute inset-y-[26px] left-[50.6%] right-0 hidden overflow-hidden rounded-l-[14px] lg:block">
           <LandingBackdrop />
-          <div className="absolute bottom-[6%] left-[15%] right-[-8%] top-[10%]">
-            <LandingDashboardPreview />
+          <div className="absolute bottom-[6%] left-[8%] right-0 top-[8%] overflow-hidden rounded-l-[12px] border-y border-l border-white/50 shadow-[0_28px_80px_rgba(30,50,70,0.22)]">
+            <Image
+              src="/landing/demo-applications.png"
+              alt="Pursuit demo workspace with 16 tracked applications and follow-up status"
+              fill
+              priority
+              sizes="(min-width: 1024px) 55vw, 100vw"
+              className="object-cover object-left-top"
+            />
           </div>
         </div>
 
@@ -112,21 +117,16 @@ export function LandingPage({ isAuthed }: { isAuthed: boolean }) {
             </nav>
 
             <Link
-              href={isAuthed ? "/dashboard" : "/login"}
+              href="/login"
               className="ml-4 shrink-0 text-[13px] font-medium text-[#101012] underline-offset-4 hover:underline"
             >
-              {isAuthed ? "Open app" : "Log in"}
+              Log in
             </Link>
           </header>
 
-          <div className="flex flex-1 flex-col justify-center pb-4 pt-14 lg:justify-end lg:pb-[60px] lg:pt-0">
-            <div className="inline-flex items-center gap-1.5 self-start text-[11px] font-medium text-[#5f5f66]">
-              <Sparkles className="size-3.5" strokeWidth={1.8} />
-              Google-verified · private by default
-            </div>
-
-            <h1 className="mt-5 max-w-[540px] text-[clamp(42px,4vw,54px)] font-medium leading-[1.03] tracking-[-0.055em] text-[#101012]">
-              The all-in-one CRM
+          <div className="flex flex-1 flex-col justify-center pb-4 pt-14 lg:justify-end lg:pb-[92px] lg:pt-0">
+            <h1 className="max-w-[540px] text-[clamp(36px,4vw,54px)] font-medium leading-[1.03] tracking-[-0.055em] text-[#101012]">
+              Everything you need
               <br />
               <span className="text-[#8d8d91]">for a smarter</span>
               <br />
@@ -134,8 +134,8 @@ export function LandingPage({ isAuthed }: { isAuthed: boolean }) {
             </h1>
 
             <p className="mt-5 max-w-[408px] text-[14.5px] leading-[1.6] text-[#858589]">
-              Track every application, email, and follow-up in one calm workspace — and spend
-              your energy on the conversations that matter.
+              Track every application, email, and follow-up in one calm workspace. Spend your
+              energy on the conversations that matter.
             </p>
 
             <div className="mt-5 flex flex-wrap items-center gap-3">
@@ -153,17 +153,18 @@ export function LandingPage({ isAuthed }: { isAuthed: boolean }) {
                 View demo
               </Link>
             </div>
-
-            <p className="mt-4 flex items-center gap-1.5 text-[10.5px] text-[#a0a0a5]">
-              <ShieldCheck className="size-3" />
-              Your workspace is private. No ads, no data selling.
-            </p>
           </div>
 
-          <div className="relative mt-4 h-[430px] overflow-hidden rounded-[12px] lg:hidden">
+          <div className="relative mt-4 h-[430px] overflow-hidden rounded-l-[12px] lg:hidden">
             <LandingBackdrop />
-            <div className="absolute bottom-[8%] left-[8%] right-[-16%] top-[8%]">
-              <LandingDashboardPreview />
+            <div className="absolute bottom-[7%] left-[6%] right-0 top-[7%] overflow-hidden rounded-l-[10px] shadow-[0_20px_60px_rgba(30,50,70,0.2)]">
+              <Image
+                src="/landing/demo-applications.png"
+                alt="Pursuit demo workspace with 16 tracked applications and follow-up status"
+                fill
+                sizes="100vw"
+                className="object-cover object-left-top"
+              />
             </div>
           </div>
         </div>
@@ -182,7 +183,7 @@ export function LandingPage({ isAuthed }: { isAuthed: boolean }) {
           <div className="max-w-[560px] md:pt-8">
             <p className="text-[15px] leading-[1.7] text-[#65656c]">
               Internship applications are relationship work. The value is not in how many rows you
-              collect — it is in remembering who you spoke to, what you said, and when to follow up
+              collect. It is in remembering who you spoke to, what you said, and when to follow up
               without sounding like a robot.
             </p>
             <p className="mt-4 text-[15px] leading-[1.7] text-[#65656c]">

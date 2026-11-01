@@ -120,7 +120,7 @@ export default async function SettingsPage() {
           <div className="border-b border-line px-4 py-3">
             <h2 className="text-[13.5px] font-medium text-ink">Follow-up cadence</h2>
             <p className="mt-0.5 text-[10.5px] text-ink-muted">
-              Defaults are suggestions — make them work for your outreach.
+              Defaults are suggestions. Make them work for your outreach.
             </p>
           </div>
           <FollowUpSettings

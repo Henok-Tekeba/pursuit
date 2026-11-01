@@ -69,7 +69,7 @@ export function EmailHistory({
       <div className="mb-3 flex flex-wrap items-center justify-between gap-2 rounded-lg border border-line bg-surface-subtle/50 px-3 py-2">
         <p className="flex items-center gap-1.5 text-[11px] text-ink-muted">
           <Clipboard className="size-3" />
-          Immutable copy of the conversation — previous emails are never overwritten.
+          Immutable copy of the conversation. Previous emails are never overwritten.
         </p>
         <div className="flex items-center gap-1.5">
           <Button size="xs" variant="ghost" onClick={onReply}>

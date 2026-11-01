@@ -94,7 +94,7 @@ export function NotesPanel({
                 <p className="text-[10px] text-ink-faint">{formatDateWithTime(entry.occurredAt)}</p>
               </div>
               <p className="mt-1 whitespace-pre-wrap text-[12px] leading-relaxed text-ink-secondary">
-                {entry.description || "—"}
+                {entry.description || "No notes"}
               </p>
             </div>
           ))}

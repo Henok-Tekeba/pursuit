@@ -51,7 +51,7 @@ export default async function AnalyticsPage() {
     },
     {
       label: "Avg. response time",
-      value: analytics.averageResponseDays ? `${analytics.averageResponseDays}d` : "—",
+      value: analytics.averageResponseDays ? `${analytics.averageResponseDays}d` : "N/A",
       caption:
         analytics.responses > 0
           ? "From application to first reply"
@@ -61,7 +61,7 @@ export default async function AnalyticsPage() {
     },
     {
       label: "Follow-up effectiveness",
-      value: analytics.followUpsSent ? `${analytics.followUpEffectiveness}%` : "—",
+      value: analytics.followUpsSent ? `${analytics.followUpEffectiveness}%` : "N/A",
       caption:
         analytics.followUpsSent > 0
           ? `${analytics.respondedAfterFollowUp} of ${analytics.followUpsSent} follow-up threads replied`
@@ -83,7 +83,7 @@ export default async function AnalyticsPage() {
               <>
                 <span className="text-ink-faint">·</span>
                 <span className="rounded-[3px] border border-line bg-surface-subtle px-1 py-0.5 text-[9.5px] text-ink-muted">
-                  Demo workspace — sample data
+                  Demo workspace · sample data
                 </span>
               </>
             )}
@@ -210,7 +210,7 @@ export default async function AnalyticsPage() {
                   <div className="grid size-[92px] place-items-center rounded-full bg-surface-card">
                     <div className="text-center">
                       <p className="text-[22px] font-medium leading-none tracking-[-0.04em] text-ink">
-                        {analytics.followUpsSent ? `${analytics.followUpEffectiveness}%` : "—"}
+                        {analytics.followUpsSent ? `${analytics.followUpEffectiveness}%` : "N/A"}
                       </p>
                       <p className="mt-1 text-[9.5px] text-ink-faint">reply rate</p>
                     </div>
@@ -345,7 +345,7 @@ export default async function AnalyticsPage() {
                   A note on the numbers
                 </p>
                 <p className="mt-2 text-[12.5px] leading-relaxed text-ink-secondary">
-                  These metrics are calculated from your own application and email history — never from
+                  These metrics are calculated from your own application and email history, never from
                   benchmarks. Response rate includes any recorded inbound reply, even if the application later
                   closed. Follow-up effectiveness only counts replies that arrived after a follow-up was sent.
                 </p>

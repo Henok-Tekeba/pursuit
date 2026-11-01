@@ -2,7 +2,7 @@
 
 # Pursuit
 
-### The calm, focused CRM for your internship search.
+### The calm, focused workspace for your internship search.
 
 [![Live](https://img.shields.io/badge/live-pursuit.enoch.et-2ea44f?style=flat-square)](https://pursuit.enoch.et)
 [![Next.js](https://img.shields.io/badge/Next.js-15-000000?style=flat-square&logo=nextdotjs)](https://nextjs.org)
@@ -39,19 +39,19 @@ No shared workspace. No noisy team features. Your search is yours.
 
 ## What's inside
 
-- **Google-verified signup** — new accounts start with Google, then finish a short onboarding profile. No SMTP provider to maintain just to create an account.
-- **Private workspaces** — every application, email, company, template, and note is scoped to the signed-in user.
-- **Public landing page** — the product story, live preview, demo entry point, and Google signup CTA.
-- **Dashboard** — pipeline totals, response rate, interviews, follow-ups due, recent applications, today's action items, and status mix.
-- **Application management** — create, edit, view, delete, search, filter, sort, paginate, bulk-update, and bulk-delete.
-- **Conversation timeline** — initial email, follow-ups, replies, interview and assessment invitations, offers, rejections, status changes, scheduled follow-ups, and notes. Emails are append-only.
-- **Follow-up engine** — days since application, days since last contact, overdue state, and configurable cadence (defaults: days 5, 10, and 17).
-- **Email archive and templates** — preserve the subject and body of every email; reuse cold-email, follow-up, and reply templates with placeholders.
-- **Companies** — company-level rollups, notes, response rates, and related applications.
-- **Analytics** — response rate, interview conversion, offer rate, average response time, follow-up effectiveness, status and method breakdowns, monthly activity.
-- **CSV export** — export the full application history at any time.
-- **Onboarding and product tour** — a six-step guided tour with Next, Back, and Skip, plus a replayable tour from Help Center.
-- **Responsive and dark mode** — full-viewport desktop workspace, mobile navigation, and a complete dark theme.
+- **Google-verified signup**: new accounts start with Google, then finish a short onboarding profile. No SMTP provider to maintain just to create an account.
+- **Private workspaces**: every application, email, company, template, and note is scoped to the signed-in user.
+- **Public landing page**: the product story, live preview, demo entry point, and Google signup CTA.
+- **Dashboard**: pipeline totals, response rate, interviews, follow-ups due, recent applications, today's action items, and status mix.
+- **Application management**: create, edit, view, delete, search, filter, sort, paginate, bulk-update, and bulk-delete.
+- **Conversation timeline**: initial email, follow-ups, replies, interview and assessment invitations, offers, rejections, status changes, scheduled follow-ups, and notes. Emails are append-only.
+- **Follow-up engine**: days since application, days since last contact, overdue state, and configurable cadence (defaults: days 5, 10, and 17).
+- **Email archive and templates**: preserve the subject and body of every email; reuse cold-email, follow-up, and reply templates with placeholders.
+- **Companies**: company-level rollups, notes, response rates, and related applications.
+- **Analytics**: response rate, interview conversion, offer rate, average response time, follow-up effectiveness, status and method breakdowns, monthly activity.
+- **CSV export**: export the full application history at any time.
+- **Onboarding and product tour**: a six-step guided tour with Next, Back, and Skip, plus a replayable tour from Help Center.
+- **Responsive and dark mode**: full-viewport desktop workspace, mobile navigation, and a complete dark theme.
 
 ## Design principles
 
@@ -141,7 +141,7 @@ The application is intentionally a modular monolith. Route handlers and server a
 | Styling | Tailwind CSS, Radix primitives, Satoshi |
 | Data | Drizzle ORM + PostgreSQL |
 | Production database | Supabase Postgres |
-| Local database | Embedded PGlite — zero external setup |
+| Local database | Embedded PGlite: zero external setup |
 | Auth | Supabase Auth for Google; app-owned sessions and credentials |
 | Product tour | driver.js |
 | Deployment | Vercel |
@@ -170,7 +170,7 @@ To use Google signup locally, add the Supabase public keys and register `http://
 
 ### Demo workspace
 
-On the login screen, click **Open demo**. Elena's workspace is read-only and contains 15 sample applications, emails, replies, follow-ups, notes, and analytics. The demo is completely separate from your own account.
+On the login screen, click **Open demo**. Elena's workspace is read-only and contains 16 sample applications, emails, replies, follow-ups, notes, and analytics. The demo is completely separate from your own account.
 
 ## Environment variables
 

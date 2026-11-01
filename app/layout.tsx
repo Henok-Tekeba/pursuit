@@ -5,11 +5,11 @@ import { Providers } from "@/components/providers";
 
 export const metadata: Metadata = {
   title: {
-    default: "Pursuit — Your internship CRM",
+    default: "Pursuit: Your internship tracker",
     template: "%s · Pursuit",
   },
   description:
-    "A calm, focused CRM for internship applications, cold emails, follow-ups, and interviews.",
+    "A calm, focused workspace for internship applications, cold emails, follow-ups, and interviews.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

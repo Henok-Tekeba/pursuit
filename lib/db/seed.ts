@@ -98,7 +98,7 @@ const apps: AppSeed[] = [
         direction: "outbound",
         kind: "initial",
         daysAgo: 24,
-        subject: "Product design at Linear — a quick note",
+        subject: "Product design at Linear: a quick note",
         body: `Hi Maya,
 
 I'm Elena, a product design student who has spent the last year obsessing over tools that make focused work feel effortless. Linear's attention to interaction detail is a constant reference point for me.
@@ -112,10 +112,10 @@ Elena`,
         direction: "inbound",
         kind: "reply",
         daysAgo: 6,
-        subject: "Re: Product design at Linear — a quick note",
+        subject: "Re: Product design at Linear: a quick note",
         body: `Hi Elena,
 
-Thanks for reaching out — your portfolio is lovely. We'd like to learn more about how you approach product design. Are you free for a 30 minute conversation with me and our design lead next week?
+Thanks for reaching out: your portfolio is lovely. We'd like to learn more about how you approach product design. Are you free for a 30 minute conversation with me and our design lead next week?
 
 Best,
 Maya`,
@@ -124,10 +124,10 @@ Maya`,
         direction: "outbound",
         kind: "reply",
         daysAgo: 5,
-        subject: "Re: Product design at Linear — a quick note",
+        subject: "Re: Product design at Linear: a quick note",
         body: `Hi Maya,
 
-Thank you — I'd love that. Thursday afternoon works well for me. Looking forward to it.
+Thank you: I'd love that. Thursday afternoon works well for me. Looking forward to it.
 
 Best,
 Elena`,
@@ -169,7 +169,7 @@ Elena`,
         direction: "outbound",
         kind: "initial",
         daysAgo: 18,
-        subject: "Application — Software Engineering Intern",
+        subject: "Application: Software Engineering Intern",
         body: `Hi Noah,
 
 I just applied for the Software Engineering Intern role through the Figma careers site. I've been building small collaborative tools for the last two years, and I'd love to bring that energy to the editor team.
@@ -183,7 +183,7 @@ Elena`,
         direction: "inbound",
         kind: "reply",
         daysAgo: 7,
-        subject: "Next steps — Figma Software Engineering Intern",
+        subject: "Next steps: Figma Software Engineering Intern",
         body: `Hi Elena,
 
 Thanks for applying! Your background looks like a good fit. We'd like to move you forward to the technical assessment. You'll receive a separate email with the details shortly.
@@ -233,7 +233,7 @@ Recruiting Team`,
         direction: "outbound",
         kind: "initial",
         daysAgo: 22,
-        subject: "Product Management Intern — quick introduction",
+        subject: "Product Management Intern: quick introduction",
         body: `Hi Priya,
 
 I'm Elena, a product-focused student who loves turning messy workflows into calm, legible tools. Notion has been part of my daily workflow for years, and I'd be thrilled to work on the product team this summer.
@@ -247,7 +247,7 @@ Elena`,
         direction: "outbound",
         kind: "follow_up",
         daysAgo: 17,
-        subject: "Re: Product Management Intern — quick introduction",
+        subject: "Re: Product Management Intern: quick introduction",
         body: `Hi Priya,
 
 Just bringing this back to your inbox. I remain very interested in the Product Management Intern role and would love to share how I think about onboarding in collaborative tools.
@@ -259,10 +259,10 @@ Elena`,
         direction: "outbound",
         kind: "follow_up",
         daysAgo: 12,
-        subject: "Re: Product Management Intern — quick introduction",
+        subject: "Re: Product Management Intern: quick introduction",
         body: `Hi Priya,
 
-One last note from me — I know hiring seasons are busy. If the role is still open, I'd be glad to send over a short product teardown. Either way, thank you for your time.
+One last note from me: I know hiring seasons are busy. If the role is still open, I'd be glad to send over a short product teardown. Either way, thank you for your time.
 
 Best,
 Elena`,
@@ -288,7 +288,7 @@ Elena`,
         direction: "outbound",
         kind: "initial",
         daysAgo: 33,
-        subject: "Frontend internship — referred by Sam Rivera",
+        subject: "Frontend internship: referred by Sam Rivera",
         body: `Hi Olivia,
 
 Sam Rivera suggested I reach out after we worked together on the campus design system. I'm applying for the Frontend Engineering Intern role and would love to be considered.
@@ -302,10 +302,10 @@ Elena`,
         direction: "inbound",
         kind: "reply",
         daysAgo: 24,
-        subject: "Re: Frontend internship — referred by Sam Rivera",
+        subject: "Re: Frontend internship: referred by Sam Rivera",
         body: `Hi Elena,
 
-Great to hear from you — Sam speaks highly of your work. We'd like to set up an initial call. Does next Tuesday work?
+Great to hear from you: Sam speaks highly of your work. We'd like to set up an initial call. Does next Tuesday work?
 
 Best,
 Olivia`,
@@ -314,7 +314,7 @@ Olivia`,
         direction: "inbound",
         kind: "interview",
         daysAgo: 14,
-        subject: "Interview — Stripe Frontend Intern",
+        subject: "Interview: Stripe Frontend Intern",
         body: `Hi Elena,
 
 Confirming your final round on Thursday. You'll meet two engineers and a design partner. We're looking forward to it.
@@ -380,7 +380,7 @@ Elena`,
         subject: "Re: Design engineering at Vercel",
         body: `Hi Elena,
 
-Thanks for the note. We'd like to chat — can you share a few times that work next week?
+Thanks for the note. We'd like to chat: can you share a few times that work next week?
 
 Lucas`,
       },
@@ -420,7 +420,7 @@ Lucas`,
         direction: "outbound",
         kind: "initial",
         daysAgo: 9,
-        subject: "Data Science Intern — a short introduction",
+        subject: "Data Science Intern: a short introduction",
         body: `Hi Ethan,
 
 I'm Elena, a data science student interested in how finance teams make faster decisions with better tooling. I built a churn model for a student-run subscription service last semester and would love to apply that curiosity at Ramp.
@@ -434,7 +434,7 @@ Elena`,
         direction: "outbound",
         kind: "follow_up",
         daysAgo: 6,
-        subject: "Re: Data Science Intern — a short introduction",
+        subject: "Re: Data Science Intern: a short introduction",
         body: `Hi Ethan,
 
 A short follow-up on my note about the Data Science Intern role. I've since finished a churn analysis for a student subscription service and would be glad to share a one-page summary if useful.
@@ -446,7 +446,7 @@ Elena`,
         direction: "inbound",
         kind: "reply",
         daysAgo: 2,
-        subject: "Re: Data Science Intern — a short introduction",
+        subject: "Re: Data Science Intern: a short introduction",
         body: `Hi Elena,
 
 Thanks for reaching out. Could you share a writing sample or a short project write-up? Also, what does your availability look like next week?
@@ -483,7 +483,7 @@ Ethan`,
         direction: "outbound",
         kind: "initial",
         daysAgo: 7,
-        subject: "Research Intern application — evaluation and interpretability",
+        subject: "Research Intern application: evaluation and interpretability",
         body: `Hi Amara,
 
 I recently submitted my application for the Research Intern role. My recent work has focused on evaluating model behavior under distribution shift, and I'd be glad to share the paper or code.
@@ -513,7 +513,7 @@ Elena`,
         direction: "outbound",
         kind: "initial",
         daysAgo: 48,
-        subject: "Growth Marketing Intern — a note from a daily learner",
+        subject: "Growth Marketing Intern: a note from a daily learner",
         body: `Hi Sofia,
 
 I've been a daily Duolingo learner for 612 days, and I'd love to bring that familiarity to the Growth Marketing team. I'm applying for the Growth Marketing Intern role and would welcome the chance to share a few campaign ideas.
@@ -525,7 +525,7 @@ Elena`,
         direction: "outbound",
         kind: "follow_up",
         daysAgo: 43,
-        subject: "Re: Growth Marketing Intern — a note from a daily learner",
+        subject: "Re: Growth Marketing Intern: a note from a daily learner",
         body: `Hi Sofia,
 
 Floating this back up in case it got buried. I'd be happy to send a short teardown of the recent streak campaign.
@@ -537,7 +537,7 @@ Elena`,
         direction: "outbound",
         kind: "follow_up",
         daysAgo: 38,
-        subject: "Re: Growth Marketing Intern — a note from a daily learner",
+        subject: "Re: Growth Marketing Intern: a note from a daily learner",
         body: `Hi Sofia,
 
 Just checking in once more on the Growth Marketing Intern role. I remain very interested and would love to contribute.
@@ -549,7 +549,7 @@ Elena`,
         direction: "outbound",
         kind: "follow_up",
         daysAgo: 31,
-        subject: "Re: Growth Marketing Intern — a note from a daily learner",
+        subject: "Re: Growth Marketing Intern: a note from a daily learner",
         body: `Hi Sofia,
 
 One last follow-up from me. If the role has been filled or the timing isn't right, I completely understand. Thank you for your time.
@@ -588,7 +588,7 @@ Elena`,
         direction: "outbound",
         kind: "initial",
         daysAgo: 14,
-        subject: "Product Design Intern — introduction via Jordan Lee",
+        subject: "Product Design Intern: introduction via Jordan Lee",
         body: `Hi Grace,
 
 Jordan Lee suggested I reach out. I'm applying for the Product Design Intern role and would love to share my work on making complex data feel approachable.
@@ -602,7 +602,7 @@ Elena`,
         direction: "inbound",
         kind: "reply",
         daysAgo: 4,
-        subject: "Re: Product Design Intern — introduction via Jordan Lee",
+        subject: "Re: Product Design Intern: introduction via Jordan Lee",
         body: `Hi Elena,
 
 Jordan's recommendation was lovely. We'd like to invite you to a portfolio review with the team. Does Monday work?
@@ -613,7 +613,7 @@ Grace`,
         direction: "inbound",
         kind: "interview",
         daysAgo: 1,
-        subject: "Airtable portfolio review — calendar invite",
+        subject: "Airtable portfolio review: calendar invite",
         body: `Hi Elena,
 
 Calendar invite attached for Monday at 1pm PT. You'll have 20 minutes to present and 25 minutes for questions. Looking forward to it!
@@ -650,7 +650,7 @@ Grace`,
         direction: "outbound",
         kind: "initial",
         daysAgo: 2,
-        subject: "Application — Software Engineering Intern",
+        subject: "Application: Software Engineering Intern",
         body: `Hi Daniel,
 
 I just submitted my application for the Software Engineering Intern role. I'm especially interested in Mercury's approach to building calm, trustworthy financial products.
@@ -681,7 +681,7 @@ Elena`,
         direction: "outbound",
         kind: "initial",
         daysAgo: 12,
-        subject: "A small concept for Spaces — and the UI/UX internship",
+        subject: "A small concept for Spaces: and the UI/UX internship",
         body: `Hi Isla,
 
 I'm Elena, a designer who has been thinking a lot about how browsers can feel more like places than utilities. I put together a short concept for an ambient workspace feature and would love to share it as part of my application for the UI/UX Design Intern role.
@@ -695,7 +695,7 @@ Elena`,
         direction: "outbound",
         kind: "follow_up",
         daysAgo: 7,
-        subject: "Re: A small concept for Spaces — and the UI/UX internship",
+        subject: "Re: A small concept for Spaces: and the UI/UX internship",
         body: `Hi Isla,
 
 Sharing a 90-second Loom walkthrough of the concept in case it's easier to skim. I'd love to hear how your team approaches these small moments.
@@ -723,7 +723,7 @@ Elena`,
         direction: "outbound",
         kind: "initial",
         daysAgo: 21,
-        subject: "Solutions Engineering Intern — quick note",
+        subject: "Solutions Engineering Intern: quick note",
         body: `Hi Marcus,
 
 I'm reaching out about the Solutions Engineering Intern role. I enjoy translating technical concepts into clear, useful stories for customers and would love to learn more about the team.
@@ -773,7 +773,7 @@ Elena`,
         direction: "outbound",
         kind: "initial",
         daysAgo: 20,
-        subject: "Product Design Intern — a quick thought on speed",
+        subject: "Product Design Intern: a quick thought on speed",
         body: `Hi Chloe,
 
 I'm Elena, a product design student who cares about the feeling of speed in software. Superhuman's keyboard-first approach has shaped how I think about reducing friction, and I'd love to join the Product Design team this summer.
@@ -787,7 +787,7 @@ Elena`,
         direction: "inbound",
         kind: "reply",
         daysAgo: 9,
-        subject: "Re: Product Design Intern — a quick thought on speed",
+        subject: "Re: Product Design Intern: a quick thought on speed",
         body: `Hi Elena,
 
 Thanks for the thoughtful note and case study. We'd like to move you to the design exercise stage. You'll receive the brief shortly.
@@ -828,12 +828,12 @@ Chloe`,
         direction: "outbound",
         kind: "initial",
         daysAgo: 5,
-        subject: "Software Engineering Intern — intro from Ben Carter",
+        subject: "Software Engineering Intern: intro from Ben Carter",
         body: `Hi Ben,
 
 Ben suggested I reach out about the Software Engineering Intern role. I've spent the last semester building internal tools for a research lab and would love to bring that experience to Retool.
 
-My application is attached — thank you for your time.
+My application is attached: thank you for your time.
 
 Best,
 Elena`,
@@ -842,7 +842,7 @@ Elena`,
         direction: "inbound",
         kind: "reply",
         daysAgo: 1,
-        subject: "Re: Software Engineering Intern — intro from Ben Carter",
+        subject: "Re: Software Engineering Intern: intro from Ben Carter",
         body: `Hi Elena,
 
 Thanks for sending this over. I'm forwarding your application to the platform team. I'll let you know as soon as I hear back.
@@ -870,7 +870,7 @@ Ben`,
         direction: "outbound",
         kind: "initial",
         daysAgo: 1,
-        subject: "Content Design Intern — a note about clarity at speed",
+        subject: "Content Design Intern: a note about clarity at speed",
         body: `Hi Hana,
 
 I'm Elena, a writer and designer focused on making complex products feel simple. I've been collecting examples of Loom's microcopy for a while, and I'd love to contribute as a Content Design Intern.

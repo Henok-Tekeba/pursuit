@@ -384,7 +384,7 @@ export function ApplicationTable({
           <DialogHeader>
             <DialogTitle>Delete this application?</DialogTitle>
             <DialogDescription>
-              This permanently removes {deleteTarget?.companyName} — {deleteTarget?.position}, its emails,
+              This permanently removes {deleteTarget?.companyName} ({deleteTarget?.position}), its emails,
               notes, and full timeline. This cannot be undone.
             </DialogDescription>
           </DialogHeader>

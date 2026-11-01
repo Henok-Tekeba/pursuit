@@ -120,7 +120,7 @@ export function Sidebar({
                 </p>
                 <p className="mt-0.5 truncate text-[10px] leading-tight text-ink-muted">
                   {data.totalApplications === 0
-                    ? "Your personal CRM"
+                    ? "Your internship search"
                     : `${data.totalApplications} application${data.totalApplications === 1 ? "" : "s"} tracked`}
                 </p>
               </div>

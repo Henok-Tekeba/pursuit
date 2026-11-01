@@ -48,7 +48,7 @@ export default function PrivacyPage() {
   return (
     <LegalPage
       title="Privacy"
-      intro="Pursuit is a personal internship CRM. This page explains what it stores, why it stores it, and how you stay in control."
+      intro="Pursuit is a personal internship tracker. This page explains what it stores, why it stores it, and how you stay in control."
       sections={sections}
     />
   );

@@ -368,7 +368,7 @@ export function FollowUpSettings({
       <div className="mt-4 flex flex-wrap items-center justify-between gap-2 rounded-lg border border-line bg-surface-subtle/50 px-3 py-2">
         <p className="flex items-center gap-1.5 text-[10.5px] text-ink-muted">
           <Check className="size-3 text-[#3a956b]" />
-          Ghosting is always manual — we never close an application for you.
+          Ghosting is always manual. We never close an application for you.
         </p>
         <Button size="sm" onClick={save} disabled={pending}>
           {pending && <Loader2 className="size-3 animate-spin" />}

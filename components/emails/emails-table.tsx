@@ -204,9 +204,9 @@ export function EmailsTable({ emails }: { emails: EmailInboxItem[] }) {
               <div className="flex min-h-0 flex-1 flex-col overflow-y-auto p-5">
                 <dl className="grid grid-cols-[68px_1fr] gap-y-2 border-b border-line pb-4 text-[11.5px]">
                   <dt className="text-ink-muted">From</dt>
-                  <dd className="truncate text-ink-secondary">{selected.fromEmail ?? "—"}</dd>
+                  <dd className="truncate text-ink-secondary">{selected.fromEmail ?? "N/A"}</dd>
                   <dt className="text-ink-muted">To</dt>
-                  <dd className="truncate text-ink-secondary">{selected.toEmail ?? "—"}</dd>
+                  <dd className="truncate text-ink-secondary">{selected.toEmail ?? "N/A"}</dd>
                 </dl>
                 <pre className="mt-4 whitespace-pre-wrap break-words font-sans text-[13px] leading-relaxed text-ink-secondary">
                   {selected.body}

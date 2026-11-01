@@ -40,30 +40,30 @@ export function todayDateOnly(): string {
 }
 
 export function formatDate(value: string | Date | null | undefined, pattern = "MMM d, yyyy") {
-  if (!value) return "—";
+  if (!value) return "N/A";
   const date = toDate(value);
-  if (!isValid(date)) return "—";
+  if (!isValid(date)) return "N/A";
   return formatInTimeZone(date, APP_TIMEZONE, pattern);
 }
 
 export function formatDateWithTime(value: string | Date | null | undefined) {
-  if (!value) return "—";
+  if (!value) return "N/A";
   const date = toDate(value);
-  if (!isValid(date)) return "—";
+  if (!isValid(date)) return "N/A";
   return formatInTimeZone(date, APP_TIMEZONE, "MMM d, yyyy 'at' h:mm a");
 }
 
 export function formatTime(value: string | Date | null | undefined) {
-  if (!value) return "—";
+  if (!value) return "N/A";
   const date = toDate(value);
-  if (!isValid(date)) return "—";
+  if (!isValid(date)) return "N/A";
   return formatInTimeZone(date, APP_TIMEZONE, "h:mm a");
 }
 
 export function formatRelative(value: string | Date | null | undefined) {
-  if (!value) return "—";
+  if (!value) return "N/A";
   const date = toDate(value);
-  if (!isValid(date)) return "—";
+  if (!isValid(date)) return "N/A";
   return formatDistanceToNowStrict(date, { addSuffix: true });
 }
 
@@ -136,7 +136,7 @@ export function isInterviewStatus(status: ApplicationStatus) {
 }
 
 export function formatDays(value: number | null) {
-  if (value === null) return "—";
+  if (value === null) return "N/A";
   if (value === 0) return "Today";
   if (value === 1) return "1 day";
   return `${value} days`;

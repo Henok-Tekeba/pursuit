@@ -15,7 +15,7 @@ export async function generateMetadata({
   const user = await requireUser();
   const application = await getApplicationDetail(user.id, id);
   if (!application) return { title: "Application" };
-  return { title: `${application.companyName} — ${application.position}` };
+  return { title: `${application.companyName}: ${application.position}` };
 }
 
 export default async function ApplicationDetailPage({

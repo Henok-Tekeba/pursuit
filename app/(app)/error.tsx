@@ -22,7 +22,7 @@ export default function AppError({
       </span>
       <h1 className="mt-4 text-[17.5px] font-medium text-ink">Something didn&apos;t load</h1>
       <p className="mt-1.5 max-w-[340px] text-[12px] leading-relaxed text-ink-muted">
-        Your data is safe. Refresh this page and try again — if the issue continues, come back in a
+        Your data is safe. Refresh this page and try again. If the issue continues, come back in a
         moment.
       </p>
       <Button size="sm" variant="outline" className="mt-4" onClick={reset}>

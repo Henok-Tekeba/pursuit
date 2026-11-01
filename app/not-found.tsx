@@ -10,7 +10,7 @@ export default function NotFound() {
           <LogoMark className="size-5 text-white" />
         </div>
         <p className="mt-5 text-[9px] font-medium uppercase tracking-[0.14em] text-[#a0a0a6]">
-          404 — Not found
+          404: Not found
         </p>
         <h1 className="mt-2 text-[24px] font-medium tracking-[-0.04em] text-[#17171c]">
           This page isn&apos;t here

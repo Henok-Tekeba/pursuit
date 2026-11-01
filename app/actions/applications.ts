@@ -289,7 +289,7 @@ export async function createApplicationAction(
           applicationId: application.id,
           direction: "outbound",
           kind: "initial",
-          subject: initialSubject ?? `Application — ${data.position}`,
+          subject: initialSubject ?? `Application: ${data.position}`,
           body: initialBody ?? "",
           fromEmail: user.email,
           toEmail: data.contactEmail || null,

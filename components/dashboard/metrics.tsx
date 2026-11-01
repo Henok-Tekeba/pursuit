@@ -31,7 +31,7 @@ export function DashboardMetrics({ data }: { data: DashboardData }) {
       value: data.dueFollowUps.length,
       caption:
         data.dueFollowUps.length === 0
-          ? "Nothing due — nice work"
+          ? "Nothing due. Nice work"
           : `${overdue} overdue · ${dueToday} due today`,
       icon: AlarmClock,
       tone: "bg-[#fff5e8] text-[#b47b2c] dark:bg-[#302619] dark:text-[#dfb56e]",

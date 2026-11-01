@@ -578,7 +578,7 @@ export function ApplicationDetail({
           <DialogHeader>
             <DialogTitle>Delete this application?</DialogTitle>
             <DialogDescription>
-              This removes {application.companyName} — {application.position}, including all emails,
+              This removes {application.companyName} ({application.position}), including all emails,
               notes, and history. This cannot be undone.
             </DialogDescription>
           </DialogHeader>

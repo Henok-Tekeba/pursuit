@@ -72,7 +72,7 @@ export function AuthForm({
         <p className="mx-auto mt-3 max-w-[330px] text-[12.5px] leading-[1.55] text-[#74747c] md:text-[13.5px]">
           {isSignup
             ? "Start with a clean workspace. Every application, email, and follow-up stays private to you."
-            : "Your work, your team, your flow — all in one place."}
+            : "Your work, your team, your flow. All in one place."}
         </p>
       </div>
 
