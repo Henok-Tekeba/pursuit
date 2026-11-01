@@ -19,7 +19,7 @@ assets
 
 # local artifacts
 *.log
-screenshots
+/screenshots
 playwright-report
 test-results
 .env*
