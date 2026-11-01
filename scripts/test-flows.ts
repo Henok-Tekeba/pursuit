@@ -21,7 +21,7 @@ async function main() {
 
   try {
     await page.goto(`${base}/login`, { waitUntil: "networkidle" });
-    assert(await page.getByRole("heading", { name: "Welcome back!" }).isVisible(), "login page renders");
+    assert(await page.getByRole("heading", { name: "Welcome back." }).isVisible(), "login page renders");
 
     await page.getByRole("button", { name: "Open demo" }).click();
     await page.waitForURL("**/dashboard", { timeout: 30_000 });
