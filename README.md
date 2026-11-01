@@ -11,6 +11,7 @@
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Supabase-3ecf8e?style=flat-square&logo=supabase)](https://supabase.com)
 [![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?style=flat-square&logo=vercel)](https://vercel.com)
 [![GitHub](https://img.shields.io/badge/Source-GitHub-181717?style=flat-square&logo=github)](https://github.com/Henok-Tekeba/pursuit)
+[![Release](https://img.shields.io/github/v/release/Henok-Tekeba/pursuit?style=flat-square)](https://github.com/Henok-Tekeba/pursuit/releases)
 
 **Live app:** [pursuit.enoch.et](https://pursuit.enoch.et) · **Demo:** open the app and click **Open demo**
 
@@ -345,7 +346,7 @@ supabase/schema.sql     Fresh-database schema for SQL editor
 
 ## Status
 
-Pursuit is live and actively used for a real internship search. The priority is a calm, reliable workflow over feature sprawl.
+Pursuit v1.0.0 is live and actively used for a real internship search. The priority is a calm, reliable workflow over feature sprawl.
 
 
 ## Repository
