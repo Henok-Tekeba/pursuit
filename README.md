@@ -44,13 +44,13 @@ No shared workspace. No noisy team features. Your search is yours.
 
 ## Screens
 
-| Dashboard | Applications |
+| Applications | Analytics |
 | --- | --- |
-| ![Dashboard](docs/screenshots/dashboard.png) | ![Applications](docs/screenshots/applications.png) |
+| ![Applications](docs/screenshots/applications.png) | ![Analytics](docs/screenshots/analytics.png) |
 
-| Analytics | Sign in |
-| --- | --- |
-| ![Analytics](docs/screenshots/analytics.png) | ![Login](docs/screenshots/login.png) |
+<p align="center">
+  <img src="docs/screenshots/login.png" alt="Pursuit sign-in screen" width="86%" />
+</p>
 
 ## Auth model
 
@@ -302,3 +302,8 @@ supabase/schema.sql     Fresh-database schema for SQL editor
 ## Status
 
 Pursuit is live and actively used for a real internship search. The priority is a calm, reliable workflow over feature sprawl.
+
+
+## License
+
+This repository is public for portfolio and demonstration purposes. All rights reserved. No license is granted to deploy, resell, or redistribute the application or Pursuit branding without permission.
