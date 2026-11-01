@@ -25,8 +25,9 @@ async function main() {
 
     await page.getByRole("button", { name: "Open demo" }).click();
     await page.waitForURL("**/dashboard", { timeout: 30_000 });
-    await page.waitForLoadState("networkidle");
-    assert(await page.getByRole("heading", { name: "Dashboard" }).isVisible(), "demo dashboard renders");
+    const dashboardHeading = page.getByRole("heading", { name: "Dashboard" });
+    await dashboardHeading.waitFor({ state: "visible", timeout: 30_000 });
+    assert(await dashboardHeading.isVisible(), "demo dashboard renders");
     assert(
       (await page.locator("body").innerText()).includes("read-only"),
       "demo shows the read-only notice",
