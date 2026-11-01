@@ -1,0 +1,215 @@
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/satoshi-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/satoshi-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/satoshi-500.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/satoshi-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 240 5% 9%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 5% 9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 5% 9%;
+  --primary: 240 5% 9%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 240 5% 96%;
+  --secondary-foreground: 240 5% 9%;
+  --muted: 240 5% 96%;
+  --muted-foreground: 240 4% 55%;
+  --accent: 240 5% 96%;
+  --accent-foreground: 240 5% 9%;
+  --destructive: 350 55% 53%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 240 5% 92%;
+  --input: 240 5% 92%;
+  --ring: 240 5% 17%;
+  --sidebar: 0 0% 100%;
+  --sidebar-foreground: 240 5% 9%;
+  --radius: 0.625rem;
+
+  --surface-canvas: #e0e0e0;
+  --surface-shell: #fafafa;
+  --surface-sidebar: #f7f7f7;
+  --surface-main: #fafafa;
+  --surface-card: #ffffff;
+  --surface-hover: #f6f6f7;
+  --surface-subtle: #f1f1f3;
+  --ink: #17171c;
+  --ink-secondary: #5f5f66;
+  --ink-muted: #8b8b92;
+  --ink-faint: #a9a9b0;
+  --line: #ededef;
+  --line-strong: #dedee2;
+}
+
+.dark {
+  --background: 240 6% 10%;
+  --foreground: 0 0% 96%;
+  --card: 240 5% 13%;
+  --card-foreground: 0 0% 96%;
+  --popover: 240 5% 13%;
+  --popover-foreground: 0 0% 96%;
+  --primary: 0 0% 96%;
+  --primary-foreground: 240 6% 10%;
+  --secondary: 240 4% 17%;
+  --secondary-foreground: 0 0% 96%;
+  --muted: 240 4% 17%;
+  --muted-foreground: 240 4% 65%;
+  --accent: 240 4% 17%;
+  --accent-foreground: 0 0% 96%;
+  --destructive: 350 55% 53%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 240 4% 20%;
+  --input: 240 4% 20%;
+  --ring: 0 0% 80%;
+  --sidebar: 240 6% 11%;
+  --sidebar-foreground: 0 0% 96%;
+
+  --surface-canvas: #0f1012;
+  --surface-shell: #17181b;
+  --surface-sidebar: #151619;
+  --surface-main: #1a1b1f;
+  --surface-card: #1f2024;
+  --surface-hover: #27282d;
+  --surface-subtle: #24252a;
+  --ink: #f3f3f4;
+  --ink-secondary: #c0c0c6;
+  --ink-muted: #8f8f98;
+  --ink-faint: #6f6f78;
+  --line: #2c2d32;
+  --line-strong: #3a3b41;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-surface-canvas font-sans text-ink antialiased;
+    font-size: 13px;
+    text-rendering: optimizeLegibility;
+    height: 100%;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  ::selection {
+    background: rgba(40, 40, 48, 0.14);
+  }
+
+  input[type="date"] {
+    position: relative;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.38;
+  }
+}
+
+@layer utilities {
+  .auth-canvas {
+    background-color: #bbbbbb;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .hide-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-submit-highlight {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(120, 120, 132, 0.28) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(120, 120, 132, 0.25);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(120, 120, 132, 0.4);
+}
+
+.auth-panel-shadow {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+}
+
+.auth-halftone {
+  image-rendering: auto;
+  filter: contrast(1.02);
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
