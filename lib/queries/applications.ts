@@ -37,6 +37,7 @@ export type ApplicationListItem = {
   companyId: string;
   companyName: string;
   companyWebsite: string | null;
+  companyDomain: string | null;
   position: string;
   location: string | null;
   contactName: string | null;
@@ -64,6 +65,7 @@ function mapListRow(row: { application: Application; company: Company }): Applic
     companyId: row.company.id,
     companyName: row.company.name,
     companyWebsite: row.company.website,
+    companyDomain: row.company.domain,
     position: row.application.position,
     location: row.application.location,
     contactName: row.application.contactName,
@@ -365,6 +367,7 @@ export async function getEmailsForUser(
     id: email.id,
     applicationId: application.id,
     companyName: company.name,
+    companyDomain: company.domain,
     position: application.position,
     direction: email.direction,
     kind: email.kind,

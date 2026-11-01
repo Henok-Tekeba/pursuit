@@ -29,6 +29,7 @@ import {
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { StatusBadge } from "@/components/status-badge";
 import { CompanyAvatar } from "@/components/company-avatar";
+import { companyLogoUrl } from "@/lib/company-logos";
 import { EmptyState } from "@/components/empty-state";
 import { updateCompanyAction } from "@/app/actions/applications";
 import { formatDate, percent } from "@/lib/utils";
@@ -155,7 +156,7 @@ export function CompaniesGrid({ companies }: { companies: CompanyView[] }) {
                   className="group rounded-[10px] border border-line bg-surface-card p-4 transition-shadow hover:shadow-card"
                 >
                   <div className="flex items-start gap-2.5">
-                    <CompanyAvatar name={company.name} className="size-9" />
+                    <CompanyAvatar name={company.name} logoUrl={companyLogoUrl(company.domain)} className="size-9" />
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-1.5">
                         <h3 className="truncate text-[13.5px] font-medium text-ink">{company.name}</h3>

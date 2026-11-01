@@ -5,7 +5,8 @@ import { requireUser } from "@/lib/auth/session";
 import { getFollowUpApplications } from "@/lib/queries/applications";
 import { PageHeader } from "@/components/page-header";
 import { Button } from "@/components/ui/button";
-import { PersonAvatar } from "@/components/company-avatar";
+import { CompanyAvatar } from "@/components/company-avatar";
+import { companyLogoUrl } from "@/lib/company-logos";
 import { StatusBadge } from "@/components/status-badge";
 import { EmptyState } from "@/components/empty-state";
 import { QuickFollowUp } from "@/components/dashboard/quick-follow-up";
@@ -128,9 +129,9 @@ export default async function FollowUpsPage({
                 return (
                   <div key={item.id} className={cn("px-4 py-3", overdue && "bg-[#fffbf5]/70 dark:bg-[#241f17]/40")}>
                     <div className="flex items-start gap-2.5">
-                      <PersonAvatar
-                        name={item.contactName || item.companyName}
-                        src={item.contactAvatarUrl}
+                      <CompanyAvatar
+                        name={item.companyName}
+                        logoUrl={companyLogoUrl(item.companyDomain)}
                         className="size-8"
                       />
                       <Link href={`/applications/${item.id}`} className="min-w-0 flex-1">
@@ -190,9 +191,9 @@ export default async function FollowUpsPage({
                       <tr key={item.id} className={cn("group", overdue && "bg-[#fffbf5]/70 dark:bg-[#241f17]/40")}>
                         <td className="border-b border-line py-3 pl-4 pr-2">
                           <Link href={`/applications/${item.id}`} className="flex items-center gap-2.5">
-                            <PersonAvatar
-                              name={item.contactName || item.companyName}
-                              src={item.contactAvatarUrl}
+                            <CompanyAvatar
+                              name={item.companyName}
+                              logoUrl={companyLogoUrl(item.companyDomain)}
                               className="size-7"
                             />
                             <span className="min-w-0">

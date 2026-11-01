@@ -15,6 +15,8 @@ import type { ApplicationStatus, EmailDirection, EmailKind } from "@/lib/db/sche
 import { EMAIL_KIND_LABELS } from "@/lib/constants";
 import { cn, formatDate, formatDateWithTime, formatTime } from "@/lib/utils";
 import { StatusBadge } from "@/components/status-badge";
+import { CompanyAvatar } from "@/components/company-avatar";
+import { companyLogoUrl } from "@/lib/company-logos";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/empty-state";
@@ -23,6 +25,7 @@ export type EmailInboxItem = {
   id: string;
   applicationId: string;
   companyName: string;
+  companyDomain: string | null;
   position: string;
   direction: EmailDirection;
   kind: EmailKind;
@@ -135,9 +138,11 @@ export function EmailsTable({ emails }: { emails: EmailInboxItem[] }) {
                       href={`/applications/${email.applicationId}`}
                       className="flex items-center gap-2"
                     >
-                      <span className="grid size-6 shrink-0 place-items-center rounded-full border border-line bg-surface-subtle text-[10px] font-medium text-ink-secondary">
-                        {email.companyName.slice(0, 1).toUpperCase()}
-                      </span>
+                      <CompanyAvatar
+                        name={email.companyName}
+                        logoUrl={companyLogoUrl(email.companyDomain)}
+                        className="size-6"
+                      />
                       <span className="min-w-0">
                         <span className="block truncate text-[11.5px] font-medium text-ink">{email.companyName}</span>
                         <span className="block truncate text-[10px] text-ink-muted">{email.position}</span>

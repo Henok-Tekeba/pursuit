@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { ArrowUpRight, Briefcase } from "lucide-react";
 import type { DashboardData } from "@/lib/queries/applications";
-import { PersonAvatar } from "@/components/company-avatar";
+import { CompanyAvatar } from "@/components/company-avatar";
+import { companyLogoUrl } from "@/lib/company-logos";
 import { StatusBadge } from "@/components/status-badge";
 import { formatDate, getFollowUpLabel, isOverdue } from "@/lib/utils";
 import { EmptyState } from "@/components/empty-state";
@@ -47,9 +48,9 @@ export function RecentApplications({ items }: { items: DashboardData["recent"] }
               href={`/applications/${item.id}`}
               className="flex items-center gap-2.5 px-4 py-3 transition-colors hover:bg-surface-hover"
             >
-              <PersonAvatar
-                name={item.contactName || item.companyName}
-                src={item.contactAvatarUrl}
+              <CompanyAvatar
+                name={item.companyName}
+                logoUrl={companyLogoUrl(item.companyDomain)}
                 className="size-8"
               />
               <div className="min-w-0 flex-1">
@@ -86,9 +87,9 @@ export function RecentApplications({ items }: { items: DashboardData["recent"] }
                 <tr key={item.id} className="group transition-colors hover:bg-surface-hover">
                   <td className="border-b border-line py-2.5 pl-4 pr-2">
                     <Link href={`/applications/${item.id}`} className="flex items-center gap-2.5">
-                      <PersonAvatar
-                        name={item.contactName || item.companyName}
-                        src={item.contactAvatarUrl}
+                      <CompanyAvatar
+                        name={item.companyName}
+                        logoUrl={companyLogoUrl(item.companyDomain)}
                         className="size-7"
                       />
                       <span className="min-w-0">

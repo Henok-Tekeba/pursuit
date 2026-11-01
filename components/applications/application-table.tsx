@@ -21,7 +21,8 @@ import { STATUS_LABELS, STATUS_ORDER, STATUS_STYLES } from "@/lib/constants";
 import type { ApplicationStatus } from "@/lib/db/schema";
 import { cn, formatDate, getFollowUpLabel, isOverdue } from "@/lib/utils";
 import { StatusBadge } from "@/components/status-badge";
-import { PersonAvatar } from "@/components/company-avatar";
+import { CompanyAvatar } from "@/components/company-avatar";
+import { companyLogoUrl } from "@/lib/company-logos";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
@@ -257,9 +258,9 @@ export function ApplicationTable({
                 </td>
                 <td className="border-b border-line py-2 pr-4">
                   <Link href={`/applications/${item.id}`} className="flex min-w-0 items-center gap-2.5">
-                    <PersonAvatar
-                      name={item.contactName || item.companyName}
-                      src={item.contactAvatarUrl}
+                    <CompanyAvatar
+                      name={item.companyName}
+                      logoUrl={companyLogoUrl(item.companyDomain)}
                       className="size-6"
                     />
                     <span className="min-w-0">
@@ -461,9 +462,9 @@ function MobileApplicationCard({
       <div className="flex items-start gap-2.5">
         <Checkbox checked={selected} onCheckedChange={onToggle} className="mt-1.5" aria-label={`Select ${item.companyName}`} />
         <Link href={`/applications/${item.id}`} className="flex min-w-0 flex-1 items-start gap-2.5">
-          <PersonAvatar
-            name={item.contactName || item.companyName}
-            src={item.contactAvatarUrl}
+          <CompanyAvatar
+            name={item.companyName}
+            logoUrl={companyLogoUrl(item.companyDomain)}
             className="size-8"
           />
           <span className="min-w-0 flex-1">
