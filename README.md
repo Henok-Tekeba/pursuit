@@ -10,6 +10,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?style=flat-square&logo=typescript)](https://www.typescriptlang.org)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Supabase-3ecf8e?style=flat-square&logo=supabase)](https://supabase.com)
 [![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?style=flat-square&logo=vercel)](https://vercel.com)
+[![GitHub](https://img.shields.io/badge/Source-GitHub-181717?style=flat-square&logo=github)](https://github.com/Henok-Tekeba/pursuit)
 
 **Live app:** [pursuit.enoch.et](https://pursuit.enoch.et) · **Demo:** open the app and click **Open demo**
 
@@ -27,6 +28,14 @@ Pursuit keeps the entire search in one place: the companies, the people, the col
 
 No shared workspace. No noisy team features. Your search is yours.
 
+## A day with Pursuit
+
+1. **Verify once.** Continue with Google and finish a short profile. Your email is already verified.
+2. **Capture the conversation.** Add the application, the company, the contact, and the exact first email you sent.
+3. **Follow the cadence.** Pursuit suggests the next follow-up based on your saved intervals.
+4. **Let the timeline do the remembering.** Replies, interviews, assessments, offers, rejections, and notes stay attached to the application.
+5. **See the whole search.** Use analytics to find what is converting, then export everything whenever you want.
+
 ## What's inside
 
 - **Google-verified signup** — new accounts start with Google, then finish a short onboarding profile. No SMTP provider to maintain just to create an account.
@@ -35,14 +44,22 @@ No shared workspace. No noisy team features. Your search is yours.
 - **Application management** — create, edit, view, delete, search, filter, sort, paginate, bulk-update, and bulk-delete.
 - **Conversation timeline** — initial email, follow-ups, replies, interview and assessment invitations, offers, rejections, status changes, scheduled follow-ups, and notes. Emails are append-only.
 - **Follow-up engine** — days since application, days since last contact, overdue state, and configurable cadence (defaults: days 5, 10, and 17).
-- **Email archive and templates** — preserve the subject and body of every email; reuse reusable cold-email, follow-up, and reply templates with placeholders.
+- **Email archive and templates** — preserve the subject and body of every email; reuse cold-email, follow-up, and reply templates with placeholders.
 - **Companies** — company-level rollups, notes, response rates, and related applications.
 - **Analytics** — response rate, interview conversion, offer rate, average response time, follow-up effectiveness, status and method breakdowns, monthly activity.
 - **CSV export** — export the full application history at any time.
 - **Onboarding and product tour** — a six-step guided tour with Next, Back, and Skip, plus a replayable tour from Help Center.
 - **Responsive and dark mode** — full-viewport desktop workspace, mobile navigation, and a complete dark theme.
 
-## Screens
+## Design principles
+
+- **Calm over busy.** The dashboard should answer “what needs me today?” before it shows anything else.
+- **The conversation is the record.** The original email, the reply, and the note belong together.
+- **Private by default.** Every query is user-scoped. There is no shared workspace.
+- **No fake urgency.** Nothing is auto-ghosted. You decide when a conversation is over.
+- **Fast by default.** Server-rendered pages, small client islands, and no unnecessary loading states.
+
+## Product screens
 
 | Applications | Analytics |
 | --- | --- |
@@ -50,6 +67,24 @@ No shared workspace. No noisy team features. Your search is yours.
 
 <p align="center">
   <img src="docs/screenshots/login.png" alt="Pursuit sign-in screen" width="86%" />
+</p>
+
+### More screens
+
+| Follow-ups | Templates |
+| --- | --- |
+| ![Follow-ups](docs/screenshots/follow-ups.png) | ![Templates](docs/screenshots/templates.png) |
+
+| Companies | Emails |
+| --- | --- |
+| ![Companies](docs/screenshots/companies.png) | ![Emails](docs/screenshots/emails.png) |
+
+| Settings | Guided tour |
+| --- | --- |
+| ![Settings](docs/screenshots/settings.png) | ![Product tour](docs/screenshots/product-tour.png) |
+
+<p align="center">
+  <img src="docs/screenshots/signup.png" alt="Pursuit Google signup screen" width="86%" />
 </p>
 
 ## Auth model
@@ -303,6 +338,10 @@ supabase/schema.sql     Fresh-database schema for SQL editor
 
 Pursuit is live and actively used for a real internship search. The priority is a calm, reliable workflow over feature sprawl.
 
+
+## Repository
+
+Source: [github.com/Henok-Tekeba/pursuit](https://github.com/Henok-Tekeba/pursuit)
 
 ## License
 
