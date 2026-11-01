@@ -17,8 +17,15 @@ export function AuthShell({
         }`}
       >
         <div className="relative flex min-h-dvh w-full flex-col items-center bg-white px-6 pb-16 pt-9 md:min-h-0 md:w-1/2 md:px-12 md:pb-0 md:pt-9">
-          <Link href="/login" aria-label="Pursuit home" className="relative z-10">
+          <Link
+            href="/login"
+            aria-label="Pursuit home"
+            className="relative z-10 flex items-center gap-2"
+          >
             <LogoMark className="h-[30px] w-[23px] text-[#0b0b0c]" />
+            <span className="text-[16px] font-medium tracking-[-0.03em] text-[#0b0b0c]">
+              Pursuit
+            </span>
           </Link>
 
           <div
