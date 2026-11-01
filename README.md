@@ -1,10 +1,12 @@
-# Internship Tracker
+# Pursuit
 
-A focused personal CRM for internship applications, cold emails, follow-ups, interviews, and every conversation in between. Built as a modular monolith with Next.js, TypeScript, Tailwind, shadcn-style Radix components, Drizzle ORM, and PostgreSQL.
+Pursuit is a focused personal CRM for internship applications, cold emails, follow-ups, interviews, and every conversation in between. Built as a modular monolith with Next.js, TypeScript, Tailwind, shadcn-style Radix components, Drizzle ORM, and PostgreSQL.
 
 The authentication screen and application shell are a close recreation of the supplied design references, extended into a full multi-user product.
 
 **Live:** https://internship-tracker-dusky-phi.vercel.app
+
+The Vercel hostname is retained so the existing Supabase and Google OAuth callbacks keep working. A custom domain can be attached later without changing the application code.
 
 ## What's included
 
@@ -60,7 +62,7 @@ Email/password signup is intentionally disabled. Existing email/password account
 
 Elena's workspace contains 15 sample applications, emails, replies, follow-ups, and analytics. It is completely separate from your account.
 
-- **Email:** `elena@internshiptracker.app`
+- **Email:** `elena@pursuit.app`
 - **Password:** `REDACTED_DEMO_CREDENTIAL!`
 
 You can also click **Open demo** on the login screen for one-click access. The demo user is labelled **Demo workspace** in the product. Set `DEMO_LOGIN_ENABLED=false` to disable the demo shortcut, and `SEED_DEMO=false` to prevent seeding Elena locally.

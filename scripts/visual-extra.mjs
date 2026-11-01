@@ -10,7 +10,7 @@ page.on("console", (message) => { if (message.type() === "error") errors.push(me
 await fs.mkdir("screenshots", { recursive: true });
 
 await page.goto("http://localhost:3001/login", { waitUntil: "networkidle" });
-await page.fill('input[name="email"]', "elena@internshiptracker.app");
+await page.fill('input[name="email"]', "elena@pursuit.app");
 await page.fill('input[name="password"]', "REDACTED_DEMO_CREDENTIAL!");
 await page.click('button[type="submit"]');
 await page.waitForURL("**/dashboard");

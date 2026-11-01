@@ -909,7 +909,7 @@ export async function seedDemoData(db: Db, force = false) {
   await db.insert(settings).values({
     userId: demoUser.id,
     followUpIntervals: [5, 10, 17],
-    emailSignature: "Elena Crutiez\nProduct designer & builder\nelena@internshiptracker.app",
+    emailSignature: "Elena Crutiez\nProduct designer & builder\nelena@pursuit.app",
     defaultMethod: "cold_email",
   });
 

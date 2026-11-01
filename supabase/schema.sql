@@ -1,4 +1,4 @@
--- Internship Tracker — fresh Supabase database schema
+-- Pursuit — fresh Supabase database schema
 -- Use this only for a new database. If you use `pnpm db:migrate`,
 -- do not also run this file, or the migration runner will see duplicate tables.
 

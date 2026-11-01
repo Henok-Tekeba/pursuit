@@ -9,7 +9,7 @@ export function AuthFooter() {
     <>
       <div className="flex items-center justify-center gap-4 text-[11px] text-[#8b8b93]">
         <a
-          href="mailto:hello@internshiptracker.app"
+          href="mailto:hello@pursuit.app"
           className="transition-colors hover:text-[#44444b]"
         >
           Help

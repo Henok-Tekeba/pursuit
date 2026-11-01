@@ -117,7 +117,7 @@ export function Sidebar({
               </span>
               <div className="min-w-0 flex-1">
                 <p className="truncate text-[11.5px] font-medium leading-tight text-ink">
-                  Internship Tracker
+                  Pursuit
                 </p>
                 <p className="mt-0.5 truncate text-[10px] leading-tight text-ink-muted">
                   {data.totalApplications === 0

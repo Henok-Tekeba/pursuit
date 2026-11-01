@@ -13,7 +13,7 @@ const content = {
     title: "Terms of use",
     description: "The short version",
     body: [
-      "Internship Tracker is a personal tool for organizing your own internship applications, emails, and follow-ups.",
+      "Pursuit is a personal tool for organizing your own internship applications, emails, and follow-ups.",
       "You are responsible for the content you add and for making sure your outreach is honest and appropriate. The service is provided as-is, without guarantees of hiring outcomes.",
       "You may export or delete your data at any time. Do not use the service to store sensitive information you would not put in an email.",
     ],
@@ -24,7 +24,7 @@ const content = {
     body: [
       "Your application records are private to your account. We never show them to other users.",
       "Your data is stored in a PostgreSQL database. Authentication is handled by Supabase Auth in production, or a local development sign-in flow when Supabase is not configured.",
-      "You can export a CSV of your applications at any time. To request deletion of your account and data, email hello@internshiptracker.app.",
+      "You can export a CSV of your applications at any time. To request deletion of your account and data, email hello@pursuit.app.",
     ],
   },
 };

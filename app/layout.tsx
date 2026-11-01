@@ -5,8 +5,8 @@ import { Providers } from "@/components/providers";
 
 export const metadata: Metadata = {
   title: {
-    default: "Internship Tracker — Your internship CRM",
-    template: "%s · Internship Tracker",
+    default: "Pursuit — Your internship CRM",
+    template: "%s · Pursuit",
   },
   description:
     "A calm, focused CRM for internship applications, cold emails, follow-ups, and interviews.",
