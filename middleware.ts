@@ -24,6 +24,14 @@ export async function middleware(request: NextRequest) {
   const token = request.cookies.get(SESSION_COOKIE)?.value;
   const session = token ? await verifySessionToken(token) : null;
 
+  const isMutation = !["GET", "HEAD", "OPTIONS"].includes(request.method);
+  if (session?.isDemo && isMutation && pathname !== "/api/auth/signout") {
+    return NextResponse.json(
+      { error: "The demo workspace is read-only. Create your own account to make changes." },
+      { status: 403 },
+    );
+  }
+
   if (isProtected && !session) {
     const url = new URL("/login", request.url);
     if (pathname !== "/dashboard") url.searchParams.set("next", pathname);

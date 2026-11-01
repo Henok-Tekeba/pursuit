@@ -103,7 +103,7 @@ Pursuit uses Google as the account-creation path. Google has already verified th
 
 - **New accounts** are Google-only. The onboarding step collects name, target role, school, graduation year, location, and an optional password.
 - **Existing email/password accounts** remain supported at `/login`.
-- **Demo access** is a one-click session on the login screen. It is clearly marked as sample data and does not expose a password credential.
+- **Demo access** is a read-only one-click session on the login screen. It is clearly marked as sample data and does not expose a password credential.
 - **Sessions** use signed, HTTP-only cookies. Passwords are hashed with scrypt.
 - **Data access** is enforced in the application layer: every read and mutation is filtered by the authenticated user ID.
 
@@ -164,7 +164,7 @@ To use Google signup locally, add the Supabase public keys and register `http://
 
 ### Demo workspace
 
-On the login screen, click **Open demo**. Elena's workspace contains 15 sample applications, emails, replies, follow-ups, notes, and analytics. The demo is completely separate from your own account.
+On the login screen, click **Open demo**. Elena's workspace is read-only and contains 15 sample applications, emails, replies, follow-ups, notes, and analytics. The demo is completely separate from your own account.
 
 ## Environment variables
 
@@ -263,7 +263,7 @@ pnpm test:flows
 pnpm test:extended
 ```
 
-- `test:flows` exercises the demo workspace: sign-in, application creation with an initial email, recording a reply, search, CSV export, and deletion.
+- `test:flows` exercises the read-only demo workspace: sign-in, read-only state, search, page rendering, and CSV export.
 - `test:extended` creates a temporary verified QA account directly in the database, exercises the empty workspace, templates, settings, bulk actions, notes, scheduling, data isolation, password changing, password sign-in, the demo shortcut, and sign-out, then cleans up the account.
 
 For a server on a different port:

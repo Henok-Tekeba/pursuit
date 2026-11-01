@@ -91,6 +91,22 @@ export function AppShell({
             onOpenMenu={() => setMobileOpen(true)}
             onOpenSearch={() => setSearchOpen(true)}
           />
+          {user.isDemo && (
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line bg-[#fbfbfb] px-4 py-2 text-[11px] text-ink-muted dark:bg-white/[0.025]">
+              <span>
+                <span className="font-medium text-ink-secondary">Demo workspace</span> · read-only,
+                with sample data only.
+              </span>
+              <form action="/api/auth/signout?next=/signup" method="post">
+                <button
+                  type="submit"
+                  className="font-medium text-ink underline underline-offset-2 transition-opacity hover:opacity-70"
+                >
+                  Create your own
+                </button>
+              </form>
+            </div>
+          )}
           <div className="min-h-0 flex-1 overflow-y-auto">
             <div className={cn("min-h-full")}>{children}</div>
           </div>

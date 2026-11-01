@@ -6,7 +6,7 @@ import { eq } from "drizzle-orm";
 import { getDb } from "@/lib/db";
 import { users } from "@/lib/db/schema";
 import { normalizeEmail } from "@/lib/auth/helpers";
-import { clearSessionCookie, requireUser, setSessionCookie } from "@/lib/auth/session";
+import { requireUser, setSessionCookie } from "@/lib/auth/session";
 import { hashPassword, verifyPassword } from "@/lib/auth/password";
 import { DEMO_EMAIL, isDemoLoginEnabled } from "@/lib/auth/demo";
 
@@ -57,7 +57,7 @@ export async function passwordSignInAction(
     return { status: "error", message: "Incorrect email or password." };
   }
 
-  await setSessionCookie(user.id, user.email);
+  await setSessionCookie(user.id, user.email, user.isDemo);
   redirect("/dashboard");
 }
 
@@ -72,7 +72,7 @@ export async function demoSignInAction() {
   if (!demoUser) {
     redirect("/login?error=demo-unavailable");
   }
-  await setSessionCookie(demoUser.id, demoUser.email);
+  await setSessionCookie(demoUser.id, demoUser.email, true);
   redirect("/dashboard");
 }
 
@@ -110,10 +110,6 @@ export async function changePasswordAction(
   return { status: "success", message: "Password updated." };
 }
 
-export async function signOutAction() {
-  await clearSessionCookie();
-  redirect("/login");
-}
 
 export async function updateProfileAction(formData: FormData) {
   const user = await requireUser();

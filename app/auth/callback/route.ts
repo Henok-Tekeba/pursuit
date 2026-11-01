@@ -45,7 +45,7 @@ export async function GET(request: NextRequest) {
 
     const existing = await findUserByEmail(email);
     if (existing) {
-      await setSessionCookie(existing.id, existing.email);
+      await setSessionCookie(existing.id, existing.email, existing.isDemo);
       return NextResponse.redirect(new URL(next, request.url));
     }
 

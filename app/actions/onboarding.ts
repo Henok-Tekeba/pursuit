@@ -59,7 +59,7 @@ export async function completeOnboardingAction(
 
   const existing = await findUserByEmail(email);
   if (existing) {
-    await setSessionCookie(existing.id, existing.email);
+    await setSessionCookie(existing.id, existing.email, existing.isDemo);
     redirect("/dashboard");
   }
 
@@ -99,7 +99,7 @@ export async function completeOnboardingAction(
     created = raceWinner;
   }
 
-  await setSessionCookie(created.id, created.email);
+  await setSessionCookie(created.id, created.email, created.isDemo);
 
   try {
     await supabase.auth.signOut();

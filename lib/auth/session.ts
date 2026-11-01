@@ -12,8 +12,8 @@ import {
   verifySessionToken,
 } from "./token";
 
-export async function setSessionCookie(userId: string, email: string) {
-  const token = await createSessionToken(userId, email);
+export async function setSessionCookie(userId: string, email: string, isDemo = false) {
+  const token = await createSessionToken(userId, email, isDemo);
   const store = await cookies();
   store.set(SESSION_COOKIE, token, {
     httpOnly: true,

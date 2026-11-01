@@ -18,10 +18,11 @@ function getSecret() {
 export type SessionPayload = JWTPayload & {
   sub: string;
   email: string;
+  isDemo?: boolean;
 };
 
-export async function createSessionToken(userId: string, email: string) {
-  return new SignJWT({ email })
+export async function createSessionToken(userId: string, email: string, isDemo = false) {
+  return new SignJWT({ email, isDemo })
     .setProtectedHeader({ alg: "HS256" })
     .setSubject(userId)
     .setIssuedAt()

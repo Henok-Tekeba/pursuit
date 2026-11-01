@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Download, KeyRound, LogOut, Palette, ShieldCheck, UserRound } from "lucide-react";
 import { requireUser } from "@/lib/auth/session";
 import { getSettingsForUser } from "@/lib/queries/applications";
-import { signOutAction } from "@/app/actions/auth";
 import { PageHeader } from "@/components/page-header";
 import { Button } from "@/components/ui/button";
 import { ProfileSettings, FollowUpSettings, PasswordSettings } from "@/components/settings/settings-forms";
@@ -106,7 +105,7 @@ export default async function SettingsPage() {
                   <p className="text-[11.5px] font-medium text-ink">{user.name}</p>
                   <p className="mt-0.5 text-[10.5px] text-ink-muted">{user.email}</p>
                 </div>
-                <form action={signOutAction}>
+                <form action="/api/auth/signout" method="post">
                   <Button type="submit" variant="outline" size="sm">
                     <LogOut className="size-3.5" />
                     Sign out

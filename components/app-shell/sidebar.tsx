@@ -23,7 +23,6 @@ import {
 import { cn } from "@/lib/utils";
 import { LogoMark } from "@/components/logo";
 import { PersonAvatar } from "@/components/company-avatar";
-import { signOutAction } from "@/app/actions/auth";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -349,7 +348,7 @@ function UserMenu({
           </a>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <form action={signOutAction}>
+        <form action="/api/auth/signout" method="post">
           <button
             type="submit"
             className="relative flex w-full cursor-default select-none items-center gap-2 rounded-md px-2 py-1.5 text-[13px] text-[#b94a5c] outline-none transition-colors hover:bg-[#fdf1f3] focus:bg-[#fdf1f3] dark:hover:bg-[#332427] dark:focus:bg-[#332427]"
