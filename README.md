@@ -4,6 +4,8 @@ A focused personal CRM for internship applications, cold emails, follow-ups, int
 
 The authentication screen and application shell are a close recreation of the supplied design references, extended into a full multi-user product.
 
+**Live:** https://internship-tracker-dusky-phi.vercel.app
+
 ## What's included
 
 - **Real email/password accounts** — create your own account from `/signup`, sign in from `/login`, and manage your password in Settings. Passwords are hashed with scrypt and sessions use signed, HTTP-only cookies.
@@ -85,6 +87,8 @@ pnpm test:extended
 # App
 APP_URL=http://localhost:3000
 SESSION_SECRET=generate-a-long-random-value
+# Fixed display timezone (server + browser use the same value)
+NEXT_PUBLIC_APP_TIMEZONE=Africa/Addis_Ababa
 
 # Demo workspace
 DEMO_LOGIN_ENABLED=true
@@ -135,10 +139,10 @@ Email/password accounts work immediately with no external auth service. Supabase
    ```
 2. **Add the app callback to Supabase**
    - Supabase Dashboard → Authentication → URL Configuration
-   - Site URL: `https://your-domain.com`
+   - Site URL: `https://internship-tracker-dusky-phi.vercel.app`
    - Redirect URLs:
-     - `https://your-domain.com/auth/callback`
-     - `http://localhost:3000/auth/callback` for local testing
+     - `https://internship-tracker-dusky-phi.vercel.app/auth/callback`
+     - `http://localhost:3001/auth/callback` for local testing
 3. **Google**
    - Google Cloud Console → APIs & Services → OAuth consent screen. Publish the app (or add test users while testing).
    - Credentials → Create OAuth client ID → Web application.
@@ -151,7 +155,7 @@ Email/password accounts work immediately with no external auth service. Supabase
    - Add the Services ID, Team ID, Key ID, and private key in Supabase Dashboard → Authentication → Providers → Apple.
    - Apple’s provider setup is the slowest part. If Apple credentials are not ready, you can still go live with email/password and Google; the Apple button will only succeed once the provider is configured.
 
-If Supabase Auth is not configured, the social buttons show a helpful inline message and email/password login continues to work normally.
+The login page reads the enabled providers from Supabase Auth and only renders buttons for providers that are actually enabled. Email/password login always remains available. If Supabase Auth is not configured, social buttons are hidden.
 
 ### Go-live checklist
 
@@ -162,6 +166,7 @@ Use this on launch day:
 - [ ] `DATABASE_URL` added to Vercel (transaction/session pooler)
 - [ ] `SESSION_SECRET` generated and added to Vercel
 - [ ] `APP_URL` set to the production URL
+- [ ] `NEXT_PUBLIC_APP_TIMEZONE` added to Vercel
 - [ ] Supabase Auth URL Configuration updated with the production callback
 - [ ] Google OAuth client configured
 - [ ] Apple provider configured (if launching with Apple)
@@ -176,13 +181,21 @@ Use this on launch day:
 
 ### Deploy to Vercel
 
-1. Push the project to GitHub.
-2. Import the repository into Vercel.
-3. Add `APP_URL`, `SESSION_SECRET`, and `DATABASE_URL`.
-   - Set `SEED_DEMO=false` if you do not want Elena's sample data in production.
-   - Leave `DEMO_LOGIN_ENABLED=true` only if the demo account exists and you want the shortcut visible.
-4. Run the database migration once against the production database.
-5. Deploy with the default Next.js build command (`pnpm build`).
+The production app is deployed at **https://internship-tracker-dusky-phi.vercel.app**.
+
+Current Vercel project: `internship-tracker` under `henok-aaits-projects`.
+
+Production environment variables:
+
+- `DATABASE_URL` — Supabase transaction pooler (port `6543`)
+- `SESSION_SECRET`
+- `APP_URL=https://internship-tracker-dusky-phi.vercel.app`
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `NEXT_PUBLIC_APP_TIMEZONE=Africa/Addis_Ababa`
+- `SEED_DEMO=true`
+
+The project currently deploys with `vercel deploy --prod`; connect the GitHub repo in the Vercel dashboard to enable automatic deploys on push. Run `pnpm db:migrate` once against a fresh production database before the first deploy.
 
 ## Data model
 
