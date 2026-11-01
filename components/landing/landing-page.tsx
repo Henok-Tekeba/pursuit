@@ -11,18 +11,6 @@ import {
 } from "lucide-react";
 import { LogoMark } from "@/components/logo";
 
-const nav = [
-  { label: "Why Pursuit", href: "#why" },
-  { label: "Features", href: "#features" },
-  { label: "How it works", href: "#how-it-works" },
-  { label: "Demo", href: "/demo" },
-  {
-    label: "Changelog",
-    href: "https://github.com/Henok-Tekeba/pursuit/releases",
-    external: true,
-  },
-];
-
 const features = [
   {
     icon: Briefcase,
@@ -86,41 +74,10 @@ export function LandingPage() {
         </div>
 
         <div className="relative flex min-h-dvh w-full flex-col px-6 pb-10 md:px-11 lg:w-[50.6%] lg:pb-0">
-          <header className="flex items-center justify-between pt-[26px]">
+          <header className="flex items-center pt-[26px]">
             <Link href="/" className="flex shrink-0 items-center gap-2" aria-label="Pursuit home">
               <LogoMark className="h-[23px] w-[18px]" />
               <span className="text-[16px] font-semibold tracking-[-0.04em]">Pursuit</span>
-            </Link>
-
-            <nav className="hidden items-center gap-3 md:flex">
-              {nav.map((item) =>
-                item.external ? (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-[13px] text-[#66666c] transition-colors hover:text-[#101012]"
-                  >
-                    {item.label}
-                  </a>
-                ) : (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    className="text-[13px] text-[#66666c] transition-colors hover:text-[#101012]"
-                  >
-                    {item.label}
-                  </Link>
-                ),
-              )}
-            </nav>
-
-            <Link
-              href="/login"
-              className="ml-4 shrink-0 text-[13px] font-medium text-[#101012] underline-offset-4 hover:underline"
-            >
-              Log in
             </Link>
           </header>
 

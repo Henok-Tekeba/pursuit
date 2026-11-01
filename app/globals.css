@@ -150,7 +150,7 @@
 
 @layer utilities {
   .auth-canvas {
-    background-color: #bbbbbb;
+    background-color: #fafaf9;
   }
 
   .text-balance {
@@ -197,10 +197,6 @@
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
 }
 
-.auth-halftone {
-  image-rendering: auto;
-  filter: contrast(1.02);
-}
 
 .driver-popover.it-product-tour {
   max-width: 330px;

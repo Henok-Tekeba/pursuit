@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export function AuthFooter() {
   return (
-    <div className="flex items-center justify-center gap-4 text-[11px] text-[#8b8b93]">
+    <div className="flex items-center justify-start gap-4 text-[11px] text-[#8b8b93]">
       <a
         href="mailto:tekebahenok6@gmail.com"
         className="transition-colors hover:text-[#44444b]"
