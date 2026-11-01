@@ -18,11 +18,24 @@ import { updateSettingsAction } from "@/app/actions/applications";
 export function ProfileSettings({
   user,
 }: {
-  user: { name: string; email: string; avatarUrl: string | null; isDemo: boolean };
+  user: {
+    name: string;
+    email: string;
+    avatarUrl: string | null;
+    targetRole: string | null;
+    university: string | null;
+    graduationYear: string | null;
+    location: string | null;
+    isDemo: boolean;
+  };
 }) {
   const router = useRouter();
   const [name, setName] = useState(user.name);
   const [avatarUrl, setAvatarUrl] = useState(user.avatarUrl ?? "");
+  const [targetRole, setTargetRole] = useState(user.targetRole ?? "");
+  const [university, setUniversity] = useState(user.university ?? "");
+  const [graduationYear, setGraduationYear] = useState(user.graduationYear ?? "");
+  const [location, setLocation] = useState(user.location ?? "");
   const [pending, startTransition] = useTransition();
 
   const save = () => {
@@ -30,10 +43,18 @@ export function ProfileSettings({
       toast.error("Enter your full name.");
       return;
     }
+    if (graduationYear.trim() && !/^\d{4}$/.test(graduationYear.trim())) {
+      toast.error("Enter a four-digit graduation year.");
+      return;
+    }
     startTransition(async () => {
       const formData = new FormData();
       formData.set("name", name);
       formData.set("avatarUrl", avatarUrl);
+      formData.set("targetRole", targetRole);
+      formData.set("university", university);
+      formData.set("graduationYear", graduationYear);
+      formData.set("location", location);
       const result = await updateProfileAction(formData);
       if (result.ok) {
         toast.success("Profile updated.");
@@ -75,6 +96,44 @@ export function ProfileSettings({
             value={avatarUrl}
             onChange={(event) => setAvatarUrl(event.target.value)}
             placeholder="https://… or /avatars/photo.jpg"
+          />
+        </div>
+        <div className="space-y-1.5">
+          <Label htmlFor="profile-target-role">Target role</Label>
+          <Input
+            id="profile-target-role"
+            value={targetRole}
+            onChange={(event) => setTargetRole(event.target.value)}
+            placeholder="Product Design Intern"
+          />
+        </div>
+        <div className="space-y-1.5">
+          <Label htmlFor="profile-location">Location</Label>
+          <Input
+            id="profile-location"
+            value={location}
+            onChange={(event) => setLocation(event.target.value)}
+            placeholder="City, country"
+          />
+        </div>
+        <div className="space-y-1.5">
+          <Label htmlFor="profile-university">University / school</Label>
+          <Input
+            id="profile-university"
+            value={university}
+            onChange={(event) => setUniversity(event.target.value)}
+            placeholder="Where you study"
+          />
+        </div>
+        <div className="space-y-1.5">
+          <Label htmlFor="profile-graduation">Graduation year</Label>
+          <Input
+            id="profile-graduation"
+            value={graduationYear}
+            onChange={(event) => setGraduationYear(event.target.value)}
+            inputMode="numeric"
+            maxLength={4}
+            placeholder="2027"
           />
         </div>
       </div>

@@ -46,7 +46,10 @@ export function DashboardMetrics({ data }: { data: DashboardData }) {
   ];
 
   return (
-    <div className="grid grid-cols-2 divide-y divide-line border-b border-line sm:divide-y-0 lg:grid-cols-4 lg:divide-x">
+    <div
+      data-tour="dashboard-metrics"
+      className="grid grid-cols-2 divide-y divide-line border-b border-line sm:divide-y-0 lg:grid-cols-4 lg:divide-x"
+    >
       {metrics.map((metric, index) => {
         const Icon = metric.icon;
         return (

@@ -7,6 +7,7 @@ import { Sidebar } from "./sidebar";
 import { Topbar } from "./topbar";
 import { SearchDialog } from "./search-dialog";
 import { HelpCenterDialog } from "./help-dialog";
+import { ProductTour } from "@/components/onboarding/product-tour";
 import type { ShellData, ShellUser } from "./types";
 import { cn } from "@/lib/utils";
 
@@ -119,6 +120,7 @@ export function AppShell({
 
       <SearchDialog open={searchOpen} onOpenChange={setSearchOpen} />
       <HelpCenterDialog open={helpOpen} onOpenChange={setHelpOpen} />
+      <ProductTour />
     </div>
   );
 }

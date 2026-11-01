@@ -5,107 +5,10 @@ import { z } from "zod";
 import { eq } from "drizzle-orm";
 import { getDb } from "@/lib/db";
 import { users } from "@/lib/db/schema";
-import {
-  ensureUserWorkspace,
-  findOrCreateUser,
-  isSupabaseConfigured,
-  issueMagicLink,
-  normalizeEmail,
-} from "@/lib/auth/helpers";
+import { normalizeEmail } from "@/lib/auth/helpers";
 import { clearSessionCookie, requireUser, setSessionCookie } from "@/lib/auth/session";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
-import { getAppUrl, getRequestBaseUrl } from "@/lib/url";
 import { hashPassword, verifyPassword } from "@/lib/auth/password";
 import { DEMO_EMAIL, isDemoLoginEnabled } from "@/lib/auth/demo";
-
-export type AuthFormState = {
-  status: "idle" | "error" | "sent";
-  message?: string;
-  email?: string;
-  devLink?: string;
-  delivery?: "local" | "supabase";
-};
-
-const authSchema = z.object({
-  email: z.string().trim().email("Enter a valid email address."),
-  name: z.string().trim().optional(),
-  intent: z.enum(["login", "signup"]).default("login"),
-});
-
-export async function sendSignInLink(
-  _previousState: AuthFormState,
-  formData: FormData,
-): Promise<AuthFormState> {
-  const parsed = authSchema.safeParse({
-    email: formData.get("email"),
-    name: formData.get("name") ?? undefined,
-    intent: formData.get("intent") ?? "login",
-  });
-
-  if (!parsed.success) {
-    return {
-      status: "error",
-      message: parsed.error.issues[0]?.message ?? "Enter a valid email address.",
-    };
-  }
-
-  const email = normalizeEmail(parsed.data.email);
-  const name = parsed.data.name?.trim();
-  const intent = parsed.data.intent;
-
-  if (intent === "signup" && (!name || name.length < 2)) {
-    return { status: "error", message: "Please enter your full name." };
-  }
-
-  if (isSupabaseConfigured()) {
-    try {
-      const supabase = await createSupabaseServerClient();
-      const baseUrl = await getRequestBaseUrl();
-      const { error } = await supabase.auth.signInWithOtp({
-        email,
-        options: {
-          shouldCreateUser: true,
-          emailRedirectTo: `${baseUrl}/auth/callback?next=/dashboard`,
-          data: name ? { full_name: name } : undefined,
-        },
-      });
-      if (error) {
-        return { status: "error", message: error.message };
-      }
-      return { status: "sent", email, delivery: "supabase" };
-    } catch (error) {
-      console.error("Supabase magic link failed", error);
-      return {
-        status: "error",
-        message: "We couldn't send your sign-in email. Please try again.",
-      };
-    }
-  }
-
-  const localDatabase = !process.env.DATABASE_URL?.trim();
-  if (
-    process.env.NODE_ENV === "production" &&
-    !localDatabase &&
-    process.env.DEV_SHOW_MAGIC_LINK !== "true"
-  ) {
-    return {
-      status: "error",
-      message:
-        "Email delivery is not configured. Add Supabase Auth credentials to enable sign-in emails.",
-    };
-  }
-
-  try {
-    await findOrCreateUser(email, name);
-    const token = await issueMagicLink(email);
-    const baseUrl = localDatabase ? await getRequestBaseUrl() : getAppUrl();
-    const devLink = `${baseUrl}/auth/verify?token=${token}`;
-    return { status: "sent", email, delivery: "local", devLink };
-  } catch (error) {
-    console.error("Local magic link failed", error);
-    return { status: "error", message: "Something went wrong. Please try again." };
-  }
-}
 
 export type PasswordAuthState = {
   status: "idle" | "error";
@@ -123,10 +26,6 @@ const passwordAuthSchema = z.object({
     .string()
     .min(8, "Use at least 8 characters for your password.")
     .max(200, "That password is too long."),
-});
-
-const signUpSchema = passwordAuthSchema.extend({
-  name: z.string().trim().min(2, "Please enter your full name.").max(80),
 });
 
 export async function passwordSignInAction(
@@ -159,58 +58,6 @@ export async function passwordSignInAction(
   }
 
   await setSessionCookie(user.id, user.email);
-  redirect("/dashboard");
-}
-
-export async function passwordSignUpAction(
-  _previousState: PasswordAuthState,
-  formData: FormData,
-): Promise<PasswordAuthState> {
-  const parsed = signUpSchema.safeParse({
-    name: formData.get("name"),
-    email: formData.get("email"),
-    password: formData.get("password"),
-  });
-
-  if (!parsed.success) {
-    return {
-      status: "error",
-      message: parsed.error.issues[0]?.message ?? "Check your account details.",
-    };
-  }
-
-  const email = normalizeEmail(parsed.data.email);
-  const name = parsed.data.name.trim();
-  const db = await getDb();
-  const existing = await db.query.users.findFirst({ where: eq(users.email, email) });
-  if (existing) {
-    return {
-      status: "error",
-      message:
-        "An account with this email already exists. Sign in instead, or use a different email.",
-    };
-  }
-
-  try {
-    const passwordHash = await hashPassword(parsed.data.password);
-    const [user] = await db
-      .insert(users)
-      .values({
-        email,
-        name,
-        passwordHash,
-      })
-      .returning();
-    await ensureUserWorkspace(user);
-    await setSessionCookie(user.id, user.email);
-  } catch (error) {
-    console.error("Password signup failed", error);
-    return {
-      status: "error",
-      message: "We couldn't create your account. Please try again.",
-    };
-  }
-
   redirect("/dashboard");
 }
 
@@ -272,15 +119,28 @@ export async function updateProfileAction(formData: FormData) {
   const user = await requireUser();
   const name = String(formData.get("name") ?? "").trim();
   const avatarUrl = String(formData.get("avatarUrl") ?? "").trim();
+  const targetRole = String(formData.get("targetRole") ?? "").trim();
+  const university = String(formData.get("university") ?? "").trim();
+  const graduationYear = String(formData.get("graduationYear") ?? "").trim();
+  const location = String(formData.get("location") ?? "").trim();
+
   if (!name || name.length < 2) {
     return { ok: false, message: "Please enter your name." };
   }
+  if (graduationYear && !/^\d{4}$/.test(graduationYear)) {
+    return { ok: false, message: "Enter a four-digit graduation year." };
+  }
+
   const db = await getDb();
   await db
     .update(users)
     .set({
       name,
       avatarUrl: avatarUrl || null,
+      targetRole: targetRole || null,
+      university: university || null,
+      graduationYear: graduationYear || null,
+      location: location || null,
       updatedAt: new Date(),
     })
     .where(eq(users.id, user.id));

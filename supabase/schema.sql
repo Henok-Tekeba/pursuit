@@ -106,6 +106,12 @@ CREATE TABLE "users" (
 	"email" text NOT NULL,
 	"name" text NOT NULL,
 	"avatar_url" text,
+	"password_hash" text,
+	"target_role" text,
+	"university" text,
+	"graduation_year" text,
+	"location" text,
+	"onboarded_at" timestamp with time zone,
 	"is_demo" boolean DEFAULT false NOT NULL,
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
 	"updated_at" timestamp with time zone DEFAULT now() NOT NULL

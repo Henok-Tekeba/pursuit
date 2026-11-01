@@ -15,6 +15,13 @@
       "when": 1793464296772,
       "tag": "0001_youthful_mister_fear",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793515660641,
+      "tag": "0002_even_komodo",
+      "breakpoints": true
     }
   ]
 }

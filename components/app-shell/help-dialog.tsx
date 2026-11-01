@@ -1,6 +1,6 @@
 "use client";
 
-import { Command, LifeBuoy, Keyboard, Mail } from "lucide-react";
+import { Command, Compass, LifeBuoy, Keyboard, Mail } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -38,6 +38,26 @@ export function HelpCenterDialog({
         </DialogHeader>
 
         <div className="space-y-2 border-t border-line pt-4">
+          <div className="flex items-center justify-between gap-3 rounded-lg border border-line bg-surface-subtle/60 p-3">
+            <div>
+              <p className="text-[13px] font-medium text-ink">Take the quick tour</p>
+              <p className="mt-0.5 text-[11.5px] leading-relaxed text-ink-muted">
+                A 60-second walkthrough of the dashboard, applications, and follow-ups.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                onOpenChange(false);
+                window.location.href = "/dashboard?tour=1";
+              }}
+              className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full bg-ink px-3 text-[11px] font-medium text-surface-card transition-opacity hover:opacity-85"
+            >
+              <Compass className="size-3" />
+              Start
+            </button>
+          </div>
+
           <div className="flex items-start gap-3 rounded-lg border border-line bg-surface-subtle/60 p-3">
             <Keyboard className="mt-0.5 size-4 text-ink-muted" />
             <div className="flex-1">

@@ -209,6 +209,7 @@ export function Sidebar({
               <Link
                 href={item.href}
                 onClick={onNavigate}
+                data-tour={`nav-${item.href.slice(1)}`}
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "relative flex h-[38px] items-center rounded-lg transition-colors",
@@ -256,6 +257,7 @@ export function Sidebar({
         <button
           type="button"
           onClick={onOpenHelp}
+          data-tour="help-center"
           className={cn(
             "flex h-8 w-full items-center rounded-md text-[12px] text-ink-secondary transition-colors hover:bg-black/[0.025] hover:text-ink dark:hover:bg-white/[0.04]",
             collapsed ? "justify-center" : "gap-2.5 px-1",

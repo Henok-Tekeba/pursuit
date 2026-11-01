@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "driver.js/dist/driver.css";
 import { Providers } from "@/components/providers";
 
 export const metadata: Metadata = {

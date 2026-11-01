@@ -45,6 +45,10 @@ export default async function SettingsPage() {
                 name: user.name,
                 email: user.email,
                 avatarUrl: user.avatarUrl,
+                targetRole: user.targetRole,
+                university: user.university,
+                graduationYear: user.graduationYear,
+                location: user.location,
                 isDemo: user.isDemo,
               }}
             />
@@ -94,7 +98,7 @@ export default async function SettingsPage() {
                 <p className="mt-1">
                   {user.isDemo
                     ? "You're in the demo workspace. Sign out to create your own private workspace with email."
-                    : "Sign-in is handled with secure email links. Your applications are scoped to your user account and never shared with other users."}
+                    : "Your email is verified through Google and your applications are scoped to this account."}
                 </p>
               </div>
               <div className="flex flex-wrap items-center justify-between gap-2">

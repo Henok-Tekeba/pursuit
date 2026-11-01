@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { findOrCreateUser } from "@/lib/auth/helpers";
+import { findUserByEmail } from "@/lib/auth/helpers";
 import { setSessionCookie } from "@/lib/auth/session";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { safeRedirectPath } from "@/lib/url";
@@ -20,7 +20,6 @@ export async function GET(request: NextRequest) {
   try {
     const supabase = await createSupabaseServerClient();
     let email: string | null = null;
-    let fullName: string | undefined;
 
     if (code) {
       const { data, error } = await supabase.auth.exchangeCodeForSession(code);
@@ -29,7 +28,6 @@ export async function GET(request: NextRequest) {
         return NextResponse.redirect(new URL("/login?error=auth-failed", request.url));
       }
       email = data.user.email;
-      fullName = (data.user.user_metadata?.full_name as string | undefined) ?? undefined;
     } else if (tokenHash) {
       const { data, error } = await supabase.auth.verifyOtp({
         type: (type as "email" | "magiclink") ?? "magiclink",
@@ -39,16 +37,21 @@ export async function GET(request: NextRequest) {
         return NextResponse.redirect(new URL("/login?error=auth-failed", request.url));
       }
       email = data.user.email;
-      fullName = (data.user.user_metadata?.full_name as string | undefined) ?? undefined;
     }
 
     if (!email) {
       return NextResponse.redirect(new URL("/login?error=auth-failed", request.url));
     }
 
-    const user = await findOrCreateUser(email, fullName);
-    await setSessionCookie(user.id, user.email);
-    return NextResponse.redirect(new URL(next, request.url));
+    const existing = await findUserByEmail(email);
+    if (existing) {
+      await setSessionCookie(existing.id, existing.email);
+      return NextResponse.redirect(new URL(next, request.url));
+    }
+
+    // The Supabase session is now established. Onboarding will collect the
+    // profile details and create the app-owned account only after this point.
+    return NextResponse.redirect(new URL("/onboarding", request.url));
   } catch (error) {
     console.error("Auth callback failed", error);
     return NextResponse.redirect(new URL("/login?error=auth-failed", request.url));

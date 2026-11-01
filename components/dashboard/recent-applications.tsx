@@ -9,7 +9,10 @@ import { Button } from "@/components/ui/button";
 
 export function RecentApplications({ items }: { items: DashboardData["recent"] }) {
   return (
-    <section className="min-w-0 border-b border-line min-[1150px]:border-b-0 min-[1150px]:border-r">
+    <section
+      data-tour="recent-applications"
+      className="min-w-0 border-b border-line min-[1150px]:border-b-0 min-[1150px]:border-r"
+    >
       <div className="flex items-center justify-between px-4 py-3.5">
         <div>
           <h2 className="text-[14px] font-medium tracking-[-0.01em] text-ink">Recent applications</h2>
