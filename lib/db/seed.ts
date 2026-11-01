@@ -115,7 +115,7 @@ Elena`,
         subject: "Re: Product design at Linear: a quick note",
         body: `Hi Elena,
 
-Thanks for reaching out: your portfolio is lovely. We'd like to learn more about how you approach product design. Are you free for a 30 minute conversation with me and our design lead next week?
+Thanks for reaching out. Your portfolio is lovely. We'd like to learn more about how you approach product design. Are you free for a 30 minute conversation with me and our design lead next week?
 
 Best,
 Maya`,
@@ -127,7 +127,7 @@ Maya`,
         subject: "Re: Product design at Linear: a quick note",
         body: `Hi Maya,
 
-Thank you: I'd love that. Thursday afternoon works well for me. Looking forward to it.
+Thank you. I'd love that. Thursday afternoon works well for me. Looking forward to it.
 
 Best,
 Elena`,
@@ -262,7 +262,7 @@ Elena`,
         subject: "Re: Product Management Intern: quick introduction",
         body: `Hi Priya,
 
-One last note from me: I know hiring seasons are busy. If the role is still open, I'd be glad to send over a short product teardown. Either way, thank you for your time.
+One last note from me. I know hiring seasons are busy. If the role is still open, I'd be glad to send over a short product teardown. Either way, thank you for your time.
 
 Best,
 Elena`,
@@ -305,7 +305,7 @@ Elena`,
         subject: "Re: Frontend internship: referred by Sam Rivera",
         body: `Hi Elena,
 
-Great to hear from you: Sam speaks highly of your work. We'd like to set up an initial call. Does next Tuesday work?
+Great to hear from you. Sam speaks highly of your work. We'd like to set up an initial call. Does next Tuesday work?
 
 Best,
 Olivia`,
@@ -380,7 +380,7 @@ Elena`,
         subject: "Re: Design engineering at Vercel",
         body: `Hi Elena,
 
-Thanks for the note. We'd like to chat: can you share a few times that work next week?
+Thanks for the note. We'd like to chat. Can you share a few times that work next week?
 
 Lucas`,
       },
@@ -681,7 +681,7 @@ Elena`,
         direction: "outbound",
         kind: "initial",
         daysAgo: 12,
-        subject: "A small concept for Spaces: and the UI/UX internship",
+        subject: "A small concept for Spaces and the UI/UX internship",
         body: `Hi Isla,
 
 I'm Elena, a designer who has been thinking a lot about how browsers can feel more like places than utilities. I put together a short concept for an ambient workspace feature and would love to share it as part of my application for the UI/UX Design Intern role.
@@ -695,7 +695,7 @@ Elena`,
         direction: "outbound",
         kind: "follow_up",
         daysAgo: 7,
-        subject: "Re: A small concept for Spaces: and the UI/UX internship",
+        subject: "Re: A small concept for Spaces and the UI/UX internship",
         body: `Hi Isla,
 
 Sharing a 90-second Loom walkthrough of the concept in case it's easier to skim. I'd love to hear how your team approaches these small moments.
@@ -833,7 +833,7 @@ Chloe`,
 
 Ben suggested I reach out about the Software Engineering Intern role. I've spent the last semester building internal tools for a research lab and would love to bring that experience to Retool.
 
-My application is attached: thank you for your time.
+My application is attached. Thank you for your time.
 
 Best,
 Elena`,
