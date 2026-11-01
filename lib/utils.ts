@@ -3,13 +3,10 @@ import { twMerge } from "tailwind-merge";
 import {
   addDays,
   differenceInCalendarDays,
-  format,
   formatDistanceToNowStrict,
-  formatISO,
   isValid,
-  parseISO,
-  startOfDay,
 } from "date-fns";
+import { formatInTimeZone } from "date-fns-tz";
 import type { ApplicationStatus } from "@/lib/db/schema";
 import { ACTIVE_STATUSES, INTERVIEW_STATUSES, RESPONSE_STATUSES } from "@/lib/constants";
 
@@ -17,57 +14,75 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export const APP_TIMEZONE = process.env.NEXT_PUBLIC_APP_TIMEZONE || "UTC";
+
+function toDate(value: string | Date): Date {
+  if (value instanceof Date) return value;
+  return new Date(value.length === 10 ? `${value}T00:00:00Z` : value);
+}
+
+function dateKey(value: string | Date): string {
+  if (typeof value === "string" && value.length === 10) return value.slice(0, 10);
+  return formatInTimeZone(toDate(value), APP_TIMEZONE, "yyyy-MM-dd");
+}
+
 export function toDateOnly(date: Date | string): string {
   if (typeof date === "string") return date.slice(0, 10);
-  return formatISO(date, { representation: "date" });
+  return formatInTimeZone(date, APP_TIMEZONE, "yyyy-MM-dd");
 }
 
 export function parseDateOnly(value: string): Date {
-  return parseISO(`${value.slice(0, 10)}T00:00:00`);
+  return new Date(`${value.slice(0, 10)}T00:00:00Z`);
 }
 
 export function todayDateOnly(): string {
-  return format(new Date(), "yyyy-MM-dd");
+  return formatInTimeZone(new Date(), APP_TIMEZONE, "yyyy-MM-dd");
 }
 
 export function formatDate(value: string | Date | null | undefined, pattern = "MMM d, yyyy") {
   if (!value) return "—";
-  const date = typeof value === "string" ? parseISO(value.length === 10 ? `${value}T00:00:00` : value) : value;
+  const date = toDate(value);
   if (!isValid(date)) return "—";
-  return format(date, pattern);
+  return formatInTimeZone(date, APP_TIMEZONE, pattern);
 }
 
 export function formatDateWithTime(value: string | Date | null | undefined) {
   if (!value) return "—";
-  const date = typeof value === "string" ? new Date(value) : value;
+  const date = toDate(value);
   if (!isValid(date)) return "—";
-  return format(date, "MMM d, yyyy 'at' h:mm a");
+  return formatInTimeZone(date, APP_TIMEZONE, "MMM d, yyyy 'at' h:mm a");
 }
 
 export function formatTime(value: string | Date | null | undefined) {
   if (!value) return "—";
-  const date = typeof value === "string" ? new Date(value) : value;
+  const date = toDate(value);
   if (!isValid(date)) return "—";
-  return format(date, "h:mm a");
+  return formatInTimeZone(date, APP_TIMEZONE, "h:mm a");
 }
 
 export function formatRelative(value: string | Date | null | undefined) {
   if (!value) return "—";
-  const date = typeof value === "string" ? new Date(value.length === 10 ? `${value}T00:00:00` : value) : value;
+  const date = toDate(value);
   if (!isValid(date)) return "—";
   return formatDistanceToNowStrict(date, { addSuffix: true });
 }
 
 export function daysSince(value: string | Date | null | undefined): number | null {
   if (!value) return null;
-  const date = typeof value === "string" ? parseDateOnly(value) : startOfDay(value);
-  return Math.max(0, differenceInCalendarDays(startOfDay(new Date()), date));
+  return Math.max(0, differenceInCalendarDays(parseDateOnly(todayDateOnly()), parseDateOnly(dateKey(value))));
 }
 
 export function daysUntil(value: string | Date | null | undefined): number | null {
   if (!value) return null;
-  const date = typeof value === "string" ? parseDateOnly(value) : startOfDay(value);
-  return differenceInCalendarDays(date, startOfDay(new Date()));
+  return differenceInCalendarDays(parseDateOnly(dateKey(value)), parseDateOnly(todayDateOnly()));
+}
+
+export function calendarDaysBetween(
+  start: string | Date | null | undefined,
+  end: string | Date | null | undefined,
+): number | null {
+  if (!start || !end) return null;
+  return differenceInCalendarDays(parseDateOnly(dateKey(end)), parseDateOnly(dateKey(start)));
 }
 
 export function isOverdue(value: string | Date | null | undefined): boolean {

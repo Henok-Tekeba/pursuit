@@ -91,6 +91,14 @@ export function ProfileSettings({
 export function PasswordSettings({ hasPassword }: { hasPassword: boolean }) {
   const initialState: PasswordChangeState = { status: "idle" };
   const [state, formAction, pending] = useActionState(changePasswordAction, initialState);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (state.status === "success") {
+      toast.success(state.message ?? "Password updated.");
+      router.refresh();
+    }
+  }, [state, router]);
 
   return (
     <form action={formAction} className="p-4">

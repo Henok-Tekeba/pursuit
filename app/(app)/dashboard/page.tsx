@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { format } from "date-fns";
 import { Download, Plus } from "lucide-react";
 import { requireUser } from "@/lib/auth/session";
 import { getDashboardData, getSettingsForUser } from "@/lib/queries/applications";
@@ -9,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { RefreshButton } from "@/components/refresh-button";
 import { DashboardMetrics, StatusOverview, TodaysActions } from "@/components/dashboard/metrics";
 import { RecentApplications } from "@/components/dashboard/recent-applications";
+import { formatDate } from "@/lib/utils";
 
 export const metadata: Metadata = { title: "Dashboard" };
 export const dynamic = "force-dynamic";
@@ -20,7 +20,7 @@ export default async function DashboardPage() {
     getSettingsForUser(user.id),
   ]);
   const intervals = (settings?.followUpIntervals ?? [5, 10, 17]).join(", ");
-  const todayLabel = format(new Date(), "EEEE, MMMM d");
+  const todayLabel = formatDate(new Date(), "EEEE, MMMM d");
 
   return (
     <div className="min-h-full pb-6">

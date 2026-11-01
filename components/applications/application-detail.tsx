@@ -3,7 +3,6 @@
 import { useEffect, useState, useTransition } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { differenceInCalendarDays, parseISO } from "date-fns";
 import {
   ArrowDownLeft,
   ArrowLeft,
@@ -26,6 +25,7 @@ import { toast } from "sonner";
 import type { ActivityType, ApplicationMethod, ApplicationStatus, Template } from "@/lib/db/schema";
 import { METHOD_LABELS } from "@/lib/constants";
 import {
+  calendarDaysBetween,
   cn,
   daysSince,
   formatDate,
@@ -135,16 +135,9 @@ export function ApplicationDetail({
     }
   };
 
-  const responseDays =
-    application.firstResponseAt
-      ? Math.max(
-          0,
-          differenceInCalendarDays(
-            new Date(application.firstResponseAt),
-            parseISO(`${application.appliedAt}T00:00:00`),
-          ),
-        )
-      : null;
+  const responseDays = application.firstResponseAt
+    ? Math.max(0, calendarDaysBetween(application.appliedAt, application.firstResponseAt) ?? 0)
+    : null;
 
   const followUpOverdue = isOverdue(application.nextFollowUpAt);
   const followUpNone = !application.nextFollowUpAt;

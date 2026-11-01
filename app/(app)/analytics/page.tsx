@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { format } from "date-fns";
 import {
   ArrowUpRight,
   BadgeCheck,
@@ -19,7 +18,7 @@ import { PageHeader } from "@/components/page-header";
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/empty-state";
 import { METHOD_LABELS, STATUS_LABELS, STATUS_STYLES } from "@/lib/constants";
-import { cn, percent } from "@/lib/utils";
+import { cn, formatDate, percent } from "@/lib/utils";
 
 export const metadata: Metadata = { title: "Analytics" };
 export const dynamic = "force-dynamic";
@@ -164,7 +163,7 @@ export default async function AnalyticsPage() {
                   {analytics.monthly.map((month) => {
                     const max = Math.max(...analytics.monthly.map((entry) => entry.count), 1);
                     const height = Math.max(6, (month.count / max) * 128);
-                    const monthLabel = format(new Date(`${month.month}-01T00:00:00`), "MMM");
+                    const monthLabel = formatDate(new Date(`${month.month}-01T00:00:00Z`), "MMM");
                     return (
                       <div key={month.month} className="flex flex-1 flex-col items-center gap-2">
                         <span className="text-[10px] font-medium tabular-nums text-ink-muted">

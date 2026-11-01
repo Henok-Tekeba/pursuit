@@ -1,7 +1,6 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { eq } from "drizzle-orm";
 import { getDb } from "@/lib/db";
@@ -261,7 +260,6 @@ export async function changePasswordAction(
     .update(users)
     .set({ passwordHash, updatedAt: new Date() })
     .where(eq(users.id, user.id));
-  revalidatePath("/settings");
   return { status: "success", message: "Password updated." };
 }
 

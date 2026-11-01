@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { addDays, format } from "date-fns";
+import { addDays } from "date-fns";
 import { CalendarClock, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -18,6 +18,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { scheduleFollowUpAction } from "@/app/actions/applications";
+import { parseDateOnly, toDateOnly, todayDateOnly } from "@/lib/utils";
+
+function defaultFollowUpDate() {
+  return toDateOnly(addDays(parseDateOnly(todayDateOnly()), 3));
+}
 
 export function ScheduleFollowUpDialog({
   applicationId,
@@ -36,13 +41,11 @@ export function ScheduleFollowUpDialog({
 }) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const [date, setDate] = useState(
-    currentDate ?? format(addDays(new Date(), 3), "yyyy-MM-dd"),
-  );
+  const [date, setDate] = useState(currentDate ?? defaultFollowUpDate());
   const [pending, startTransition] = useTransition();
 
   useEffect(() => {
-    if (open) setDate(currentDate ?? format(addDays(new Date(), 3), "yyyy-MM-dd"));
+    if (open) setDate(currentDate ?? defaultFollowUpDate());
   }, [open, currentDate]);
 
   return (
@@ -67,7 +70,7 @@ export function ScheduleFollowUpDialog({
             id="schedule-date"
             type="date"
             value={date}
-            min={format(new Date(), "yyyy-MM-dd")}
+            min={todayDateOnly()}
             onChange={(event) => setDate(event.target.value)}
           />
         </div>

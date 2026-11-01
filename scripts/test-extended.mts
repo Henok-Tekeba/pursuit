@@ -5,10 +5,10 @@ const browser = await chromium.launch({ headless: true });
 const context = await browser.newContext({ viewport: { width: 1280, height: 900 } });
 const page = await context.newPage();
 const errors: string[] = [];
-page.on("pageerror", (error) => errors.push(error.message));
+page.on("pageerror", (error) => errors.push(`${page.url()}: ${error.message}`));
 page.on("console", (message) => {
   if (message.type() === "error" && !message.text().includes("Download the React DevTools")) {
-    errors.push(message.text());
+    errors.push(`${page.url()}: ${message.text()}`);
   }
 });
 
@@ -108,8 +108,8 @@ async function main() {
   await page.getByText("Follow-up sent").first().waitFor({ timeout: 15_000 });
 
   // Edit
-  await page.getByRole("link", { name: "Edit" }).first().click();
-  await page.waitForURL(/\/edit$/, { timeout: 20_000, waitUntil: "commit" });
+  await page.goto(`${firstUrl}/edit`, { waitUntil: "networkidle" });
+  await page.locator("#position").waitFor({ timeout: 20_000 });
   await page.fill("#position", "Senior Product Design Intern");
   await page.getByRole("button", { name: "Save changes" }).click();
   await page.waitForURL(/\/applications\/[a-f0-9-]+$/, { timeout: 20_000 });
@@ -176,7 +176,7 @@ async function main() {
   await page.fill("#current-password", USER_PASSWORD);
   await page.fill("#new-password", NEW_PASSWORD);
   await page.getByRole("button", { name: "Update password" }).click();
-  await page.getByText("Password updated.").waitFor({ timeout: 15_000 });
+  await page.getByText("Password updated.").first().waitFor({ timeout: 15_000 });
 
   // Password sign-in, rejection, and demo access
   await page.getByRole("button", { name: "Open account menu" }).click();
