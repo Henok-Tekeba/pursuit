@@ -90,11 +90,11 @@ export function HelpCenterDialog({
                 Email us and we&apos;ll get back to you within one business day.
               </p>
               <a
-                href="mailto:hello@pursuit.app"
+                href="mailto:tekebahenok6@gmail.com"
                 className="mt-2 inline-flex items-center gap-1.5 text-[12px] font-medium text-ink underline underline-offset-2"
               >
                 <Mail className="size-3" />
-                hello@pursuit.app
+                tekebahenok6@gmail.com
               </a>
             </div>
           </div>

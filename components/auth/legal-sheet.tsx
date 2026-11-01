@@ -24,7 +24,7 @@ const content = {
     body: [
       "Your application records are private to your account. We never show them to other users.",
       "Your data is stored in a PostgreSQL database. Authentication is handled by Supabase Auth in production, or a local development sign-in flow when Supabase is not configured.",
-      "You can export a CSV of your applications at any time. To request deletion of your account and data, email hello@pursuit.app.",
+      "You can export a CSV of your applications at any time. To request deletion of your account and data, email tekebahenok6@gmail.com.",
     ],
   },
 };
