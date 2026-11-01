@@ -71,8 +71,8 @@ export function AppShell({
   }, [router]);
 
   return (
-    <div className="min-h-dvh bg-surface-canvas p-0 md:p-4 lg:p-6">
-      <div className="mx-auto flex h-[100dvh] w-full max-w-[1500px] overflow-hidden border-black/[0.04] bg-surface-main md:h-[calc(100dvh-32px)] md:rounded-[14px] md:border md:shadow-shell lg:h-[calc(100dvh-48px)]">
+    <div className="h-dvh w-full overflow-hidden bg-surface-main">
+      <div className="flex h-full w-full overflow-hidden bg-surface-main">
         <Sidebar
           user={user}
           data={data}

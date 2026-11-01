@@ -19,8 +19,7 @@ The authentication screen and application shell are a close recreation of the su
 - **Email archive and templates** — preserve the exact subject and body of every sent or received email; reuse cold-email, follow-up, and reply templates with `{{company}}`, `{{position}}`, `{{contactName}}`, `{{myName}}`, and `{{email}}` placeholders.
 - **Analytics** — response rate, interview conversion, offer rate, average response time, follow-up effectiveness, status breakdown, method breakdown, monthly activity, and CSV export.
 - **Companies** — company-level rollups, response rates, notes, and quick access to related applications.
-- **Responsive + dark mode** — mobile navigation, mobile-friendly application/follow-up/email lists, larger type, and a complete dark theme.
-- **Google sign-in with Supabase Auth** — Google verifies the email and creates the account. Apple is scaffolded but disabled until Apple Developer credentials are available. Existing email/password accounts remain supported.
+- **Responsive + dark mode** — full-viewport workspace, mobile navigation, mobile-friendly application/follow-up/email lists, larger type, and a complete dark theme.
 - **Optional sample data** — the demo workspace is clearly marked. New accounts never receive fake data. Elena is seeded only when demo data is enabled.
 
 ## Stack
@@ -32,7 +31,7 @@ The authentication screen and application shell are a close recreation of the su
 | Data | Drizzle ORM + PostgreSQL |
 | Local database | Embedded PGlite (PostgreSQL WASM) so the app runs with zero external database setup |
 | Production database | Supabase Postgres via `DATABASE_URL` |
-| Auth | Built-in email/password auth; optional Supabase Auth for Google/Apple OAuth |
+| Auth | Google signup + onboarding via Supabase Auth; existing email/password sign-in retained |
 | Deployment | Vercel |
 
 ## Run locally
@@ -49,11 +48,13 @@ pnpm dev
 
 Open `http://localhost:3000`.
 
-No database, Docker, or cloud account is required locally. On first use the app creates an embedded PostgreSQL database in `.data/pglite`, applies migrations, and seeds the demo workspace.
+No database or Docker setup is required locally. On first use the app creates an embedded PostgreSQL database in `.data/pglite`, applies migrations, and seeds the demo workspace. To use Google signup locally, add the Supabase public keys; otherwise use the demo workspace or an existing password account.
 
 ### Create your account
 
-Go to **`/signup`** and create an account with your name, email, and a password (8+ characters). You will be signed in automatically and your workspace will start empty. This is your day-to-day account.
+Go to **`/signup`** and continue with Google. Google verifies your email, then onboarding collects your name, target role, school, graduation year, location, and an optional password. Your workspace starts empty. This is your day-to-day account.
+
+Email/password signup is intentionally disabled. Existing email/password accounts can still sign in at `/login`.
 
 ### Demo workspace
 
@@ -80,7 +81,7 @@ pnpm test:flows
 pnpm test:extended
 ```
 
-`pnpm test:flows` exercises the seeded demo account: sign-in, application creation with an initial email, recording a reply, searching, CSV export, and deletion. `pnpm test:extended` covers account creation, empty-state onboarding, templates, settings, bulk actions, notes, scheduling, private-data isolation, password changing, password sign-in, the demo shortcut, and sign-out.
+`pnpm test:flows` exercises the seeded demo account: sign-in, application creation with an initial email, recording a reply, searching, CSV export, and deletion. `pnpm test:extended` creates a temporary verified QA account directly in the database, then covers empty-state onboarding, templates, settings, bulk actions, notes, scheduling, private-data isolation, password changing, password sign-in, the demo shortcut, and sign-out.
 
 ## Environment variables
 
@@ -98,7 +99,7 @@ SEED_DEMO=true
 # Production database (Supabase Postgres recommended)
 DATABASE_URL=postgresql://...
 
-# Optional: Supabase Auth for Google / Apple OAuth
+# Required for new Google signups; existing password login works without it
 NEXT_PUBLIC_SUPABASE_URL=https://<project-ref>.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=<anon-key>
 ```
@@ -129,7 +130,7 @@ If you want to keep the deployment private, use Vercel Deployment Protection or 
    DATABASE_URL="postgresql://..." pnpm db:seed
    ```
 
-### Auth: Google & Apple sign-in
+### Auth: Google sign-in
 
 New account creation uses **Google sign-in**, so the email is verified by Google and no email delivery service is required. Existing email/password accounts can still sign in normally. Supabase Auth is required for the Google signup path.
 
@@ -149,12 +150,7 @@ New account creation uses **Google sign-in**, so the email is verified by Google
    - Credentials → Create OAuth client ID → Web application.
    - Authorized redirect URI: `https://<project-ref>.supabase.co/auth/v1/callback`
    - Copy the Client ID and Client Secret into Supabase Dashboard → Authentication → Providers → Google.
-4. **Apple**
-   - Apple sign-in requires a paid Apple Developer Program membership.
-   - In Apple Developer, create a Services ID with Sign in with Apple enabled. Add your domain and `https://<project-ref>.supabase.co/auth/v1/callback` as a return URL.
-   - Create a Sign in with Apple key, note the Key ID and Team ID, and download the `.p8` key.
-   - Add the Services ID, Team ID, Key ID, and private key in Supabase Dashboard → Authentication → Providers → Apple.
-   - Apple’s provider setup is the slowest part. Apple is intentionally out of scope for launch; the button stays hidden until the provider is configured.
+Apple sign-in is intentionally out of scope for this launch. The provider and button stay hidden until Apple Developer credentials are configured.
 
 The login and signup pages read the enabled providers from Supabase Auth and only render buttons for providers that are actually enabled. Email/password login remains available for existing accounts. If Supabase Auth is not configured, social buttons are hidden.
 
@@ -170,7 +166,6 @@ Use this on launch day:
 - [ ] `NEXT_PUBLIC_APP_TIMEZONE` added to Vercel
 - [ ] Supabase Auth URL Configuration updated with the production callback
 - [ ] Google OAuth client configured
-- [ ] Apple provider configured (if launching with Apple)
 - [ ] `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` added to Vercel
 - [ ] Deployment built and `/api/health` returns `{ "ok": true }`
 - [ ] Open production `/signup`, continue with Google, and confirm the new account reaches `/onboarding` and then an empty dashboard

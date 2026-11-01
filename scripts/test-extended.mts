@@ -1,4 +1,10 @@
 import { chromium } from "playwright";
+import { readFileSync } from "node:fs";
+import { eq } from "drizzle-orm";
+import { getDb, closeDb } from "@/lib/db";
+import { users } from "@/lib/db/schema";
+import { hashPassword } from "@/lib/auth/password";
+import { ensureUserWorkspace } from "@/lib/auth/helpers";
 
 const base = process.env.TEST_BASE_URL ?? "http://localhost:3001";
 const browser = await chromium.launch({ headless: true });
@@ -18,15 +24,16 @@ function assert(condition: unknown, message: string): asserts condition {
 
 const USER_PASSWORD = "REDACTED_TEST_CREDENTIAL!";
 const NEW_PASSWORD = "REDACTED_TEST_CREDENTIAL-Updated!";
+let createdUserEmail: string | null = null;
 
-async function signUp(name: string, email: string, password: string) {
-  await page.goto(`${base}/signup`, { waitUntil: "networkidle" });
-  await page.fill('input[name="name"]', name);
-  await page.fill('input[name="email"]', email);
-  await page.fill('input[name="password"]', password);
-  await page.getByRole("button", { name: "Create account" }).click();
-  await page.waitForURL("**/dashboard", { timeout: 30_000 });
-  await page.waitForLoadState("networkidle");
+function loadEnv() {
+  for (const line of readFileSync(".env.local", "utf8").split("\n")) {
+    if (!line || line.trimStart().startsWith("#")) continue;
+    const i = line.indexOf("=");
+    if (i < 0) continue;
+    const key = line.slice(0, i);
+    if (!process.env[key]) process.env[key] = line.slice(i + 1);
+  }
 }
 
 async function signIn(email: string, password: string) {
@@ -64,9 +71,25 @@ async function main() {
   const companyOne = `Northstar Labs ${stamp}`;
   const companyTwo = `Juniper Studio ${stamp}`;
 
-  await signUp("QA Tester", userEmail, USER_PASSWORD);
+  loadEnv();
+  const db = await getDb();
+  const [qaUser] = await db
+    .insert(users)
+    .values({
+      email: userEmail,
+      name: "QA Tester",
+      passwordHash: await hashPassword(USER_PASSWORD),
+      onboardedAt: new Date(),
+    })
+    .returning();
+  await ensureUserWorkspace(qaUser);
+  createdUserEmail = userEmail;
+
+  await signIn(userEmail, USER_PASSWORD);
+  await page.waitForURL("**/dashboard", { timeout: 30_000 });
+  await page.waitForLoadState("networkidle");
   await page.getByText("No applications yet").waitFor({ timeout: 15_000 });
-  assert((await page.locator("body").innerText()).includes("QA Tester"), "signup uses the collected name");
+  assert((await page.locator("body").innerText()).includes("QA Tester"), "account login uses the collected name");
   assert((await page.locator("body").innerText()).includes("No applications yet"), "new account has empty dashboard");
   assert((await page.locator("body").innerText()).includes("0"), "new account metrics start at zero");
 
@@ -215,5 +238,14 @@ main()
     process.exitCode = 1;
   })
   .finally(async () => {
+    if (createdUserEmail) {
+      try {
+        const db = await getDb();
+        await db.delete(users).where(eq(users.email, createdUserEmail));
+        await closeDb();
+      } catch (cleanupError) {
+        console.error("Test cleanup failed:", cleanupError);
+      }
+    }
     await browser.close();
   });
