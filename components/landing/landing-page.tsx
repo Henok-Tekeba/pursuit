@@ -70,7 +70,7 @@ export function LandingPage() {
 
   return (
     <main className="min-h-dvh bg-[#fafaf9] text-[#101012]">
-      <section className="relative mx-auto min-h-dvh w-full max-w-[1440px] overflow-hidden">
+      <section className="relative mx-auto min-h-dvh w-full max-w-[1920px] overflow-hidden">
         <div className="absolute inset-y-[26px] left-[50.6%] right-0 hidden overflow-hidden rounded-l-[14px] lg:block">
           <LandingBackdrop />
           <div className="absolute bottom-[6%] left-[8%] right-0 top-[8%] overflow-hidden rounded-l-[12px] border-y border-l border-white/50 shadow-[0_28px_80px_rgba(30,50,70,0.22)]">
