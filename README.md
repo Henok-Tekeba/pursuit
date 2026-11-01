@@ -41,6 +41,7 @@ No shared workspace. No noisy team features. Your search is yours.
 
 - **Google-verified signup** — new accounts start with Google, then finish a short onboarding profile. No SMTP provider to maintain just to create an account.
 - **Private workspaces** — every application, email, company, template, and note is scoped to the signed-in user.
+- **Public landing page** — the product story, live preview, demo entry point, and Google signup CTA.
 - **Dashboard** — pipeline totals, response rate, interviews, follow-ups due, recent applications, today's action items, and status mix.
 - **Application management** — create, edit, view, delete, search, filter, sort, paginate, bulk-update, and bulk-delete.
 - **Conversation timeline** — initial email, follow-ups, replies, interview and assessment invitations, offers, rejections, status changes, scheduled follow-ups, and notes. Emails are append-only.
@@ -61,6 +62,10 @@ No shared workspace. No noisy team features. Your search is yours.
 - **Fast by default.** Server-rendered pages, small client islands, and no unnecessary loading states.
 
 ## Product screens
+
+<p align="center">
+  <img src="docs/screenshots/landing.png" alt="Pursuit landing page" width="100%" />
+</p>
 
 | Applications | Analytics |
 | --- | --- |
@@ -346,7 +351,7 @@ supabase/schema.sql     Fresh-database schema for SQL editor
 
 ## Status
 
-Pursuit v1.0.0 is live and actively used for a real internship search. The priority is a calm, reliable workflow over feature sprawl.
+Pursuit v1.1.0 is live and actively used for a real internship search. The priority is a calm, reliable workflow over feature sprawl.
 
 
 ## Repository
