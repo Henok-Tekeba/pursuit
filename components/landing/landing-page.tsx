@@ -95,7 +95,7 @@ export function LandingPage({ isAuthed }: { isAuthed: boolean }) {
                     href={item.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-[12.5px] text-[#66666c] transition-colors hover:text-[#101012]"
+                    className="text-[13px] text-[#66666c] transition-colors hover:text-[#101012]"
                   >
                     {item.label}
                   </a>
@@ -103,7 +103,7 @@ export function LandingPage({ isAuthed }: { isAuthed: boolean }) {
                   <Link
                     key={item.label}
                     href={item.href}
-                    className="text-[12.5px] text-[#66666c] transition-colors hover:text-[#101012]"
+                    className="text-[13px] text-[#66666c] transition-colors hover:text-[#101012]"
                   >
                     {item.label}
                   </Link>
@@ -113,7 +113,7 @@ export function LandingPage({ isAuthed }: { isAuthed: boolean }) {
 
             <Link
               href={isAuthed ? "/dashboard" : "/login"}
-              className="ml-4 shrink-0 text-[12px] font-medium text-[#101012] underline-offset-4 hover:underline"
+              className="ml-4 shrink-0 text-[13px] font-medium text-[#101012] underline-offset-4 hover:underline"
             >
               {isAuthed ? "Open app" : "Log in"}
             </Link>
@@ -133,22 +133,22 @@ export function LandingPage({ isAuthed }: { isAuthed: boolean }) {
               <span className="text-[#8d8d91]">internship search.</span>
             </h1>
 
-            <p className="mt-5 max-w-[408px] text-[14px] leading-[1.6] text-[#858589]">
+            <p className="mt-5 max-w-[408px] text-[14.5px] leading-[1.6] text-[#858589]">
               Track every application, email, and follow-up in one calm workspace — and spend
               your energy on the conversations that matter.
             </p>
 
-            <div className="mt-7 flex flex-wrap items-center gap-3">
+            <div className="mt-5 flex flex-wrap items-center gap-3">
               <Link
                 href={primaryHref}
-                className="inline-flex h-[40px] items-center gap-2 rounded-[7px] bg-[#101012] px-5 text-[12px] font-medium text-white transition-opacity hover:opacity-85"
+                className="inline-flex h-[40px] items-center gap-2 rounded-[7px] bg-[#101012] px-5 text-[12.5px] font-medium text-white transition-opacity hover:opacity-85"
               >
                 {primaryLabel}
                 <ArrowRight className="size-3.5" />
               </Link>
               <Link
                 href="/demo"
-                className="inline-flex h-[40px] items-center rounded-[7px] bg-[#efefed] px-5 text-[12px] font-medium text-[#101012] transition-colors hover:bg-[#e8e8e5]"
+                className="inline-flex h-[40px] items-center rounded-[7px] bg-[#efefed] px-5 text-[12.5px] font-medium text-[#101012] transition-colors hover:bg-[#e8e8e5]"
               >
                 View demo
               </Link>
@@ -288,14 +288,14 @@ export function LandingPage({ isAuthed }: { isAuthed: boolean }) {
               <div className="flex flex-wrap gap-2.5">
                 <Link
                   href={primaryHref}
-                  className="inline-flex h-[40px] items-center gap-2 rounded-[7px] bg-white px-5 text-[12px] font-medium text-[#101012] transition-opacity hover:opacity-85"
+                  className="inline-flex h-[40px] items-center gap-2 rounded-[7px] bg-white px-5 text-[12.5px] font-medium text-[#101012] transition-opacity hover:opacity-85"
                 >
                   {primaryLabel}
                   <ArrowRight className="size-3.5" />
                 </Link>
                 <Link
                   href="/demo"
-                  className="inline-flex h-[40px] items-center rounded-[7px] border border-white/20 px-5 text-[12px] font-medium text-white transition-colors hover:bg-white/10"
+                  className="inline-flex h-[40px] items-center rounded-[7px] border border-white/20 px-5 text-[12.5px] font-medium text-white transition-colors hover:bg-white/10"
                 >
                   View the demo
                 </Link>
