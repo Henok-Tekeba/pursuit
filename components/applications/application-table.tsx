@@ -644,7 +644,7 @@ function Pagination({
         </PageLink>
       </div>
       <p className="text-[11.5px] text-ink-muted">
-        Showing <span className="font-medium text-ink-secondary">{from}–{to}</span> of{" "}
+        Showing <span className="font-medium text-ink-secondary">{from} to {to}</span> of{" "}
         <span className="font-medium text-ink-secondary">{total}</span> entries
       </p>
     </div>

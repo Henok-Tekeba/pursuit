@@ -220,7 +220,7 @@ export default async function NotificationsPage() {
               <p className="text-[12px] font-medium text-ink">Follow-ups work</p>
             </div>
             <p className="mt-2 text-[10.5px] leading-relaxed text-ink-muted">
-              A short, specific nudge sent 5–7 days after your first email is often the difference between a
+              A short, specific nudge sent 5 to 7 days after your first email is often the difference between a
               quiet inbox and a real conversation.
             </p>
             <Button asChild variant="outline" size="xs" className="mt-3">

@@ -117,7 +117,7 @@ export function CompaniesGrid({ companies }: { companies: CompanyView[] }) {
             <SelectContent>
               <SelectItem value="applications">Most applications</SelectItem>
               <SelectItem value="responses">Most responses</SelectItem>
-              <SelectItem value="name">Name A–Z</SelectItem>
+              <SelectItem value="name">Name A to Z</SelectItem>
             </SelectContent>
           </Select>
         </div>

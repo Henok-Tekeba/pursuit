@@ -140,8 +140,8 @@ export function ApplicationFilters({ values }: { values: FilterValues }) {
           <SelectContent>
             <SelectItem value="applied_desc">Newest</SelectItem>
             <SelectItem value="applied_asc">Oldest</SelectItem>
-            <SelectItem value="company_asc">A–Z</SelectItem>
-            <SelectItem value="company_desc">Z–A</SelectItem>
+            <SelectItem value="company_asc">A to Z</SelectItem>
+            <SelectItem value="company_desc">Z to A</SelectItem>
             <SelectItem value="follow_up">Follow-up</SelectItem>
           </SelectContent>
         </Select>
