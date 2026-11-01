@@ -204,7 +204,6 @@ export async function passwordSignUpAction(
       .returning();
     await ensureUserWorkspace(user);
     await setSessionCookie(user.id, user.email);
-    redirect("/dashboard");
   } catch (error) {
     console.error("Password signup failed", error);
     return {
@@ -212,6 +211,8 @@ export async function passwordSignUpAction(
       message: "We couldn't create your account. Please try again.",
     };
   }
+
+  redirect("/dashboard");
 }
 
 export async function demoSignInAction() {

@@ -31,12 +31,12 @@ const ERROR_MESSAGES: Record<string, string> = {
 
 export function AuthForm({
   mode,
-  socialEnabled,
+  socialProviders,
   initialError,
   demoEnabled = false,
 }: {
   mode: "login" | "signup";
-  socialEnabled: boolean;
+  socialProviders: { google: boolean; apple: boolean };
   initialError?: string;
   demoEnabled?: boolean;
 }) {
@@ -45,6 +45,7 @@ export function AuthForm({
   const [state, formAction, pending] = useActionState(action, initialState);
   const [socialError, setSocialError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const hasSocial = socialProviders.google || socialProviders.apple;
 
   const error =
     state.status === "error"
@@ -54,9 +55,9 @@ export function AuthForm({
 
   const onSocial = (provider: "google" | "apple") => {
     setSocialError("");
-    if (!socialEnabled) {
+    if (!socialProviders[provider]) {
       setSocialError(
-        `${provider === "google" ? "Google" : "Apple"} sign-in is available once Supabase Auth is configured. Use email and password to continue.`,
+        `${provider === "google" ? "Google" : "Apple"} sign-in isn't enabled yet. Use email and password to continue.`,
       );
       return;
     }
@@ -76,30 +77,42 @@ export function AuthForm({
         </p>
       </div>
 
-      <div className="mt-8 grid grid-cols-2 gap-2.5">
-        <button
-          type="button"
-          onClick={() => onSocial("google")}
-          className="flex h-[42px] items-center justify-center gap-2 rounded-full border border-[#e9e9eb] bg-white px-2 text-[11.5px] font-medium text-[#27272d] transition-colors hover:border-[#d7d7db] hover:bg-[#fcfcfc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/10 md:text-[12px]"
-        >
-          <GoogleIcon className="size-4" />
-          {isSignup ? "Sign up with Google" : "Sign In with Google"}
-        </button>
-        <button
-          type="button"
-          onClick={() => onSocial("apple")}
-          className="flex h-[42px] items-center justify-center gap-2 rounded-full border border-[#e9e9eb] bg-white px-2 text-[11.5px] font-medium text-[#27272d] transition-colors hover:border-[#d7d7db] hover:bg-[#fcfcfc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/10 md:text-[12px]"
-        >
-          <AppleIcon className="size-4" />
-          {isSignup ? "Sign up with Apple" : "Sign In with Apple"}
-        </button>
-      </div>
+      {hasSocial && (
+        <>
+          <div
+            className={`mt-8 grid gap-2.5 ${
+              socialProviders.google && socialProviders.apple ? "grid-cols-2" : "grid-cols-1"
+            }`}
+          >
+            {socialProviders.google && (
+              <button
+                type="button"
+                onClick={() => onSocial("google")}
+                className="flex h-[42px] items-center justify-center gap-2 rounded-full border border-[#e9e9eb] bg-white px-2 text-[11.5px] font-medium text-[#27272d] transition-colors hover:border-[#d7d7db] hover:bg-[#fcfcfc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/10 md:text-[12px]"
+              >
+                <GoogleIcon className="size-4" />
+                {isSignup ? "Sign up with Google" : "Sign In with Google"}
+              </button>
+            )}
+            {socialProviders.apple && (
+              <button
+                type="button"
+                onClick={() => onSocial("apple")}
+                className="flex h-[42px] items-center justify-center gap-2 rounded-full border border-[#e9e9eb] bg-white px-2 text-[11.5px] font-medium text-[#27272d] transition-colors hover:border-[#d7d7db] hover:bg-[#fcfcfc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/10 md:text-[12px]"
+              >
+                <AppleIcon className="size-4" />
+                {isSignup ? "Sign up with Apple" : "Sign In with Apple"}
+              </button>
+            )}
+          </div>
 
-      <div className="my-[24px] flex items-center gap-3">
-        <span className="h-px flex-1 bg-[#e9e9eb]" />
-        <span className="text-[11.5px] text-[#8f8f96]">Or</span>
-        <span className="h-px flex-1 bg-[#e9e9eb]" />
-      </div>
+          <div className="my-[24px] flex items-center gap-3">
+            <span className="h-px flex-1 bg-[#e9e9eb]" />
+            <span className="text-[11.5px] text-[#8f8f96]">Or</span>
+            <span className="h-px flex-1 bg-[#e9e9eb]" />
+          </div>
+        </>
+      )}
 
       <form
         action={formAction}

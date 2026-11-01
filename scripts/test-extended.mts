@@ -65,6 +65,7 @@ async function main() {
   const companyTwo = `Juniper Studio ${stamp}`;
 
   await signUp("QA Tester", userEmail, USER_PASSWORD);
+  await page.getByText("No applications yet").waitFor({ timeout: 15_000 });
   assert((await page.locator("body").innerText()).includes("QA Tester"), "signup uses the collected name");
   assert((await page.locator("body").innerText()).includes("No applications yet"), "new account has empty dashboard");
   assert((await page.locator("body").innerText()).includes("0"), "new account metrics start at zero");
@@ -108,7 +109,7 @@ async function main() {
 
   // Edit
   await page.getByRole("link", { name: "Edit" }).first().click();
-  await page.waitForURL(/\/edit$/, { timeout: 20_000 });
+  await page.waitForURL(/\/edit$/, { timeout: 20_000, waitUntil: "commit" });
   await page.fill("#position", "Senior Product Design Intern");
   await page.getByRole("button", { name: "Save changes" }).click();
   await page.waitForURL(/\/applications\/[a-f0-9-]+$/, { timeout: 20_000 });
@@ -137,7 +138,7 @@ async function main() {
   await page.getByRole("button", { name: "Delete" }).last().click();
   await page.getByRole("dialog").getByRole("button", { name: "Delete applications" }).click();
   await page.getByText("2 applications deleted.").waitFor({ timeout: 15_000 });
-  await page.waitForTimeout(500);
+  await page.getByText("Your first application starts here").waitFor({ timeout: 15_000 });
   assert((await page.locator("body").innerText()).includes("Your first application starts here"), "bulk delete cleared applications");
 
   // Templates
@@ -191,9 +192,11 @@ async function main() {
   await page.getByRole("button", { name: "Sign out" }).click();
   await page.waitForURL("**/login", { timeout: 20_000 });
 
-  // Social auth gracefully explains configuration
-  await page.getByRole("button", { name: /Sign In with Google/ }).click();
-  await page.getByText(/Google sign-in is available once Supabase Auth is configured/).waitFor({ timeout: 10_000 });
+  // Password auth remains available when no social providers are enabled.
+  assert(
+    await page.getByRole("button", { name: "Sign in", exact: true }).isVisible(),
+    "password sign-in remains available",
+  );
 
   // Demo access
   await page.getByRole("button", { name: "Open demo" }).click();

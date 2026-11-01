@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { AuthShell } from "@/components/auth/auth-shell";
 import { AuthForm } from "@/components/auth/auth-form";
-import { isSupabaseConfigured } from "@/lib/auth/helpers";
+import { getSocialProviders } from "@/lib/auth/providers";
 import { isDemoLoginEnabled } from "@/lib/auth/demo";
 import { getCurrentUser } from "@/lib/auth/session";
 import { redirect } from "next/navigation";
@@ -17,11 +17,12 @@ export default async function LoginPage({
   const user = await getCurrentUser();
   if (user) redirect("/dashboard");
   const { error } = await searchParams;
+  const socialProviders = await getSocialProviders();
   return (
     <AuthShell>
       <AuthForm
         mode="login"
-        socialEnabled={isSupabaseConfigured()}
+        socialProviders={socialProviders}
         initialError={error}
         demoEnabled={isDemoLoginEnabled()}
       />
