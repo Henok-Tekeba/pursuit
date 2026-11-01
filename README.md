@@ -245,6 +245,15 @@ Redirect URLs:
 
 Google Cloud's redirect URI stays pointed at Supabase. The app only needs the Supabase public URL and publishable key.
 
+When publishing the OAuth consent screen, use:
+
+```text
+App name: Pursuit
+Support email: tekebahenok6@gmail.com
+Privacy policy: https://pursuit.enoch.et/privacy
+Terms of service: https://pursuit.enoch.et/terms
+```
+
 ## Testing
 
 With the app running on port 3001:
@@ -342,6 +351,8 @@ Pursuit is live and actively used for a real internship search. The priority is 
 ## Repository
 
 Source: [github.com/Henok-Tekeba/pursuit](https://github.com/Henok-Tekeba/pursuit)
+
+Legal: [Privacy](https://pursuit.enoch.et/privacy) · [Terms](https://pursuit.enoch.et/terms)
 
 ## License
 
