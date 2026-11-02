@@ -47,7 +47,7 @@ async function createSupabaseDatabase(url: string): Promise<Database> {
   const client = postgres(connectionUrl, {
     prepare: false,
     max: 4,
-    idle_timeout: 20,
+    idle_timeout: 300,
     connect_timeout: 15,
     ssl: url.includes("supabase") || url.includes("sslmode=require") ? "require" : undefined,
   });

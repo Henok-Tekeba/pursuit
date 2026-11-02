@@ -448,10 +448,10 @@ export async function getTemplatesForUser(userId: string) {
   return db.select().from(templates).where(eq(templates.userId, userId)).orderBy(asc(templates.kind), desc(templates.updatedAt));
 }
 
-export async function getSettingsForUser(userId: string) {
+export const getSettingsForUser = cache(async (userId: string) => {
   const db = await getDb();
   return db.query.settings.findFirst({ where: eq(settings.userId, userId) });
-}
+});
 
 export async function getEmailsForApplication(userId: string, applicationId: string) {
   const db = await getDb();
