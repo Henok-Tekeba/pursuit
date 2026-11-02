@@ -46,6 +46,7 @@ No shared workspace. No noisy team features. Your search is yours.
 - **Application management**: create, edit, view, delete, search, filter, sort, paginate, bulk-update, and bulk-delete.
 - **Conversation timeline**: initial email, follow-ups, replies, interview and assessment invitations, offers, rejections, status changes, scheduled follow-ups, and notes. Emails are append-only.
 - **Follow-up engine**: days since application, days since last contact, overdue state, and configurable cadence (defaults: days 5, 10, and 17).
+- **Calendar feed**: a private subscription for scheduled follow-ups that have no recorded reply, with 15-minute reminders in Google Calendar, Apple Calendar, or Outlook.
 - **Email archive and templates**: preserve the subject and body of every email; reuse cold-email, follow-up, and reply templates with placeholders.
 - **Companies**: company-level rollups, notes, response rates, and related applications.
 - **Analytics**: response rate, interview conversion, offer rate, average response time, follow-up effectiveness, status and method breakdowns, monthly activity.
@@ -228,7 +229,7 @@ Migrations live in `drizzle/`. For a brand-new Supabase project, `supabase/schem
 | `email_interactions` | Append-only sent/received emails |
 | `activities` | Chronological application timeline |
 | `templates` | Reusable email content |
-| `settings` | Follow-up cadence, default method, signature |
+| `settings` | Follow-up cadence, default method, signature, and private calendar token |
 
 ## Google OAuth setup
 
@@ -344,19 +345,22 @@ supabase/schema.sql     Fresh-database schema for SQL editor
 
 ## Roadmap
 
-- Email reminders and calendar sync
+- Email reminders
+- Browser extension for saving job posts
 - Resume and attachment storage
 - Shared read-only workspaces for mentors
 - More OAuth providers
 
 ## Status
 
-Pursuit v1.1.0 is live and actively used for a real internship search. The priority is a calm, reliable workflow over feature sprawl.
+Pursuit v1.2.0 is live and actively used for a real internship search. The priority is a calm, reliable workflow over feature sprawl.
 
 
 ## Repository
 
 Source: [github.com/Henok-Tekeba/pursuit](https://github.com/Henok-Tekeba/pursuit)
+
+Changelog: [CHANGELOG.md](CHANGELOG.md)
 
 Legal: [Privacy](https://pursuit.enoch.et/privacy) · [Terms](https://pursuit.enoch.et/terms)
 

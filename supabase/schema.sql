@@ -86,6 +86,7 @@ CREATE TABLE "settings" (
 	"follow_up_intervals" integer[] DEFAULT '{5,10,17}' NOT NULL,
 	"email_signature" text,
 	"default_method" "application_method" DEFAULT 'cold_email' NOT NULL,
+	"calendar_token" text,
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
 	"updated_at" timestamp with time zone DEFAULT now() NOT NULL
 );
@@ -141,6 +142,7 @@ CREATE INDEX "emails_application_idx" ON "email_interactions" USING btree ("appl
 CREATE INDEX "emails_user_idx" ON "email_interactions" USING btree ("user_id");
 CREATE INDEX "emails_occurred_idx" ON "email_interactions" USING btree ("occurred_at");
 CREATE INDEX "templates_user_idx" ON "templates" USING btree ("user_id");
+CREATE UNIQUE INDEX "settings_calendar_token_unique" ON "settings" USING btree ("calendar_token");
 CREATE UNIQUE INDEX "users_email_unique" ON "users" USING btree ("email");
 
 ALTER TABLE "users" ADD COLUMN "password_hash" text;

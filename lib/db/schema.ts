@@ -232,16 +232,21 @@ export const templates = pgTable(
   (table) => [index("templates_user_idx").on(table.userId)],
 );
 
-export const settings = pgTable("settings", {
-  userId: uuid("user_id")
-    .primaryKey()
-    .references(() => users.id, { onDelete: "cascade" }),
-  followUpIntervals: integer("follow_up_intervals").array().notNull().default([5, 10, 17]),
-  emailSignature: text("email_signature"),
-  defaultMethod: applicationMethodEnum("default_method").notNull().default("cold_email"),
-  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
-});
+export const settings = pgTable(
+  "settings",
+  {
+    userId: uuid("user_id")
+      .primaryKey()
+      .references(() => users.id, { onDelete: "cascade" }),
+    followUpIntervals: integer("follow_up_intervals").array().notNull().default([5, 10, 17]),
+    emailSignature: text("email_signature"),
+    defaultMethod: applicationMethodEnum("default_method").notNull().default("cold_email"),
+    calendarToken: text("calendar_token"),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [uniqueIndex("settings_calendar_token_unique").on(table.calendarToken)],
+);
 
 export const usersRelations = relations(users, ({ many, one }) => ({
   applications: many(applications),

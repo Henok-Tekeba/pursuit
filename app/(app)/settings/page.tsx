@@ -6,6 +6,9 @@ import { PageHeader } from "@/components/page-header";
 import { Button } from "@/components/ui/button";
 import { ProfileSettings, FollowUpSettings, PasswordSettings } from "@/components/settings/settings-forms";
 import { ThemeToggle } from "@/components/app-shell/theme-toggle";
+import { CalendarFeedSettings } from "@/components/settings/calendar-feed-settings";
+import { ensureCalendarToken } from "@/lib/calendar";
+import { getRequestBaseUrl } from "@/lib/url";
 
 export const metadata: Metadata = { title: "Settings" };
 export const dynamic = "force-dynamic";
@@ -13,12 +16,15 @@ export const dynamic = "force-dynamic";
 export default async function SettingsPage() {
   const user = await requireUser();
   const settings = await getSettingsForUser(user.id);
+  const calendarFeedUrl = user.isDemo
+    ? null
+    : `${await getRequestBaseUrl()}/api/calendar/${await ensureCalendarToken(user.id)}.ics`;
 
   return (
     <div className="min-h-full pb-6">
       <PageHeader
         title="Settings"
-        description="Your profile, follow-up cadence, and workspace preferences."
+        description="Your profile, follow-up cadence, calendar, and workspace preferences."
         actions={
           <Button asChild variant="outline" size="sm">
             <a href="/api/export">
@@ -116,23 +122,27 @@ export default async function SettingsPage() {
           </section>
         </div>
 
-        <section className="h-fit rounded-[10px] border border-line bg-surface-card shadow-card">
-          <div className="border-b border-line px-4 py-3">
-            <h2 className="text-[13.5px] font-medium text-ink">Follow-up cadence</h2>
-            <p className="mt-0.5 text-[10.5px] text-ink-muted">
-              Defaults are suggestions. Make them work for your outreach.
-            </p>
-          </div>
-          <FollowUpSettings
-            initialIntervals={settings?.followUpIntervals ?? [5, 10, 17]}
-            defaultMethod={settings?.defaultMethod ?? "cold_email"}
-            emailSignature={settings?.emailSignature ?? null}
-          />
-          <div className="border-t border-line px-4 py-3 text-[10.5px] leading-relaxed text-ink-faint">
-            Changing your cadence affects new applications and future suggestions. Existing follow-up dates are
-            left untouched unless you reschedule them.
-          </div>
-        </section>
+        <div className="space-y-4">
+          <section className="h-fit rounded-[10px] border border-line bg-surface-card shadow-card">
+            <div className="border-b border-line px-4 py-3">
+              <h2 className="text-[13.5px] font-medium text-ink">Follow-up cadence</h2>
+              <p className="mt-0.5 text-[10.5px] text-ink-muted">
+                Defaults are suggestions. Make them work for your outreach.
+              </p>
+            </div>
+            <FollowUpSettings
+              initialIntervals={settings?.followUpIntervals ?? [5, 10, 17]}
+              defaultMethod={settings?.defaultMethod ?? "cold_email"}
+              emailSignature={settings?.emailSignature ?? null}
+            />
+            <div className="border-t border-line px-4 py-3 text-[10.5px] leading-relaxed text-ink-faint">
+              Changing your cadence affects new applications and future suggestions. Existing follow-up dates are
+              left untouched unless you reschedule them.
+            </div>
+          </section>
+
+          {calendarFeedUrl ? <CalendarFeedSettings feedUrl={calendarFeedUrl} /> : null}
+        </div>
       </div>
     </div>
   );
