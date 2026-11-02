@@ -55,6 +55,7 @@ import {
   updateApplicationAction,
   type CreateApplicationInput,
 } from "@/app/actions/applications";
+import { autofillFromJobUrlAction } from "@/app/actions/job-import";
 import { cn, getFirstFollowUpDate, resolveTemplate, todayDateOnly } from "@/lib/utils";
 
 type FormMode = "create" | "edit";
@@ -116,6 +117,11 @@ export function ApplicationForm({
   const [serverError, setServerError] = useState("");
   const [manualFollowUp, setManualFollowUp] = useState(mode === "edit");
   const [loadingTemplate, setLoadingTemplate] = useState(false);
+  const [autofillPending, setAutofillPending] = useState(false);
+  const [autofillNotice, setAutofillNotice] = useState<{
+    type: "error" | "success";
+    message: string;
+  } | null>(null);
   const lastSuggested = useRef<string | null>(null);
 
   const schema = useMemo(
@@ -251,6 +257,52 @@ export function ApplicationForm({
     toast.success(`Loaded “${template.name}”`);
   };
 
+  const autofill = async () => {
+    const jobUrl = getValues("jobUrl").trim();
+    if (!jobUrl) {
+      setAutofillNotice({ type: "error", message: "Paste a job link first." });
+      return;
+    }
+
+    setAutofillPending(true);
+    setAutofillNotice(null);
+
+    try {
+      const response = await autofillFromJobUrlAction(jobUrl);
+      if (!response.ok) {
+        setAutofillNotice({ type: "error", message: response.error });
+        return;
+      }
+
+      const { fields, source } = response.result;
+      const entries: Array<[keyof FormValues, string | undefined]> = [
+        ["companyName", fields.companyName],
+        ["companyWebsite", fields.companyWebsite],
+        ["position", fields.position],
+        ["location", fields.location],
+        ["jobUrl", fields.jobUrl],
+      ];
+      for (const [field, value] of entries) {
+        if (value) {
+          setValue(field, value, { shouldDirty: true, shouldValidate: true });
+        }
+      }
+
+      setAutofillNotice({
+        type: "success",
+        message: `Filled from ${source}. Review the details before saving.`,
+      });
+      toast.success("Job details filled. Review before saving.");
+    } catch {
+      setAutofillNotice({
+        type: "error",
+        message: "We couldn't read that job page. Enter the details manually.",
+      });
+    } finally {
+      setAutofillPending(false);
+    }
+  };
+
   const onSubmit = async (values: FormValues) => {
     setServerError("");
     const payload = {
@@ -374,13 +426,46 @@ export function ApplicationForm({
                 </Field>
                 <div className="sm:col-span-2">
                   <Field label="Job posting URL" htmlFor="jobUrl" error={errors.jobUrl?.message}>
-                    <Input
-                      id="jobUrl"
-                      placeholder="https://…"
-                      inputMode="url"
-                      {...register("jobUrl")}
-                    />
+                    <div className="flex items-center gap-2">
+                      <Input
+                        id="jobUrl"
+                        placeholder="https://…"
+                        inputMode="url"
+                        className="min-w-0 flex-1"
+                        {...register("jobUrl")}
+                      />
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="h-10 shrink-0"
+                        onClick={autofill}
+                        disabled={autofillPending}
+                      >
+                        {autofillPending ? (
+                          <Loader2 className="size-3.5 animate-spin" />
+                        ) : (
+                          <Sparkles className="size-3.5" />
+                        )}
+                        {autofillPending ? "Reading…" : "Autofill"}
+                      </Button>
+                    </div>
                   </Field>
+                  {autofillNotice && (
+                    <p
+                      role="status"
+                      className={cn(
+                        "mt-1.5 text-[10.5px] leading-relaxed",
+                        autofillNotice.type === "error" ? "text-[#b64c5e]" : "text-[#2e8a61]",
+                      )}
+                    >
+                      {autofillNotice.message}
+                    </p>
+                  )}
+                  <p className="mt-1.5 text-[10.5px] leading-relaxed text-ink-faint">
+                    Paste a company career page or ATS link. Pursuit fills only the fields it can
+                    verify, then you review them before saving.
+                  </p>
                 </div>
               </div>
             </section>

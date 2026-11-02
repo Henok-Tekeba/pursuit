@@ -8,6 +8,8 @@ import { ProfileSettings, FollowUpSettings, PasswordSettings } from "@/component
 import { ThemeToggle } from "@/components/app-shell/theme-toggle";
 import { CalendarFeedSettings } from "@/components/settings/calendar-feed-settings";
 import { ensureCalendarToken } from "@/lib/calendar";
+import { buildGoogleCalendarUrl } from "@/lib/google-calendar";
+import { getCalendarFollowUps } from "@/lib/queries/calendar";
 import { getRequestBaseUrl } from "@/lib/url";
 
 export const metadata: Metadata = { title: "Settings" };
@@ -16,9 +18,23 @@ export const dynamic = "force-dynamic";
 export default async function SettingsPage() {
   const user = await requireUser();
   const settings = await getSettingsForUser(user.id);
-  const calendarFeedUrl = user.isDemo
-    ? null
-    : `${await getRequestBaseUrl()}/api/calendar/${await ensureCalendarToken(user.id)}.ics`;
+  let calendarFeedUrl: string | null = null;
+  let nextCalendarEventUrl: string | null = null;
+  let nextCalendarCompany: string | null = null;
+
+  if (!user.isDemo) {
+    const [baseUrl, token, calendarEvents] = await Promise.all([
+      getRequestBaseUrl(),
+      ensureCalendarToken(user.id),
+      getCalendarFollowUps(user.id),
+    ]);
+    calendarFeedUrl = `${baseUrl}/api/calendar/${token}.ics`;
+    const nextEvent = calendarEvents[0];
+    if (nextEvent) {
+      nextCalendarEventUrl = buildGoogleCalendarUrl(nextEvent, baseUrl);
+      nextCalendarCompany = nextEvent.companyName;
+    }
+  }
 
   return (
     <div className="min-h-full pb-6">
@@ -141,7 +157,13 @@ export default async function SettingsPage() {
             </div>
           </section>
 
-          {calendarFeedUrl ? <CalendarFeedSettings feedUrl={calendarFeedUrl} /> : null}
+          {calendarFeedUrl ? (
+            <CalendarFeedSettings
+              feedUrl={calendarFeedUrl}
+              nextEventUrl={nextCalendarEventUrl}
+              nextEventCompany={nextCalendarCompany}
+            />
+          ) : null}
         </div>
       </div>
     </div>
