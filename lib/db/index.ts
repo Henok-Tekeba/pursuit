@@ -33,8 +33,18 @@ async function createLocalDatabase(): Promise<Database> {
   return db;
 }
 
+function normalizeDatabaseUrl(url: string) {
+  // Supabase recommends the transaction pooler for serverless connections.
+  // The project string may still contain the session-pooler port.
+  if (url.includes("pooler.supabase.com") && url.includes(":5432")) {
+    return url.replace(":5432", ":6543");
+  }
+  return url;
+}
+
 async function createSupabaseDatabase(url: string): Promise<Database> {
-  const client = postgres(url, {
+  const connectionUrl = normalizeDatabaseUrl(url);
+  const client = postgres(connectionUrl, {
     prepare: false,
     max: 4,
     idle_timeout: 20,

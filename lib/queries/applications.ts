@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { and, asc, count, desc, eq, gt, gte, ilike, inArray, lte, or, sql } from "drizzle-orm";
 import { addDays, differenceInCalendarDays, parseISO } from "date-fns";
 import { getDb } from "@/lib/db";
@@ -82,6 +83,18 @@ function mapListRow(row: { application: Application; company: Company }): Applic
     updatedAt: row.application.updatedAt.toISOString(),
   };
 }
+
+const getWorkspaceItems = cache(async (userId: string) => {
+  const db = await getDb();
+  const rows = await db
+    .select({ application: applications, company: companies })
+    .from(applications)
+    .innerJoin(companies, eq(applications.companyId, companies.id))
+    .where(eq(applications.userId, userId))
+    .orderBy(desc(applications.updatedAt));
+
+  return rows.map(mapListRow);
+});
 
 export async function getApplications(userId: string, filters: ApplicationListFilters = {}) {
   const db = await getDb();
@@ -187,15 +200,7 @@ export async function getApplicationsForExport(userId: string, filters: Applicat
 export type DashboardData = Awaited<ReturnType<typeof getDashboardData>>;
 
 export async function getDashboardData(userId: string) {
-  const db = await getDb();
-  const rows = await db
-    .select({ application: applications, company: companies })
-    .from(applications)
-    .innerJoin(companies, eq(applications.companyId, companies.id))
-    .where(eq(applications.userId, userId))
-    .orderBy(desc(applications.updatedAt));
-
-  const items = rows.map(mapListRow);
+  const items = await getWorkspaceItems(userId);
   const today = todayDateOnly();
   const total = items.length;
   const responses = items.filter((item) => item.firstResponseAt !== null).length;
@@ -590,13 +595,8 @@ export async function getAnalytics(userId: string) {
 export async function getShellData(userId: string) {
   const db = await getDb();
   const today = todayDateOnly();
-  const [rows, inboundRow] = await Promise.all([
-    db
-      .select({ application: applications, company: companies })
-      .from(applications)
-      .innerJoin(companies, eq(applications.companyId, companies.id))
-      .where(eq(applications.userId, userId))
-      .orderBy(asc(applications.nextFollowUpAt)),
+  const [items, inboundRow] = await Promise.all([
+    getWorkspaceItems(userId),
     db
       .select({ value: count() })
       .from(emailInteractions)
@@ -609,13 +609,14 @@ export async function getShellData(userId: string) {
       ),
   ]);
 
-  const items = rows.map(mapListRow);
-  const due = items.filter(
-    (item) =>
-      ACTIVE_STATUSES.includes(item.status) &&
-      item.nextFollowUpAt !== null &&
-      item.nextFollowUpAt <= today,
-  );
+  const due = items
+    .filter(
+      (item) =>
+        ACTIVE_STATUSES.includes(item.status) &&
+        item.nextFollowUpAt !== null &&
+        item.nextFollowUpAt <= today,
+    )
+    .sort((a, b) => (a.nextFollowUpAt ?? "").localeCompare(b.nextFollowUpAt ?? ""));
   const interviewCount = items.filter((item) => item.status === "interview").length;
 
   return {
