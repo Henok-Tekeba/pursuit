@@ -10,6 +10,7 @@ All notable changes to Pursuit are recorded here.
 - Calendar events include the company, role, application link, and a 15-minute reminder.
 - Follow-ups with a recorded reply, or applications that are closed, are excluded automatically.
 - Regenerate control for revoking a leaked or unwanted feed URL.
+- Calendar feed link from the follow-ups page for quicker access.
 
 ### Changed
 

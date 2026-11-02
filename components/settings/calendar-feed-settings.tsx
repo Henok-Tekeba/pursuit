@@ -38,7 +38,7 @@ export function CalendarFeedSettings({ feedUrl }: { feedUrl: string }) {
   };
 
   return (
-    <section className="rounded-[10px] border border-line bg-surface-card shadow-card">
+    <section id="calendar-feed" className="scroll-mt-6 rounded-[10px] border border-line bg-surface-card shadow-card">
       <div className="flex items-center gap-2 border-b border-line px-4 py-3">
         <CalendarDays className="size-3.5 text-ink-muted" />
         <div>

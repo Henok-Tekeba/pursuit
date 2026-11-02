@@ -47,6 +47,17 @@ export default async function FollowUpsPage({
             <Link href="/settings" className="underline underline-offset-2 hover:text-ink">
               cadence settings
             </Link>
+            {!user.isDemo && (
+              <>
+                <span className="text-ink-faint">·</span>
+                <Link
+                  href="/settings#calendar-feed"
+                  className="underline underline-offset-2 hover:text-ink"
+                >
+                  calendar feed
+                </Link>
+              </>
+            )}
           </span>
         }
         actions={
