@@ -151,7 +151,7 @@ export function LandingPage() {
               {["No ads", "No shared workspace", "No fake urgency"].map((item) => (
                 <span
                   key={item}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-[#e3dacb] bg-[#fffcf5] px-3 py-1.5 text-[10.5px] text-[#65656c]"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-[#e3dacb] bg-[#fbf6ec] px-3 py-1.5 text-[10.5px] text-[#65656c]"
                 >
                   <Check className="size-3 text-[#4c946c]" />
                   {item}
@@ -162,7 +162,7 @@ export function LandingPage() {
         </div>
       </section>
 
-      <section id="features" className="border-t border-[#e7dfd1] bg-[#fffcf5]">
+      <section id="features" className="border-t border-[#e7dfd1] bg-[#fbf6ec]">
         <div className="mx-auto w-full max-w-[1200px] px-6 py-20 md:px-11 md:py-28">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
@@ -190,7 +190,7 @@ export function LandingPage() {
                   key={feature.title}
                   className="rounded-[12px] border border-[#e7dfd1] bg-[#f6f1e6] p-5 transition-colors hover:border-[#d8cec0]"
                 >
-                  <span className="grid size-8 place-items-center rounded-lg border border-[#e3dacb] bg-[#fffcf5] text-[#5f5f66]">
+                  <span className="grid size-8 place-items-center rounded-lg border border-[#e3dacb] bg-[#fbf6ec] text-[#5f5f66]">
                     <Icon className="size-4" strokeWidth={1.7} />
                   </span>
                   <h3 className="mt-5 text-[15px] font-medium tracking-[-0.02em]">{feature.title}</h3>
@@ -229,7 +229,7 @@ export function LandingPage() {
         </div>
       </section>
 
-      <section className="bg-[#fffcf5]">
+      <section className="bg-[#fbf6ec]">
         <div className="mx-auto w-full max-w-[1200px] px-6 pb-20 md:px-11 md:pb-28">
           <div className="relative overflow-hidden rounded-[14px] bg-[#101012] px-7 py-12 text-white md:px-12 md:py-16">
             <div className="absolute -right-16 -top-24 size-72 rounded-full bg-[#f0b8a8]/20 blur-3xl" />

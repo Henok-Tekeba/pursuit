@@ -32,7 +32,7 @@ export function CompanyAvatar({
     return (
       <span
         className={cn(
-          "inline-flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full border border-black/[0.04] bg-white",
+          "inline-flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full border border-black/[0.04] bg-[#fbf6ec]",
           className,
         )}
       >

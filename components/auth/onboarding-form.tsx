@@ -12,7 +12,7 @@ import {
 const initialState: OnboardingState = { status: "idle" };
 
 const inputClass =
-  "h-[44px] w-full rounded-[10px] border border-[#e3dacb] bg-[#fffcf5] px-4 text-[13.5px] text-[#17171c] outline-none transition-colors placeholder:text-[#a89d8f] focus:border-[#cfc4b4] focus:ring-2 focus:ring-black/[0.04]";
+  "h-[44px] w-full rounded-[10px] border border-[#e3dacb] bg-[#fbf6ec] px-4 text-[13.5px] text-[#17171c] outline-none transition-colors placeholder:text-[#a89d8f] focus:border-[#cfc4b4] focus:ring-2 focus:ring-black/[0.04]";
 
 export function OnboardingForm({
   email,
