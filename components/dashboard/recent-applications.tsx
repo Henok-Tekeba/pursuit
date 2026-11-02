@@ -75,7 +75,7 @@ export function RecentApplications({ items }: { items: DashboardData["recent"] }
         <div className="hidden overflow-x-auto sm:block">
           <table className="w-full min-w-[470px] border-separate border-spacing-0 text-left">
             <thead>
-              <tr className="bg-[#f8f9fb] dark:bg-white/[0.035]">
+              <tr className="bg-[#f5efe4] dark:bg-white/[0.035]">
                 <th className="py-2 pl-4 pr-2 text-[11px] font-medium text-ink-muted">Company</th>
                 <th className="py-2 px-2 text-[11px] font-medium text-ink-muted">Applied</th>
                 <th className="py-2 px-2 text-[11px] font-medium text-ink-muted">Status</th>

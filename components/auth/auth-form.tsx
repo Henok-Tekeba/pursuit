@@ -24,7 +24,7 @@ const ERROR_MESSAGES: Record<string, string> = {
 };
 
 const fieldClass =
-  "h-11 w-full rounded-[8px] border border-[#e5e5e2] bg-white px-3.5 text-[13px] text-[#101012] outline-none transition-colors placeholder:text-[#a0a0a5] focus:border-[#c9c9c6] focus:ring-2 focus:ring-black/[0.04]";
+  "h-11 w-full rounded-[8px] border border-[#e3dacb] bg-[#fffcf5] px-3.5 text-[13px] text-[#101012] outline-none transition-colors placeholder:text-[#a0a0a5] focus:border-[#c9c9c6] focus:ring-2 focus:ring-black/[0.04]";
 const labelClass = "mb-1.5 block text-[11px] font-medium text-[#5f5f66]";
 
 export function AuthForm({
@@ -83,7 +83,7 @@ export function AuthForm({
               <button
                 type="button"
                 onClick={() => onSocial("google")}
-                className="flex h-11 items-center justify-center gap-2 rounded-[8px] border border-[#e5e5e2] bg-white px-3 text-[12px] font-medium text-[#27272d] transition-colors hover:border-[#d5d5d2] hover:bg-[#fdfdfc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/10"
+                className="flex h-11 items-center justify-center gap-2 rounded-[8px] border border-[#e3dacb] bg-[#fffcf5] px-3 text-[12px] font-medium text-[#27272d] transition-colors hover:border-[#d5cbbd] hover:bg-[#fbf7ef] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/10"
               >
                 <GoogleIcon className="size-4" />
                 Continue with Google
@@ -93,7 +93,7 @@ export function AuthForm({
               <button
                 type="button"
                 onClick={() => onSocial("apple")}
-                className="flex h-11 items-center justify-center gap-2 rounded-[8px] border border-[#e5e5e2] bg-white px-3 text-[12px] font-medium text-[#27272d] transition-colors hover:border-[#d5d5d2] hover:bg-[#fdfdfc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/10"
+                className="flex h-11 items-center justify-center gap-2 rounded-[8px] border border-[#e3dacb] bg-[#fffcf5] px-3 text-[12px] font-medium text-[#27272d] transition-colors hover:border-[#d5cbbd] hover:bg-[#fbf7ef] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/10"
               >
                 <AppleIcon className="size-4" />
                 Continue with Apple
@@ -225,7 +225,7 @@ export function AuthForm({
       </p>
 
       {!isSignup && demoEnabled && (
-        <div className="mt-8 border-t border-[#e9e9e6] pt-5">
+        <div className="mt-8 border-t border-[#e7dfd1] pt-5">
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0">
               <p className="text-[12px] font-medium text-[#2b2b30]">Just exploring?</p>
@@ -249,7 +249,7 @@ function DemoButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex h-8 items-center justify-center gap-1.5 rounded-[7px] border border-[#ddddda] bg-white px-3 text-[11px] font-medium text-[#2d2d31] transition-colors hover:border-[#c9c9c6] hover:bg-[#fdfdfc] disabled:opacity-60"
+      className="inline-flex h-8 items-center justify-center gap-1.5 rounded-[7px] border border-[#ddd3c4] bg-[#fffcf5] px-3 text-[11px] font-medium text-[#2d2d31] transition-colors hover:border-[#c9c0b2] hover:bg-[#fbf7ef] disabled:opacity-60"
     >
       {pending ? <Loader2 className="size-3 animate-spin" /> : null}
       {pending ? "Opening..." : "Open demo"}

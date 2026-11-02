@@ -94,7 +94,7 @@ export function EmailsTable({ emails }: { emails: EmailInboxItem[] }) {
       <div className="hidden overflow-x-auto min-[1150px]:block">
         <table className="w-full min-w-[700px] border-separate border-spacing-0 text-left">
           <thead>
-            <tr className="bg-[#f8f9fb] dark:bg-white/[0.035]">
+            <tr className="bg-[#f5efe4] dark:bg-white/[0.035]">
               <th className="w-[90px] py-2.5 pl-3 pr-2 text-[11px] font-medium text-ink-muted">Direction</th>
               <th className="px-2 py-2.5 text-[11px] font-medium text-ink-muted">Subject</th>
               <th className="px-2 py-2.5 text-[11px] font-medium text-ink-muted">Company</th>

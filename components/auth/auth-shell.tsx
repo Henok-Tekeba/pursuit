@@ -10,7 +10,7 @@ export function AuthShell({
   wide?: boolean;
 }) {
   return (
-    <div className="min-h-dvh bg-[#fafaf9] text-[#101012]">
+    <div className="min-h-dvh bg-[#f6f1e6] text-[#101012]">
       <div className="mx-auto flex min-h-dvh w-full max-w-[1440px] lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
         <div className="relative flex min-h-dvh flex-col px-6 pb-7 pt-7 md:px-11 lg:min-h-0">
           <header className="flex items-center justify-between">

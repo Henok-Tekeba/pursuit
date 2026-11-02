@@ -69,7 +69,7 @@ async function DashboardContent() {
           <DashboardMetrics data={data} />
           <div className="grid min-[1150px]:grid-cols-[minmax(0,1fr)_336px]">
             <RecentApplications items={data.recent} />
-            <aside className="space-y-3 bg-[#fcfcfd] p-3 dark:bg-white/[0.012]">
+            <aside className="space-y-3 bg-[#faf5eb] p-3 dark:bg-white/[0.012]">
               <TodaysActions data={data.dueFollowUps} upcomingCount={data.upcomingFollowUps.length} />
               <StatusOverview data={data} />
             </aside>

@@ -156,7 +156,7 @@ export function ApplicationTable({
   return (
     <>
       {selected.size > 0 && (
-        <div className="mb-3 flex flex-wrap items-center gap-2 rounded-lg border border-[#e4e6f0] bg-[#f7f8fc] px-3 py-2 dark:border-white/10 dark:bg-white/[0.04]">
+        <div className="mb-3 flex flex-wrap items-center gap-2 rounded-lg border border-[#e4e6f0] bg-[#f6f0e5] px-3 py-2 dark:border-white/10 dark:bg-white/[0.04]">
           <span className="text-[12px] font-medium text-ink">
             {selected.size} selected
           </span>
@@ -223,7 +223,7 @@ export function ApplicationTable({
             <col className="w-[84px]" />
           </colgroup>
           <thead>
-            <tr className="bg-[#f8f9fb] dark:bg-white/[0.035]">
+            <tr className="bg-[#f5efe4] dark:bg-white/[0.035]">
               <th className="rounded-l-[7px] py-2 pl-3 pr-1">
                 <Checkbox
                   checked={allSelected ? true : someSelected ? "indeterminate" : false}
@@ -458,7 +458,7 @@ function MobileApplicationCard({
   onDelete: () => void;
 }) {
   return (
-    <div className={cn("py-3", selected && "bg-[#f8f9fc] dark:bg-white/[0.03]")}>
+    <div className={cn("py-3", selected && "bg-[#f5efe4] dark:bg-white/[0.03]")}>
       <div className="flex items-start gap-2.5">
         <Checkbox checked={selected} onCheckedChange={onToggle} className="mt-1.5" aria-label={`Select ${item.companyName}`} />
         <Link href={`/applications/${item.id}`} className="flex min-w-0 flex-1 items-start gap-2.5">

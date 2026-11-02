@@ -30,7 +30,7 @@ export function GoogleSignup({ googleEnabled }: { googleEnabled: boolean }) {
           <ArrowRight className="size-3.5 text-white/55" />
         </button>
       ) : (
-        <div className="mt-7 rounded-[9px] border border-[#e5e5e2] bg-white p-4">
+        <div className="mt-7 rounded-[9px] border border-[#e3dacb] bg-[#fffcf5] p-4">
           <p className="text-[12.5px] font-medium text-[#2b2b30]">Google sign-in is almost ready</p>
           <p className="mt-1 text-[11.5px] leading-relaxed text-[#8f8f95]">
             The Google OAuth client still needs to be connected to this deployment. You can sign in
@@ -46,7 +46,7 @@ export function GoogleSignup({ googleEnabled }: { googleEnabled: boolean }) {
             </Link>
             <Link
               href="/login"
-              className="inline-flex h-8 items-center rounded-[7px] border border-[#ddddda] bg-white px-3 text-[11px] font-medium text-[#2d2d31] transition-colors hover:border-[#c9c9c6]"
+              className="inline-flex h-8 items-center rounded-[7px] border border-[#ddd3c4] bg-[#fffcf5] px-3 text-[11px] font-medium text-[#2d2d31] transition-colors hover:border-[#c9c0b2]"
             >
               Go to login
             </Link>
@@ -59,7 +59,7 @@ export function GoogleSignup({ googleEnabled }: { googleEnabled: boolean }) {
         Google verifies your email. We never see or store your Google password.
       </p>
 
-      <p className="mt-7 border-t border-[#e9e9e6] pt-5 text-[12px] text-[#7f7f87]">
+      <p className="mt-7 border-t border-[#e7dfd1] pt-5 text-[12px] text-[#7f7f87]">
         Already have an account?{" "}
         <Link href="/login" className="font-medium text-[#2d2d31] underline underline-offset-2">
           Sign in

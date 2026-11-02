@@ -184,7 +184,7 @@ export default async function FollowUpsPage({
             <div className="hidden overflow-x-auto min-[1150px]:block">
               <table className="w-full min-w-[720px] border-separate border-spacing-0 text-left">
                 <thead>
-                  <tr className="bg-[#f8f9fb] dark:bg-white/[0.035]">
+                  <tr className="bg-[#f5efe4] dark:bg-white/[0.035]">
                     <th className="py-2.5 pl-4 pr-2 text-[11px] font-medium text-ink-muted">Company</th>
                     <th className="px-2 py-2.5 text-[11px] font-medium text-ink-muted">Role</th>
                     <th className="px-2 py-2.5 text-[11px] font-medium text-ink-muted">Applied</th>

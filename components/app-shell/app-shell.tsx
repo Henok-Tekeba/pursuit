@@ -92,7 +92,7 @@ export function AppShell({
             onOpenSearch={() => setSearchOpen(true)}
           />
           {user.isDemo && (
-            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line bg-[#fbfbfb] px-4 py-2 text-[11px] text-ink-muted dark:bg-white/[0.025]">
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line bg-[#f8f2e8] px-4 py-2 text-[11px] text-ink-muted dark:bg-white/[0.025]">
               <span>
                 <span className="font-medium text-ink-secondary">Demo workspace</span> · read-only,
                 with sample data only.

@@ -57,7 +57,7 @@ export function LandingPage() {
   const primaryLabel = "Start for free";
 
   return (
-    <main className="min-h-dvh bg-[#fafaf9] text-[#101012]">
+    <main className="min-h-dvh bg-[#f6f1e6] text-[#101012]">
       <section className="relative mx-auto min-h-dvh w-full max-w-[1920px] overflow-hidden">
         <div className="absolute inset-y-[26px] left-[50.6%] right-0 hidden overflow-hidden rounded-l-[14px] lg:block">
           <LandingBackdrop />
@@ -105,7 +105,7 @@ export function LandingPage() {
               </Link>
               <Link
                 href="/demo"
-                className="inline-flex h-[40px] items-center rounded-[7px] bg-[#efefed] px-5 text-[12.5px] font-medium text-[#101012] transition-colors hover:bg-[#e8e8e5]"
+                className="inline-flex h-[40px] items-center rounded-[7px] bg-[#efe8db] px-5 text-[12.5px] font-medium text-[#101012] transition-colors hover:bg-[#e8e0d2]"
               >
                 View demo
               </Link>
@@ -127,7 +127,7 @@ export function LandingPage() {
         </div>
       </section>
 
-      <section id="why" className="border-t border-[#ececea] bg-[#fafaf9]">
+      <section id="why" className="border-t border-[#e7dfd1] bg-[#f6f1e6]">
         <div className="mx-auto grid w-full max-w-[1200px] gap-10 px-6 py-20 md:grid-cols-[0.85fr_1.15fr] md:px-11 md:py-28">
           <div>
             <p className="text-[10.5px] font-medium uppercase tracking-[0.16em] text-[#a0a0a5]">
@@ -151,7 +151,7 @@ export function LandingPage() {
               {["No ads", "No shared workspace", "No fake urgency"].map((item) => (
                 <span
                   key={item}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-[#e5e5e2] bg-white px-3 py-1.5 text-[10.5px] text-[#65656c]"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-[#e3dacb] bg-[#fffcf5] px-3 py-1.5 text-[10.5px] text-[#65656c]"
                 >
                   <Check className="size-3 text-[#4c946c]" />
                   {item}
@@ -162,7 +162,7 @@ export function LandingPage() {
         </div>
       </section>
 
-      <section id="features" className="border-t border-[#ececea] bg-white">
+      <section id="features" className="border-t border-[#e7dfd1] bg-[#fffcf5]">
         <div className="mx-auto w-full max-w-[1200px] px-6 py-20 md:px-11 md:py-28">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
@@ -188,9 +188,9 @@ export function LandingPage() {
               return (
                 <article
                   key={feature.title}
-                  className="rounded-[12px] border border-[#ececea] bg-[#fafaf9] p-5 transition-colors hover:border-[#dededb]"
+                  className="rounded-[12px] border border-[#e7dfd1] bg-[#f6f1e6] p-5 transition-colors hover:border-[#d8cec0]"
                 >
-                  <span className="grid size-8 place-items-center rounded-lg border border-[#e8e8e5] bg-white text-[#5f5f66]">
+                  <span className="grid size-8 place-items-center rounded-lg border border-[#e3dacb] bg-[#fffcf5] text-[#5f5f66]">
                     <Icon className="size-4" strokeWidth={1.7} />
                   </span>
                   <h3 className="mt-5 text-[15px] font-medium tracking-[-0.02em]">{feature.title}</h3>
@@ -204,7 +204,7 @@ export function LandingPage() {
         </div>
       </section>
 
-      <section id="how-it-works" className="border-t border-[#ececea] bg-[#fafaf9]">
+      <section id="how-it-works" className="border-t border-[#e7dfd1] bg-[#f6f1e6]">
         <div className="mx-auto w-full max-w-[1200px] px-6 py-20 md:px-11 md:py-28">
           <p className="text-[10.5px] font-medium uppercase tracking-[0.16em] text-[#a0a0a5]">
             How it works
@@ -229,7 +229,7 @@ export function LandingPage() {
         </div>
       </section>
 
-      <section className="bg-white">
+      <section className="bg-[#fffcf5]">
         <div className="mx-auto w-full max-w-[1200px] px-6 pb-20 md:px-11 md:pb-28">
           <div className="relative overflow-hidden rounded-[14px] bg-[#101012] px-7 py-12 text-white md:px-12 md:py-16">
             <div className="absolute -right-16 -top-24 size-72 rounded-full bg-[#f0b8a8]/20 blur-3xl" />
@@ -263,7 +263,7 @@ export function LandingPage() {
         </div>
       </section>
 
-      <footer className="border-t border-[#ececea] bg-[#fafaf9]">
+      <footer className="border-t border-[#e7dfd1] bg-[#f6f1e6]">
         <div className="mx-auto flex w-full max-w-[1200px] flex-wrap items-center gap-4 px-6 py-6 text-[10.5px] text-[#99999f] md:px-11">
           <span className="flex items-center gap-1.5 font-medium text-[#55555c]">
             <LogoMark className="h-3.5 w-3" />

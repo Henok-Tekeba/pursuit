@@ -12,7 +12,7 @@ import {
 const initialState: OnboardingState = { status: "idle" };
 
 const inputClass =
-  "h-[44px] w-full rounded-[10px] border border-[#e9e9eb] bg-white px-4 text-[13.5px] text-[#17171c] outline-none transition-colors placeholder:text-[#9a9aa2] focus:border-[#cfcfd4] focus:ring-2 focus:ring-black/[0.04]";
+  "h-[44px] w-full rounded-[10px] border border-[#e3dacb] bg-[#fffcf5] px-4 text-[13.5px] text-[#17171c] outline-none transition-colors placeholder:text-[#a89d8f] focus:border-[#cfc4b4] focus:ring-2 focus:ring-black/[0.04]";
 
 export function OnboardingForm({
   email,
@@ -125,7 +125,7 @@ export function OnboardingForm({
         </div>
 
         {!isExisting && (
-          <div className="rounded-[10px] border border-[#ebebed] bg-[#fbfbfb] p-4">
+          <div className="rounded-[10px] border border-[#ebebed] bg-[#f8f2e8] p-4">
             <div className="flex items-baseline justify-between gap-3">
               <p className="text-[12px] font-medium text-[#2b2b30]">
                 {isGoogle ? "Set a password (optional)" : "Create a password"}
