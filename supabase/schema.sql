@@ -81,6 +81,13 @@ CREATE TABLE "email_interactions" (
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 
+CREATE TABLE "rate_limits" (
+	"key" text PRIMARY KEY NOT NULL,
+	"count" integer DEFAULT 0 NOT NULL,
+	"reset_at" timestamp with time zone NOT NULL,
+	"updated_at" timestamp with time zone DEFAULT now() NOT NULL
+);
+
 CREATE TABLE "settings" (
 	"user_id" uuid PRIMARY KEY NOT NULL,
 	"follow_up_intervals" integer[] DEFAULT '{5,10,17}' NOT NULL,

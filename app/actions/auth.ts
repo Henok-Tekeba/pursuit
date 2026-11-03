@@ -4,11 +4,12 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { eq } from "drizzle-orm";
 import { getDb } from "@/lib/db";
-import { users } from "@/lib/db/schema";
+import { authTokens, users } from "@/lib/db/schema";
 import { normalizeEmail } from "@/lib/auth/helpers";
-import { requireUser, setSessionCookie } from "@/lib/auth/session";
+import { clearSessionCookie, requireUser, setSessionCookie } from "@/lib/auth/session";
 import { hashPassword, verifyPassword } from "@/lib/auth/password";
 import { DEMO_EMAIL, isDemoLoginEnabled } from "@/lib/auth/demo";
+import { consumeRateLimit, getClientIp } from "@/lib/rate-limit";
 
 export type PasswordAuthState = {
   status: "idle" | "error";
@@ -45,6 +46,22 @@ export async function passwordSignInAction(
   }
 
   const email = normalizeEmail(parsed.data.email);
+  const ip = await getClientIp();
+  const ipLimit = await consumeRateLimit(`login:ip:${ip}`, 30, 15 * 60);
+  if (!ipLimit.allowed) {
+    return {
+      status: "error",
+      message: "Too many sign-in attempts. Try again in a few minutes.",
+    };
+  }
+  const emailLimit = await consumeRateLimit(`login:email:${email}`, 10, 15 * 60);
+  if (!emailLimit.allowed) {
+    return {
+      status: "error",
+      message: "Too many sign-in attempts for this account. Try again in a few minutes.",
+    };
+  }
+
   const db = await getDb();
   const user = await db.query.users.findFirst({ where: eq(users.email, email) });
 
@@ -64,6 +81,11 @@ export async function passwordSignInAction(
 export async function demoSignInAction() {
   if (!isDemoLoginEnabled()) {
     redirect("/login?error=demo-unavailable");
+  }
+  const ip = await getClientIp();
+  const demoLimit = await consumeRateLimit(`demo:ip:${ip}`, 30, 60 * 60);
+  if (!demoLimit.allowed) {
+    redirect("/login?error=rate-limited");
   }
   const db = await getDb();
   const demoUser = await db.query.users.findFirst({
@@ -110,6 +132,25 @@ export async function changePasswordAction(
   return { status: "success", message: "Password updated." };
 }
 
+
+export async function deleteAccountAction(confirmEmail: string): Promise<{
+  ok: false;
+  error: string;
+}> {
+  const user = await requireUser();
+  if (user.isDemo) {
+    return { ok: false, error: "The demo workspace cannot be deleted." };
+  }
+  if (confirmEmail.trim().toLowerCase() !== user.email.toLowerCase()) {
+    return { ok: false, error: "Type your account email exactly to confirm." };
+  }
+
+  const db = await getDb();
+  await db.delete(authTokens).where(eq(authTokens.email, user.email));
+  await db.delete(users).where(eq(users.id, user.id));
+  await clearSessionCookie();
+  redirect("/");
+}
 
 export async function updateProfileAction(formData: FormData) {
   const user = await requireUser();

@@ -3,6 +3,7 @@ import { isSupabaseConfigured } from "@/lib/auth/helpers";
 import { getSocialProviders } from "@/lib/auth/providers";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { getRequestBaseUrl } from "@/lib/url";
+import { consumeRateLimit, getClientIp } from "@/lib/rate-limit";
 
 export const dynamic = "force-dynamic";
 
@@ -20,6 +21,12 @@ export async function GET(
   const socialProviders = await getSocialProviders();
   if (!socialProviders[provider as "google" | "apple"]) {
     return NextResponse.redirect(new URL("/login?error=oauth-unavailable", request.url));
+  }
+
+  const ip = await getClientIp();
+  const oauthLimit = await consumeRateLimit(`oauth:${provider}:${ip}`, 30, 15 * 60);
+  if (!oauthLimit.allowed) {
+    return NextResponse.redirect(new URL("/login?error=rate-limited", request.url));
   }
 
   try {

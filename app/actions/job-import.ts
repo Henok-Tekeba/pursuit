@@ -2,13 +2,18 @@
 
 import { requireUser } from "@/lib/auth/session";
 import { extractJobPosting, JobImportError, type JobImportResult } from "@/lib/job-import";
+import { consumeRateLimit } from "@/lib/rate-limit";
 
 export type JobImportActionState =
   | { ok: true; result: JobImportResult }
   | { ok: false; error: string };
 
 export async function autofillFromJobUrlAction(rawUrl: string): Promise<JobImportActionState> {
-  await requireUser();
+  const user = await requireUser();
+  const rateLimit = await consumeRateLimit(`autofill:user:${user.id}`, 30, 60 * 60);
+  if (!rateLimit.allowed) {
+    return { ok: false, error: "You've imported a lot of links. Try again later." };
+  }
 
   if (typeof rawUrl !== "string" || rawUrl.trim().length === 0) {
     return { ok: false, error: "Paste a job link first." };

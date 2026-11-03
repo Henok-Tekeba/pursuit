@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ProfileSettings, FollowUpSettings, PasswordSettings } from "@/components/settings/settings-forms";
 import { ThemeToggle } from "@/components/app-shell/theme-toggle";
 import { CalendarFeedSettings } from "@/components/settings/calendar-feed-settings";
+import { DeleteAccount } from "@/components/settings/delete-account";
 import { ensureCalendarToken } from "@/lib/calendar";
 import { buildGoogleCalendarUrl } from "@/lib/google-calendar";
 import { getCalendarFollowUps } from "@/lib/queries/calendar";
@@ -136,6 +137,8 @@ export default async function SettingsPage() {
               </div>
             </div>
           </section>
+
+          {!user.isDemo ? <DeleteAccount email={user.email} /> : null}
         </div>
 
         <div className="space-y-4">

@@ -21,7 +21,14 @@ const sections = [
     heading: "Your account",
     body: [
       "Keep your sign-in method secure. Do not share your account with another person or use the service to access someone else’s data.",
-      "The demo workspace is sample data and may be changed by other visitors. Do not treat it as a private workspace.",
+      "The demo workspace is sample data and is read-only. Do not treat it as a private workspace or enter sensitive information into it.",
+      "You can delete your workspace from Settings under Danger zone. Deletion is permanent and does not delete your Google account.",
+    ],
+  },
+  {
+    heading: "Autofill and external links",
+    body: [
+      "Autofill reads public metadata from the job URL you provide so it can prefill your application. You are responsible for reviewing the filled details before saving them.",
     ],
   },
   {

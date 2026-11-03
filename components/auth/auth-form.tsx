@@ -21,6 +21,7 @@ const ERROR_MESSAGES: Record<string, string> = {
   "oauth-unavailable": "Social sign-in isn't configured. Use your email and password below.",
   "oauth-failed": "Social sign-in couldn't start. Please try again or use your password.",
   "demo-unavailable": "The demo workspace isn't available in this environment.",
+  "rate-limited": "Too many attempts. Wait a few minutes and try again.",
 };
 
 const fieldClass =

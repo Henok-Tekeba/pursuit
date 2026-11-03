@@ -66,7 +66,7 @@ export function LegalPage({
           <a href="mailto:tekebahenok6@gmail.com" className="transition-colors hover:text-ink">
             Contact
           </a>
-          <span className="ml-auto">Last updated November 1, 2026</span>
+          <span className="ml-auto">Last updated November 3, 2026</span>
         </div>
       </div>
     </main>

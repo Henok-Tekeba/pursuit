@@ -3,6 +3,7 @@ import { getUserForCalendarToken } from "@/lib/calendar";
 import { buildCalendarIcs } from "@/lib/calendar-ics";
 import { getCalendarFollowUps } from "@/lib/queries/calendar";
 import { getRequestBaseUrl } from "@/lib/url";
+import { consumeRateLimit, getClientIp } from "@/lib/rate-limit";
 
 export const dynamic = "force-dynamic";
 
@@ -16,6 +17,15 @@ export async function GET(
 
   if (!user) {
     return new NextResponse("Calendar not found.", { status: 404 });
+  }
+
+  const ip = await getClientIp();
+  const rateLimit = await consumeRateLimit(`calendar:${user.id}:${ip}`, 240, 60 * 60);
+  if (!rateLimit.allowed) {
+    return new NextResponse("Too many calendar requests. Try again later.", {
+      status: 429,
+      headers: { "Retry-After": "600" },
+    });
   }
 
   const [events, appUrl] = await Promise.all([
