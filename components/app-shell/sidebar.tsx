@@ -16,6 +16,7 @@ import {
   Mail,
   PanelLeftClose,
   Settings,
+  ShieldCheck,
   User,
   Download,
   X,
@@ -265,6 +266,22 @@ export function Sidebar({
           <HelpCircle className="size-4 text-ink-muted" strokeWidth={1.7} />
           {!collapsed && "Help Center"}
         </button>
+        {user.isAdmin ? (
+          <Link
+            href="/admin"
+            onClick={onNavigate}
+            className={cn(
+              "flex h-8 items-center rounded-md text-[12px] transition-colors",
+              pathname === "/admin"
+                ? "bg-surface-card text-ink shadow-[0_1px_2px_rgba(16,24,40,0.03)]"
+                : "text-ink-secondary hover:bg-black/[0.025] hover:text-ink dark:hover:bg-white/[0.04]",
+              collapsed ? "justify-center" : "gap-2.5 px-1",
+            )}
+          >
+            <ShieldCheck className="size-4 text-ink-muted" strokeWidth={1.7} />
+            {!collapsed && "Admin"}
+          </Link>
+        ) : null}
         <Link
           href="/settings"
           onClick={onNavigate}

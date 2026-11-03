@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { isAdminEmail } from "@/lib/auth/admin";
 import { requireUser } from "@/lib/auth/session";
 import { getShellData } from "@/lib/queries/applications";
 import { AppShell } from "@/components/app-shell/app-shell";
@@ -26,6 +27,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         email: user.email,
         avatarUrl: user.avatarUrl,
         isDemo: user.isDemo,
+        isAdmin: isAdminEmail(user.email),
       }}
       data={{
         totalApplications: shellData.totalApplications,

@@ -4,6 +4,7 @@ export type ShellUser = {
   email: string;
   avatarUrl: string | null;
   isDemo: boolean;
+  isAdmin: boolean;
 };
 
 export type DueFollowUp = {

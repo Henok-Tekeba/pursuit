@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { isAdminEmail } from "@/lib/auth/admin-emails";
 import { verifySessionToken, SESSION_COOKIE } from "@/lib/auth/token";
 
 const PROTECTED_PREFIXES = [
@@ -13,6 +14,7 @@ const PROTECTED_PREFIXES = [
   "/notifications",
   "/api/search",
   "/api/export",
+  "/admin",
 ];
 
 export async function middleware(request: NextRequest) {
@@ -38,7 +40,26 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  return NextResponse.next();
+  const isAdminPath = pathname === "/admin" || pathname.startsWith("/admin/");
+  if (isAdminPath && (!session || session.isDemo || !isAdminEmail(session.email))) {
+    return new NextResponse("Not found", {
+      status: 404,
+      headers: {
+        "Cache-Control": "private, no-store, max-age=0",
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Robots-Tag": "noindex, nofollow",
+      },
+    });
+  }
+
+  const response = NextResponse.next();
+
+  if (isAdminPath) {
+    response.headers.set("Cache-Control", "private, no-store, max-age=0");
+    response.headers.set("X-Robots-Tag", "noindex, nofollow");
+  }
+
+  return response;
 }
 
 export const config = {
