@@ -278,14 +278,6 @@ export function LandingPage() {
             <Link href="/terms" className="transition-colors hover:text-[#101012]">
               Terms
             </Link>
-            <a
-              href="https://github.com/Henok-Tekeba/pursuit"
-              target="_blank"
-              rel="noreferrer"
-              className="transition-colors hover:text-[#101012]"
-            >
-              GitHub
-            </a>
           </nav>
         </div>
       </footer>
