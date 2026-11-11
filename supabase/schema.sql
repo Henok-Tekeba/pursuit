@@ -152,4 +152,26 @@ CREATE INDEX "templates_user_idx" ON "templates" USING btree ("user_id");
 CREATE UNIQUE INDEX "settings_calendar_token_unique" ON "settings" USING btree ("calendar_token");
 CREATE UNIQUE INDEX "users_email_unique" ON "users" USING btree ("email");
 
-ALTER TABLE "users" ADD COLUMN "password_hash" text;
+-- Application data is only accessed through the server-side Postgres
+-- connection as the table owner. Enable RLS and remove Data API access for
+-- the browser-facing anon and authenticated roles.
+ALTER TABLE "activities" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "applications" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "auth_tokens" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "companies" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "email_interactions" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "rate_limits" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "settings" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "templates" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "users" ENABLE ROW LEVEL SECURITY;
+
+REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA public FROM anon, authenticated;
+REVOKE ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public FROM anon, authenticated;
+REVOKE ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public FROM anon, authenticated;
+
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public
+  REVOKE ALL ON TABLES FROM anon, authenticated;
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public
+  REVOKE ALL ON SEQUENCES FROM anon, authenticated;
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public
+  REVOKE ALL ON FUNCTIONS FROM anon, authenticated;

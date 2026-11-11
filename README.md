@@ -311,6 +311,7 @@ The current production deployment is [pursuit.enoch.et](https://pursuit.enoch.et
 - Passwords use scrypt with per-user salts.
 - Google identity is verified by Google and handled through Supabase Auth.
 - The application uses the Supabase publishable key, never a service-role key.
+- RLS is enabled on every public application table. Browser-facing `anon` and `authenticated` roles have no table access; the app uses a direct server-side Postgres connection.
 - All application data access is scoped to the authenticated user.
 - Demo data is clearly separated and no production credentials are stored in source.
 - Report a security issue privately rather than opening a public issue.
